@@ -8,8 +8,20 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "9.5.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "@material-ui/lab": "latest",
+    "@mui-treasury/components": "^1.5.2",
+    "@mui-treasury/layout": "^4.5.0",
+    "axios": "^0.19.2",
+    "clsx": "latest",
+    "js-cookie": "^2.2.1",
+    "next": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "styled-components": "^5.1.0",
+    "react-ga": "^3.1.2",
+    "react-syntax-highlighter": "^12.2.1"
   }
 }
