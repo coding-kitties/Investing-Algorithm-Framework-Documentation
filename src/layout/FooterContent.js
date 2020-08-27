@@ -5,8 +5,8 @@ import Divider from '@material-ui/core/Divider';
 import {makeStyles} from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import {Link} from "@material-ui/core";
-import {withRouter} from "react-router";
 import Button from "@material-ui/core/Button";
+import powered_by_vercel from "../images/powered-by-vercel.svg";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -28,6 +28,9 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('sm')]: {
             height: 90,
         },
+        [theme.breakpoints.down('xs')]: {
+            height: 120,
+        },
     },
     infoText: {
         color: '#fafafa',
@@ -40,6 +43,12 @@ const useStyles = makeStyles(theme => ({
         padding: 0
     }
 }));
+
+function PoweredByVercel(props) {
+    return (
+        <img src={powered_by_vercel} alt="" {...props}/>
+    );
+}
 
 const FooterContent = props =>  {
     const classes = useStyles();
@@ -72,6 +81,7 @@ const FooterContent = props =>  {
                     <Typography gutterBottom className={classes.header}>
                         Learn
                     </Typography>
+                    <br/>
                     <Grid
                         container
                         direction="row"
@@ -116,6 +126,7 @@ const FooterContent = props =>  {
                     <Typography gutterBottom className={classes.header}>
                         Framework Development
                     </Typography>
+                    <br/>
                     <Grid
                         container
                         direction="row"
@@ -150,6 +161,7 @@ const FooterContent = props =>  {
                     <Typography gutterBottom className={classes.header}>
                         Documentation Development
                     </Typography>
+                    <br/>
                     <Grid
                         container
                         direction="row"
@@ -184,11 +196,12 @@ const FooterContent = props =>  {
                     <Typography gutterBottom className={classes.header}>
                         Support
                     </Typography>
+                    <br/>
                     <Grid
                         container
                         direction="row"
                         justify="flex-start"
-                        alignItems="flex-start"m
+                        alignItems="flex-start"
                     >
                         <Grid item xs={12}>
                             <Button
@@ -246,8 +259,9 @@ const FooterContent = props =>  {
             <Divider style={{marginLeft: 25, marginRight: 25}}/>
             <br/>
             <br/>
+            <PoweredByVercel style={{marginLeft: 25}}/>
         </Paper>
     )
 }
 
-export default withRouter(FooterContent);
+export default FooterContent;

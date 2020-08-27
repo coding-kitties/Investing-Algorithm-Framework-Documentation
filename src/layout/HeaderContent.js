@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useRouter } from 'next/router'
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
 import {makeStyles, useTheme, withStyles} from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import {withRouter} from 'react-router-dom';
-import {CustomTab, CustomTabs} from "../navigation/Tabs";
+import {CustomTab, CustomTabs} from "../tabs";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {faGithub, faSlack} from "@fortawesome/free-brands-svg-icons";
@@ -98,8 +97,9 @@ function a11yProps(index) {
     };
 }
 
-function initialValue(location) {
-    const {pathname} = location;
+function initialValue() {
+    const router = useRouter();
+    const {pathname} = router;
 
     if(pathname.includes('/about')) {
         return 0;
@@ -113,22 +113,17 @@ function initialValue(location) {
     return 0;
 }
 
-const HeaderContent = props => {
+const HeaderContent = () => {
     const classes = useStyles();
-    const {history, location} = props;
+    const router = useRouter();
     const theme = useTheme();
     const matchesLGUp = useMediaQuery(theme.breakpoints.up('lg'));
     const matchesMD = useMediaQuery(theme.breakpoints.only('md'));
     const matchesSmUp = useMediaQuery(theme.breakpoints.up('sm'));
     const matchesMdDown = useMediaQuery(theme.breakpoints.down('md'));
     const matchesXl = useMediaQuery(theme.breakpoints.only('xl'));
-    const [value, setValue] = React.useState(initialValue(location));
+    const [value, setValue] = React.useState(initialValue());
     const [anchorEl, setAnchorEl] = React.useState(null);
-
-    React.useEffect(
-        () => setValue(initialValue(location)),
-        [location, history]
-    )
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -146,13 +141,13 @@ const HeaderContent = props => {
         setValue(newValue);
 
         if(newValue === 0) {
-            props.history.push('/about');
+            router.push('/about');
         } else if(newValue === 1) {
-            history.push('/documentation/general/overview');
+            router.push('/documentation/general/overview');
         } else if(newValue === 2) {
-            history.push('/development/general/overview');
+            router.push('/development/general/overview');
         } else if(newValue === 3) {
-            history.push('/license');
+            router.push('/license');
         }
     };
 
@@ -342,4 +337,4 @@ const HeaderContent = props => {
     )
 };
 
-export default withRouter(HeaderContent);
+export default HeaderContent;

@@ -3,8 +3,8 @@ import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from "@material-ui/core/styles";
-import {withRouter} from 'react-router-dom';
-import {CustomTabSecondary, CustomTabsSecondary} from "../navigation/Tabs";
+import {CustomTabSecondary, CustomTabsSecondary} from "../tabs";
+import {useRouter} from "next/router";
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,10 +41,10 @@ function a11yProps(index) {
 
 const DocumentationSubHeaderContent = props => {
     const classes = useStyles();
-    const {history, location} = props;
+    const router = useRouter();
 
-    const initialValue = (location) => {
-        const {pathname} = location;
+    const initialValue = () => {
+        const {pathname} = router;
 
         if(pathname.includes('/documentation/overview')) {
             return 0;
@@ -56,17 +56,17 @@ const DocumentationSubHeaderContent = props => {
         return 0;
     }
 
-    const [value, setValue] = React.useState(initialValue(location));
+    const [value, setValue] = React.useState(initialValue());
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
 
         if(newValue === 0) {
-            props.history.push('/documentation/general/overview');
+            router.push('/documentation/general/overview');
         } else if(newValue === 1) {
-            history.push('/documentation/guides/overview');
+            router.push('/documentation/guides/overview');
         } else if(newValue === 2) {
-            history.push('/documentation/framework-features/overview');
+            router.push('/documentation/framework-features/overview');
         }
     };
 
@@ -103,10 +103,10 @@ const DocumentationSubHeaderContent = props => {
 
 const DevelopmentSubSubHeaderContent = props => {
     const classes = useStyles();
-    const {history, location} = props;
+    const router = useRouter();
 
-    const initialValue = (location) => {
-        const {pathname} = location;
+    const initialValue = () => {
+        const {pathname} = router;
 
         if(pathname.includes('/development/general/')) {
             return 0;
@@ -118,17 +118,17 @@ const DevelopmentSubSubHeaderContent = props => {
         return 0;
     }
 
-    const [value, setValue] = React.useState(initialValue(location));
+    const [value, setValue] = React.useState(initialValue());
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
 
         if(newValue === 0) {
-            props.history.push('/development/general/overview');
+            router.push('/development/general/overview');
         } else if(newValue === 1) {
-            history.push('/development/framework/overview');
+            router.push('/development/framework/overview');
         } else if(newValue === 2) {
-            history.push('/development/documentation/overview');
+            router.push('/development/documentation/overview');
         }
     };
 
@@ -165,8 +165,8 @@ const DevelopmentSubSubHeaderContent = props => {
 };
 
 function SubHeaderContent (props) {
-
-    const {pathname} = props.location;
+    const router = useRouter();
+    const {pathname} = router;
 
     if(pathname.includes('/development/')) {
         return <DevelopmentSubSubHeaderContent {...props}/>
@@ -176,4 +176,4 @@ function SubHeaderContent (props) {
     return null;
 }
 
-export default withRouter(SubHeaderContent);
+export default SubHeaderContent;

@@ -1,7 +1,7 @@
 import React from 'react';
+import { useRouter } from 'next/router'
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
-import {withRouter} from 'react-router-dom';
 import ListItem from "@material-ui/core/ListItem";
 import {Divider} from "@material-ui/core";
 
@@ -34,9 +34,10 @@ const useStyles = makeStyles(theme => ({
 const SideNavContent = props => {
     const classes = useStyles();
     const {location} = props;
+    const router = useRouter()
 
     const listItems = () => {
-        const {pathname} = location;
+        const {pathname} = router;
 
         if (pathname.includes('documentation/general')) {
             return <>
@@ -134,4 +135,4 @@ const SideNavContent = props => {
     );
 };
 
-export default withRouter(SideNavContent);
+export default SideNavContent;

@@ -22,7 +22,7 @@ class MyApp extends App {
     return (
         <React.Fragment>
           <Head>
-            <title>My page</title>
+            <title>Investing Algorithm Framework: The framework for creation of investing algorithms</title>
             <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
             <link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet"/>
           </Head>

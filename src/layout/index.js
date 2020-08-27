@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {useRouter} from "next/router";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {
     Root,
@@ -17,7 +18,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import SubHeaderContent from "./SubHeaderContent";
 import HeaderContent from "./HeaderContent";
 import SideNavContent from "./SideNavContent";
-import MainContent from "./MainContent";
 import theme from "../theme";
 import FooterContent from "./FooterContent";
 
@@ -35,9 +35,9 @@ standardScheme.configureHeader(builder => {
     builder
         .create("main_header")
         .registerConfig("xs", {
-                position: "fixed",
-                clipped: true,
-                layer: 2,
+            position: "fixed",
+            clipped: true,
+            layer: 2,
         });
 });
 
@@ -61,9 +61,10 @@ standardScheme.configureInsetSidebar(builder => {
         });
 });
 
-const Container = props => {
+const Layout = props => {
     const matchesMdDown = useMediaQuery(theme.breakpoints.down('md'));
-    const {pathname} = useLocation();
+    const router = useRouter();
+    const {pathname} = router;
     const {children} = props;
 
     standardScheme.configureEdgeSidebar(builder => {
@@ -128,4 +129,4 @@ const Container = props => {
 };
 
 // hide-end
-export default Container;
+export default Layout;
