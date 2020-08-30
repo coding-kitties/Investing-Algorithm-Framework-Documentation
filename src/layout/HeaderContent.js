@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useRouter } from 'next/router'
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
@@ -8,11 +8,12 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {CustomTab, CustomTabs} from "../tabs";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import {faGithub, faSlack} from "@fortawesome/free-brands-svg-icons";
+import {faGithub, faSlack, faReddit} from "@fortawesome/free-brands-svg-icons";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {Button} from "@material-ui/core";
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import coding_kitties from "../images/coding-kitties.svg";
 
 const useStyles = makeStyles(theme => ({
     header: {
@@ -56,6 +57,9 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(1),
         backgroundColor: theme.palette.background.paper,
     },
+    codingKittiesHeader: {
+        fontSize: 14,
+    }
 }));
 
 
@@ -97,23 +101,14 @@ function a11yProps(index) {
     };
 }
 
-function initialValue() {
-    const router = useRouter();
-    const {pathname} = router;
-
-    if(pathname.includes('/about')) {
-        return 0;
-    } else if(pathname.includes('/documentation/')) {
-        return 1;
-    } else if(pathname.includes('/development/')) {
-        return 2;
-    } else if(pathname.includes('/license')) {
-        return 3;
-    }
-    return 0;
+const CodingKitties = props => {
+    return (
+        <img src={coding_kitties} alt="" {...props}/>
+    )
 }
 
-const HeaderContent = () => {
+
+const HeaderContent = props => {
     const classes = useStyles();
     const router = useRouter();
     const theme = useTheme();
@@ -122,12 +117,25 @@ const HeaderContent = () => {
     const matchesSmUp = useMediaQuery(theme.breakpoints.up('sm'));
     const matchesMdDown = useMediaQuery(theme.breakpoints.down('md'));
     const matchesXl = useMediaQuery(theme.breakpoints.only('xl'));
-    const [value, setValue] = React.useState(initialValue());
+    const [value, setValue] = React.useState(0);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const {pathname} = router;
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
+    React.useEffect(
+        () => {
+
+            if(pathname === '/') {
+                setValue(0);
+            } else if(pathname.includes('/documentation/')) {
+                setValue(1);
+            }
+        },
+        [pathname]
+    )
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -141,13 +149,15 @@ const HeaderContent = () => {
         setValue(newValue);
 
         if(newValue === 0) {
-            router.push('/about');
+            router.push('/');
         } else if(newValue === 1) {
             router.push('/documentation/general/overview');
         } else if(newValue === 2) {
             router.push('/development/general/overview');
         } else if(newValue === 3) {
             router.push('/license');
+        } else if(newValue === 4) {
+            router.push('/support');
         }
     };
 
@@ -158,6 +168,56 @@ const HeaderContent = () => {
             justify="space-between"
             alignItems="center"
         >
+            <Grid item xs={6} style={{marginTop: 10}}>
+                <Grid
+                    container
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="center"
+                >
+                    <Grid item>
+                        <CodingKitties height={15} style={{marginTop:4}}/>
+                    </Grid>
+                    <Grid item>
+                        <Typography className={classes.codingKittiesHeader} style={{fontWeight: 600}}>
+                            Coding
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography color={"primary"} className={classes.codingKittiesHeader}>
+                            Kitties
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item xs={6}>
+                <Grid
+                    container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="center"
+                    spacing={1}
+                >
+                    <Grid item>
+                        <img
+                            src={'https://travis-ci.org/coding-kitties/investing-algorithm-framework.svg?branch=master'}
+                            alt={'travis-ci-status'}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <img
+                            src={'https://img.shields.io/pypi/v/investing_algorithm_framework.svg'}
+                            alt={'pypi version'}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <img
+                            src={'https://img.shields.io/github/stars/coding-kitties/investing-algorithm-framework.svg?label=github%20stars'}
+                            alt={'github-stars'}
+                        />
+                    </Grid>
+                </Grid>
+            </Grid>
             <Grid item>
                 <Typography noWrap color={'primary'} className={classes.header}>
                     Investing Algorithm Framework
@@ -169,6 +229,7 @@ const HeaderContent = () => {
                     <CustomTab label="Documentation" {...a11yProps(1)} />
                     <CustomTab label="Development" {...a11yProps(2)} />
                     <CustomTab label="License" {...a11yProps(3)} />
+                    <CustomTab label="Support" {...a11yProps(4)} />
                 </CustomTabs>
             </Grid>
             <Grid item>
@@ -195,28 +256,14 @@ const HeaderContent = () => {
                             Slack
                         </Button>
                     </Grid>
-                    {matchesXl &&
-                        <>
-                            <Grid item>
-                                <img
-                                    src={'https://travis-ci.org/coding-kitties/investing-algorithm-framework.svg?branch=master'}
-                                    alt={'travis-ci-status'}
-                                />
-                            </Grid>
-                            <Grid item>
-                                <img
-                                    src={'https://img.shields.io/pypi/v/investing_algorithm_framework.svg'}
-                                    alt={'pypi version'}
-                                />
-                            </Grid>
-                            <Grid item>
-                                <img
-                                    src={'https://img.shields.io/github/stars/coding-kitties/investing-algorithm-framework.svg?label=github%20stars'}
-                                    alt={'github-stars'}
-                                />
-                            </Grid>
-                        </>
-                    }
+                    <Grid item>
+                        <Button
+                            startIcon={<FontAwesomeIcon icon={faReddit}/>}
+                            href={'https://www.reddit.com/r/InvestingAlgorithms/'}
+                        >
+                            Reddit
+                        </Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

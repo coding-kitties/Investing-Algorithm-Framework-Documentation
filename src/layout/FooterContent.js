@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import {Link} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import powered_by_vercel from "../images/powered-by-vercel.svg";
+import coding_kitties from "../images/coding-kitties.svg"
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -41,6 +42,9 @@ const useStyles = makeStyles(theme => ({
     linkButton: {
         textTransform: 'none',
         padding: 0
+    },
+    codingKittiesHeader: {
+        fontSize: 14,
     }
 }));
 
@@ -48,6 +52,13 @@ function PoweredByVercel(props) {
     return (
         <img src={powered_by_vercel} alt="" {...props}/>
     );
+}
+
+const CodingKitties = props => {
+    return (
+        <img src={coding_kitties} alt="" {...props}/>
+
+    )
 }
 
 const FooterContent = props =>  {
@@ -65,15 +76,14 @@ const FooterContent = props =>  {
                 <Grid item sm={12}>
                     <Paper color={'primary'} className={classes.licensePaper}>
                         <Typography align={"center"} className={classes.infoText}>
-                            Investing Algorithm Framework Documentation by Coding Kitties is licensed under a <Link
+                            Investing Algorithm Framework Documentation website by Coding Kitties is licensed under a <Link
                                 className={classes.headerLink}
-                                href="https://github.com/coding-kitties/investing-algorithm-framework-documentation"
+                                href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
                             >
                                  Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
                             </Link>.
                         </Typography>
                     </Paper>
-
                 </Grid>
                 <Grid item sm={6} md={3} className={classes.linkList}>
                     <br/>
@@ -249,13 +259,31 @@ const FooterContent = props =>  {
             <br/>
             <br/>
             <Divider style={{marginLeft: 25, marginRight: 25}}/>
-                <br/>
-                <br/>
-                <Typography color={'textSecondary'} style={{marginLeft: 25}}>
-                    Coding Kitties
-                </Typography>
-                <br/>
-                <br/>
+            <br/>
+            <br/>
+            <Grid
+                style={{marginLeft: 25, marginRight: 25}}
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+            >
+                <Grid item>
+                    <CodingKitties height={15} style={{marginTop:4}}/>
+                </Grid>
+                <Grid item>
+                    <Typography className={classes.codingKittiesHeader} style={{fontWeight: 600}}>
+                        Coding
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography color={"primary"} className={classes.codingKittiesHeader}>
+                        Kitties
+                    </Typography>
+                </Grid>
+            </Grid>
+            <br/>
+            <br/>
             <Divider style={{marginLeft: 25, marginRight: 25}}/>
             <br/>
             <br/>

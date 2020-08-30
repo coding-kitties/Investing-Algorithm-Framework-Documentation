@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from 'next/router'
 import clsx from 'clsx';
 import ListItem from "@material-ui/core/ListItem";
 import {makeStyles} from "@material-ui/core/styles";
@@ -16,18 +17,25 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function isActive(location, link) {
-    const {pathname} = location;
+function isActive(link) {
+    const router = useRouter()
+    const {pathname} = router;
     return pathname.includes(link);
 }
 
 const SideNavItem = props => {
     const classes = useStyles();
-    const {label, link, location} = props;
+    const {label, link} = props;
+    const router = useRouter();
 
     return (
-        <ListItem button className={classes.nested} component={Link} href={link}>
-            <Typography className={clsx(classes.listItem, isActive(location, link) && classes.active)}>{label}</Typography>
+        <ListItem button onClick={() => router.push(link)}>
+            <Typography
+                color={"textPrimary"}
+                className={clsx(classes.listItem, isActive(link) && classes.active)}
+            >
+                {label}
+            </Typography>
         </ListItem>
     )
 }

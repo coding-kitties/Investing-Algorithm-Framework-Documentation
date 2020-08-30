@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useRouter} from "next/router";
 import clsx from 'clsx';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -8,7 +9,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import Collapse from "@material-ui/core/Collapse";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
-import Link from '../Link'
 
 const useStyles = makeStyles((theme) => ({
     nested: {
@@ -26,20 +26,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function isActive(location, link) {
-    const {pathname} = location;
+function isActive(link) {
+    const router = useRouter();
+    const {pathname} = router;
     return pathname.includes(link);
 }
 
 const NestedSideNavItem = props => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const router = useRouter();
+    const handleClick = () => {setOpen(!open);};
+    const {subItems, header} = props;
 
-    const handleClick = () => {
-        setOpen(!open);
-    };
-
-    const {subItems, header, location} = props;
     return (
         <>
             <ListItem button onClick={handleClick}>
@@ -50,12 +49,18 @@ const NestedSideNavItem = props => {
                 <List disablePadding component="div">
                     {
                         subItems.map((item, index) => (
-                            <ListItem key={index} button className={classes.nested} component={Link} href={item.link}>
+                            <ListItem
+                                key={index}
+                                button
+                                className={classes.nested}
+                                onClick={() => router.push(item.link)}
+                            >
                                 <Typography
+                                    color={"textPrimary"}
                                     className={
                                         clsx(
                                             classes.subItem,
-                                            isActive(location, item.link) && classes.active
+                                            isActive(item.link) && classes.active
                                         )
                                     }
                                 >

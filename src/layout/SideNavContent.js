@@ -50,30 +50,13 @@ const SideNavContent = props => {
             </>
         } else if(pathname.includes('documentation/guides')) {
             return <>
-                    <ListItem className={classes.primaryHeader}>
-                        <Typography className={classes.primaryHeaderText}>Guides</Typography>
-                    </ListItem>
-                    <Divider/>
+                <ListItem className={classes.primaryHeader}>
+                    <Typography className={classes.primaryHeaderText}>Guides</Typography>
+                </ListItem>
+                <Divider/>
                 <SideNavItem label={'Overview'} link={'/documentation/guides/overview'}/>
-                <NestedSideNavItem header={'Basic Algorithm Guide'} subItems={
-                        [
-                            {label: 'Intro', link: '/documentation/guides/basic-algorithm/intro'},
-                            {label: 'Template', link: '/documentation/guides/basic-algorithm/template'},
-                            {label: 'Models', link: '/documentation/guides/basic-algorithm/models'},
-                            {label: 'Setup State', link: '/documentation/guides/basic-algorithm/setup_state'},
-                            {
-                                label: 'Data providing State',
-                                link: '/documentation/guides/basic-algorithm/data-providing'
-                            },
-                            {label: 'Strategy State', link: '/documentation/guides/basic-algorithm/strategy'},
-                            {
-                                label: 'Order execution State',
-                                link: '/documentation/guides/basic-algorithm/order-executors'
-                            },
-                            {label: 'Deployment', link: '/documentation/guides/basic-algorithm/deployment'},
-                        ]
-                    }/>
-                </>
+                <SideNavItem label={'Basic Algorithm'} link={'/documentation/guides/basic-algorithm'}/>
+            </>
         } else if(pathname.includes('documentation/framework-features')) {
             return <>
                 <ListItem className={classes.primaryHeader}>
@@ -81,11 +64,11 @@ const SideNavContent = props => {
                 </ListItem>
                 <Divider/>
                 <SideNavItem label={'Overview'} link={'/documentation/framework-features/overview'}/>
-                <NestedSideNavItem header={'Databases'} subItems={
+                <NestedSideNavItem header={'Database management'} subItems={
                     [
-                        {label: 'Database Resolver', link: '/documentation/framework-features/databases/database-resolver'},
-                        {label: 'Models', link: '/documentation/framework-features/databases/models'},
-                        {label: 'Querying', link: '/documentation/framework-features/databases/querying'},
+                        {label: 'Database Resolver', link: '/documentation/framework-features/database-management/sql-alchemy-database-resolver'},
+                        {label: 'Models', link: '/documentation/framework-features/database-management/models'},
+                        {label: 'Querying', link: '/documentation/framework-features/database-management/querying'},
                     ]
                 }/>            </>
         } else if(pathname.includes('/development/general/')) {
@@ -102,7 +85,7 @@ const SideNavContent = props => {
         } else if(pathname.includes('/development/framework/')) {
             return <>
                 <ListItem className={classes.primaryHeader}>
-                    <Typography className={classes.primaryHeaderText}>Development</Typography>
+                    <Typography className={classes.primaryHeaderText}>Framework</Typography>
                 </ListItem>
                 <Divider/>
                 <SideNavItem label={'Overview'} link={'/development/framework/overview'}/>
@@ -116,7 +99,7 @@ const SideNavContent = props => {
         } else if(pathname.includes('/development/documentation/')) {
             return <>
                 <ListItem className={classes.primaryHeader}>
-                    <Typography className={classes.primaryHeaderText}>Framework</Typography>
+                    <Typography className={classes.primaryHeaderText}>Documentation</Typography>
                 </ListItem>
                 <Divider/>
                 <SideNavItem label={'Overview'} link={'/development/documentation/overview'}/>

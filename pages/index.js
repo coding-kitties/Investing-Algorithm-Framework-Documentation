@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -9,15 +9,12 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import SubjectIcon from '@material-ui/icons/Subject';
 import {Row, Item} from '@mui-treasury/components/flex';
 import {Info} from '@mui-treasury/components/info';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import {faLayerGroup, faDatabase, faTerminal, faSquare, faThList} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import GetAppIcon from '@material-ui/icons/GetApp';
 
 import MarkdownArticle from "../src/markdown/MarkdownArticle";
 import python_icon from '../src/images/python.svg'
 import Layout from "../src/layout";
-import usage from '../src/articles/usage.md';
 import {Divider} from "@material-ui/core";
 
 
@@ -180,7 +177,7 @@ const AboutView = props => {
     history
   } = props;
   return  (
-      <Layout>
+      // <Layout>
         <div className={classes.root}>
           <Grid
               container
@@ -507,7 +504,7 @@ const AboutView = props => {
           <br/>
           <br/>
         </div>
-      </Layout>
+      // </Layout>
   )
 }
 

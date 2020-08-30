@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import {useRouter} from "next/router";
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -36,6 +36,7 @@ standardScheme.configureHeader(builder => {
         .create("main_header")
         .registerConfig("xs", {
             position: "fixed",
+            initialHeight: 82,
             clipped: true,
             layer: 2,
         });
@@ -90,6 +91,10 @@ const Layout = props => {
             builder.hide("primarySidebar", false);
         }
     });
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [pathname]);
 
     const showSubHeader = () => {
         if(pathname === undefined) {
