@@ -9,7 +9,7 @@ export default class MarkdownLink extends PureComponent {
 
     render() {
         return (
-            <Link href={this.props.href}>{this.props.children[0].props.value}</Link>
+            <Link href={this.props.href}>{this.props.children}</Link>
         );
     }
 }

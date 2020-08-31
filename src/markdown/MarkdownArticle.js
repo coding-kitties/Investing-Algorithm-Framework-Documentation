@@ -11,7 +11,11 @@ const MarkdownArticle = props => {
     } = props;
 
     return (
-        <ReactMarkdown source={markdown} renderers={{code: CodeBlock, link: MarkdownLink}} escapeHtml={false}/>
+        <ReactMarkdown
+            source={markdown}
+            renderers={{code: CodeBlock, link: MarkdownLink, linkReference: MarkdownLink}}
+            escapeHtml={false}
+        />
     )
 }
 
