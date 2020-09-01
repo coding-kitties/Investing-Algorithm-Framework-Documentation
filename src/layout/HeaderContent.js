@@ -195,7 +195,7 @@ const HeaderContent = props => {
                     container
                     direction="row"
                     justify="flex-end"
-                    alignItems="center"
+                    alignItems="flex-end"
                     spacing={1}
                 >
                     <Grid item>
