@@ -50,7 +50,9 @@ const useStyles = makeStyles(theme => ({
 
 function PoweredByVercel(props) {
     return (
-        <img src={powered_by_vercel} alt="" {...props}/>
+        <Link href={'https://vercel.com/?utm_source=investing-algorithm-framework-documentation&utm_campaign=oss'}>
+            <img src={powered_by_vercel} alt="" {...props}/>
+        </Link>
     );
 }
 
