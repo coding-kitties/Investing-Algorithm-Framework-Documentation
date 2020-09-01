@@ -67,7 +67,8 @@ const Layout = props => {
     const router = useRouter();
     const {pathname} = router;
     const {children} = props;
-    const [headerColor, setHeaderColor] = React.useState('#FFFFFF')
+
+    const [headerColor, setHeaderColor] = React.useState('transparent');
 
     standardScheme.configureEdgeSidebar(builder => {
         builder
@@ -93,32 +94,33 @@ const Layout = props => {
         }
     });
 
-    // Scroll checker
-    window.onscroll = function() {
-
-        if(window.pageYOffset === 0) {
-            setHeaderColor('transparent');
-        } else {
-            setHeaderColor('default')
-        }
-    };
-
     useEffect(() => {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0),
+        window.onscroll = function() {
+
+            if (pathname.includes('/documentation/') || pathname.includes('/development')) {
+                setHeaderColor('default');
+            } else {
+                if (window.pageYOffset === 0) {
+                    setHeaderColor('transparent');
+                } else {
+                    setHeaderColor('default');
+                }
+            }
+        }
     }, [pathname]);
 
     const showSubHeader = () => {
         if(pathname === undefined) {
             return false
         }
-
         return !(!pathname.includes('/documentation/') && !pathname.includes('/development'));
     }
 
     return (
         <Root scheme={standardScheme} theme={theme}>
             <CssBaseline />
-            <Header color={headerColor}>
+            <Header color={(pathname.includes('/documentation/') || pathname.includes('/development')) ? 'default' : headerColor}>
                 <Toolbar>
                     {matchesMdDown && <SidebarTrigger sidebarId="primarySidebar" />}
                     <HeaderContent />
