@@ -67,6 +67,7 @@ const Layout = props => {
     const router = useRouter();
     const {pathname} = router;
     const {children} = props;
+    const [headerColor, setHeaderColor] = React.useState('#FFFFFF')
 
     standardScheme.configureEdgeSidebar(builder => {
         builder
@@ -92,6 +93,16 @@ const Layout = props => {
         }
     });
 
+    // Scroll checker
+    window.onscroll = function() {
+
+        if(window.pageYOffset === 0) {
+            setHeaderColor('transparent');
+        } else {
+            setHeaderColor('default')
+        }
+    };
+
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [pathname]);
@@ -107,7 +118,7 @@ const Layout = props => {
     return (
         <Root scheme={standardScheme} theme={theme}>
             <CssBaseline />
-            <Header color={'default'}>
+            <Header color={headerColor}>
                 <Toolbar>
                     {matchesMdDown && <SidebarTrigger sidebarId="primarySidebar" />}
                     <HeaderContent />
