@@ -17,7 +17,8 @@ const theme = createMuiTheme({
             dark: "#031322",
             contrastText: "#fff",
         },
-    }
+    },
+    drawerWidth: 256,
 });
 
 export default theme

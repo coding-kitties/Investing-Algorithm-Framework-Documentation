@@ -72,31 +72,29 @@ const DocumentationSubHeaderContent = props => {
 
     return (
         <>
-            <Toolbar className={classes.toolbar}>
-                <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="center"
-                >
-                    <Grid item xs={12} className={classes.title}>
-                        <Typography noWrap color={'primary'} className={classes.header}>
-                            Documentation
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomTabsSecondary
-                            textColor="secondary"
-                            value={value} onChange={handleChange}
-                            aria-label="simple tabs example"
-                        >
-                            <CustomTabSecondary label="General" {...a11yProps(0)} />
-                            <CustomTabSecondary label="Guides" {...a11yProps(1)} />
-                            <CustomTabSecondary label="Framework Features" {...a11yProps(2)} />
-                        </CustomTabsSecondary>
-                    </Grid>
+            <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+            >
+                <Grid item xs={12} className={classes.title}>
+                    <Typography noWrap color={'primary'} className={classes.header}>
+                        Documentation
+                    </Typography>
                 </Grid>
-            </Toolbar>
+                <Grid item xs={12}>
+                    <CustomTabsSecondary
+                        textColor="secondary"
+                        value={value} onChange={handleChange}
+                        aria-label="simple tabs example"
+                    >
+                        <CustomTabSecondary label="General" {...a11yProps(0)} />
+                        <CustomTabSecondary label="Guides" {...a11yProps(1)} />
+                        <CustomTabSecondary label="Framework Features" {...a11yProps(2)} />
+                    </CustomTabsSecondary>
+                </Grid>
+            </Grid>
         </>
     )
 };
@@ -134,32 +132,30 @@ const DevelopmentSubSubHeaderContent = props => {
 
     return (
         <>
-            <Toolbar className={classes.toolbar}>
-                <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="center"
-                >
-                    <Grid item xs={12} className={classes.title}>
-                        <Typography noWrap color={'primary'} className={classes.header}>
-                            Development
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomTabsSecondary
-                            textColor="secondary"
-                            value={value}
-                            onChange={handleChange}
-                            aria-label="simple tabs example"
-                        >
-                            <CustomTabSecondary label="General" {...a11yProps(0)} />
-                            <CustomTabSecondary label="Framework" {...a11yProps(1)} />
-                            <CustomTabSecondary label="Documentation" {...a11yProps(2)} />
-                        </CustomTabsSecondary>
-                    </Grid>
+            <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+            >
+                <Grid item xs={12} className={classes.title}>
+                    <Typography noWrap color={'primary'} className={classes.header}>
+                        Development
+                    </Typography>
                 </Grid>
-            </Toolbar>
+                <Grid item xs={12}>
+                    <CustomTabsSecondary
+                        textColor="secondary"
+                        value={value}
+                        onChange={handleChange}
+                        aria-label="simple tabs example"
+                    >
+                        <CustomTabSecondary label="General" {...a11yProps(0)} />
+                        <CustomTabSecondary label="Framework" {...a11yProps(1)} />
+                        <CustomTabSecondary label="Documentation" {...a11yProps(2)} />
+                    </CustomTabsSecondary>
+                </Grid>
+            </Grid>
         </>
     )
 };

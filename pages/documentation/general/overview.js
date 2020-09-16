@@ -1,4 +1,5 @@
 import React from "react";
+import Layout from "../../../src/layout";
 import ArticleView from "../../../src/views/ArticleView";
 import MarkdownArticle from "../../../src/markdown/MarkdownArticle";
 

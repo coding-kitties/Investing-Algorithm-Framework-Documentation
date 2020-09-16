@@ -15,11 +15,9 @@
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
     "@material-ui/lab": "latest",
-    "@mui-treasury/components": "^1.5.2",
-    "@mui-treasury/layout": "^4.5.0",
     "axios": "^0.19.2",
+    "babel-runtime": "^6.26.0",
     "clsx": "latest",
-    "js-cookie": "^2.2.1",
     "next": "latest",
     "next-images": "^1.4.1",
     "prop-types": "latest",
@@ -27,8 +25,13 @@
     "react": "latest",
     "react-dom": "latest",
     "react-ga": "^3.1.2",
+    "react-jss": "^8.1.0",
     "react-markdown": "^4.3.1",
+    "react-scroll-trigger": "^0.6.9",
     "react-syntax-highlighter": "^12.2.1",
-    "styled-components": "^5.1.0"
+    "react-typist": "^2.0.5"
+  },
+  "devDependencies": {
+    "react-scrollable-anchor": "^0.6.1"
   }
 }

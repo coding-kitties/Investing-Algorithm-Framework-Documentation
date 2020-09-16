@@ -13,6 +13,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {Button} from "@material-ui/core";
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Toolbar from "@material-ui/core/Toolbar";
 import coding_kitties from "../images/coding-kitties.svg";
 
 const useStyles = makeStyles(theme => ({
@@ -116,26 +117,13 @@ const HeaderContent = props => {
     const matchesMD = useMediaQuery(theme.breakpoints.only('md'));
     const matchesSmUp = useMediaQuery(theme.breakpoints.up('sm'));
     const matchesMdDown = useMediaQuery(theme.breakpoints.down('md'));
-    const matchesXl = useMediaQuery(theme.breakpoints.only('xl'));
-    const [value, setValue] = React.useState(0);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [value, setValue] = React.useState(0);
     const {pathname} = router;
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-
-    React.useEffect(
-        () => {
-
-            if(pathname === '/') {
-                setValue(0);
-            } else if(pathname.includes('/documentation/')) {
-                setValue(1);
-            }
-        },
-        [pathname]
-    )
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -162,111 +150,113 @@ const HeaderContent = props => {
     };
 
     const renderLGUp = () => (
-        <Grid
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-        >
-            <Grid item xs={6} style={{marginTop: 10}}>
-                <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="center"
-                >
-                    <Grid item>
-                        <CodingKitties height={15} style={{marginTop:4}}/>
+        <Toolbar>
+            <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+            >
+                <Grid item xs={6} style={{marginTop: 10}}>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="flex-start"
+                        alignItems="center"
+                    >
+                        <Grid item>
+                            <CodingKitties height={15} style={{marginTop:4}}/>
+                        </Grid>
+                        <Grid item>
+                            <Typography className={classes.codingKittiesHeader} style={{fontWeight: 600}}>
+                                Coding
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography color={"primary"} className={classes.codingKittiesHeader}>
+                                Kitties
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <Typography className={classes.codingKittiesHeader} style={{fontWeight: 600}}>
-                            Coding
-                        </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="flex-end"
+                        alignItems="flex-end"
+                        spacing={1}
+                    >
+                        <Grid item>
+                            <img
+                                src={'https://travis-ci.org/coding-kitties/investing-algorithm-framework.svg?branch=master'}
+                                alt={'travis-ci-status'}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <img
+                                src={'https://img.shields.io/pypi/v/investing_algorithm_framework.svg'}
+                                alt={'pypi version'}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <img
+                                src={'https://img.shields.io/github/stars/coding-kitties/investing-algorithm-framework.svg?label=github%20stars'}
+                                alt={'github-stars'}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <Typography color={"primary"} className={classes.codingKittiesHeader}>
-                            Kitties
-                        </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography noWrap color={'primary'} className={classes.header}>
+                        Investing Algorithm Framework
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <CustomTabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                        <CustomTab label="About" {...a11yProps(0)} />
+                        <CustomTab label="Documentation" {...a11yProps(1)} />
+                        <CustomTab label="Development" {...a11yProps(2)} />
+                        <CustomTab label="License" {...a11yProps(3)} />
+                        <CustomTab label="Support" {...a11yProps(4)} />
+                    </CustomTabs>
+                </Grid>
+                <Grid item>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="flex-end"
+                        alignItems="center"
+                        spacing={1}
+                    >
+                        <Grid item>
+                            <Button
+                                startIcon={<FontAwesomeIcon icon={faGithub}/>}
+                                href={'https://github.com/coding-kitties/investing-algorithm-framework'}
+                            >
+                                Github
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                startIcon={<FontAwesomeIcon icon={faSlack}/>}
+                                href={'https://inv-algo-framework.slack.com'}
+                            >
+                                Slack
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                startIcon={<FontAwesomeIcon icon={faReddit}/>}
+                                href={'https://www.reddit.com/r/InvestingAlgorithms/'}
+                            >
+                                Reddit
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={6}>
-                <Grid
-                    container
-                    direction="row"
-                    justify="flex-end"
-                    alignItems="flex-end"
-                    spacing={1}
-                >
-                    <Grid item>
-                        <img
-                            src={'https://travis-ci.org/coding-kitties/investing-algorithm-framework.svg?branch=master'}
-                            alt={'travis-ci-status'}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <img
-                            src={'https://img.shields.io/pypi/v/investing_algorithm_framework.svg'}
-                            alt={'pypi version'}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <img
-                            src={'https://img.shields.io/github/stars/coding-kitties/investing-algorithm-framework.svg?label=github%20stars'}
-                            alt={'github-stars'}
-                        />
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid item>
-                <Typography noWrap color={'primary'} className={classes.header}>
-                    Investing Algorithm Framework
-                </Typography>
-            </Grid>
-            <Grid item>
-                <CustomTabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                    <CustomTab label="About" {...a11yProps(0)} />
-                    <CustomTab label="Documentation" {...a11yProps(1)} />
-                    <CustomTab label="Development" {...a11yProps(2)} />
-                    <CustomTab label="License" {...a11yProps(3)} />
-                    <CustomTab label="Support" {...a11yProps(4)} />
-                </CustomTabs>
-            </Grid>
-            <Grid item>
-                <Grid
-                    container
-                    direction="row"
-                    justify="flex-end"
-                    alignItems="center"
-                    spacing={1}
-                >
-                    <Grid item>
-                        <Button
-                            startIcon={<FontAwesomeIcon icon={faGithub}/>}
-                            href={'https://github.com/coding-kitties/investing-algorithm-framework'}
-                        >
-                            Github
-                        </Button>
-                    </Grid>
-                    <Grid item>
-                        <Button
-                            startIcon={<FontAwesomeIcon icon={faSlack}/>}
-                            href={'https://inv-algo-framework.slack.com'}
-                        >
-                            Slack
-                        </Button>
-                    </Grid>
-                    <Grid item>
-                        <Button
-                            startIcon={<FontAwesomeIcon icon={faReddit}/>}
-                            href={'https://www.reddit.com/r/InvestingAlgorithms/'}
-                        >
-                            Reddit
-                        </Button>
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Grid>
+        </Toolbar>
     )
 
     const renderMDDown = () => (

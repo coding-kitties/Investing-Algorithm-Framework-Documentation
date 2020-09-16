@@ -7,7 +7,6 @@ import Divider from "@material-ui/core/Divider";
 import MarkdownArticle from "../../../src/markdown/MarkdownArticle";
 import Link from '../../../src/Link';
 
-
 const useStyles = makeStyles(theme => ({
     root: {
         marginTop: theme.spacing(4)

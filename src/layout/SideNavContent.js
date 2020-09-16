@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
         borderTopRightRadius: 5,
         borderBottomRightRadius: 5,
         maxWidth: 250,
+        marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
         backgroundColor: theme.palette.primary.light
     },
@@ -31,9 +32,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const SideNavContent = props => {
+const SideNavContent = () => {
     const classes = useStyles();
-    const {location} = props;
     const router = useRouter()
 
     const listItems = () => {
