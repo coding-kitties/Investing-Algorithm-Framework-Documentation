@@ -1,17 +1,13 @@
 import React, {useEffect} from 'react';
 import clsx from "clsx";
-import Paper from "@material-ui/core/Paper";
 import {useRouter} from "next/router";
-import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 import Drawer from "@material-ui/core/Drawer";
 import {makeStyles} from "@material-ui/core/styles";
 import Toolbar from '@material-ui/core/Toolbar';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Collapse from '@material-ui/core/Collapse';
 import HeaderContent from "./HeaderContent";
 import SideNavContent from "./SideNavContent";
-import theme from "../theme";
 import Footer from "./Footer";
 import SubHeaderContent from "./SubHeaderContent";
 
@@ -60,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Layout = props => {
-    const matchesMdDown = useMediaQuery(theme.breakpoints.down('md'));
     const router = useRouter();
     const {pathname} = router;
     const {children} = props;
@@ -152,11 +147,6 @@ const Layout = props => {
             <main className={clsx(showDrawer() && classes.contentShift)}>
                 {children}
             </main>
-            {/*<main className={clsx(showDrawer() && classes.contentShift)}>*/}
-            {/*    <Container className={classes.container}>*/}
-            {/*        {children}*/}
-            {/*    </Container>*/}
-            {/*</main>*/}
             <Footer drawerOpen={showDrawer()}/>
         </>
     );
