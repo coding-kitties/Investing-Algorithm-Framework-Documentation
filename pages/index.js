@@ -11,9 +11,10 @@ import SubjectIcon from '@material-ui/icons/Subject';
 import Typist from 'react-typist';
 import {faBook, faLayerGroup, faDatabase, faTerminal, faSquare, faThList} from "@fortawesome/free-solid-svg-icons";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
+import {Adsense} from '@ctrl/react-adsense';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Divider} from "@material-ui/core";
-
+import {usePaperStyles} from "../src/styles";
 import Link from "../src/Link";
 import MarkdownArticle from "../src/markdown/MarkdownArticle";
 import python_icon from '../src/images/python.svg'
@@ -184,6 +185,7 @@ function PythonIcon(props) {
 
 const AboutView = props => {
   const classes = useStyles();
+  const paperClasses = usePaperStyles();
   const theme = useTheme();
   const matchesSmDown = useMediaQuery(theme.breakpoints.down('sm'));
   const [installEnter, setInstallEnter] = useState(false);
@@ -271,22 +273,25 @@ const AboutView = props => {
           <br/>
           <br/>
           <br/>
-          <Paper className={classes.infoBlockHeader}>
+          <Paper>
+            <Paper className={clsx(paperClasses.contentPaper, paperClasses.contentHeaderPaper)}>
               <Typography className={classes.infoBlockTypography}>
                 Usage
               </Typography>
-          </Paper>
-          <Paper className={classes.usageMarkdownPaper}>
-            <br/>
-            <Typography className={classes.infoBlockText} variant={"body1"}>
-              The framework doesn't limit you in the way you define your data providers, strategies and algorithms.
-            </Typography>
-            <MarkdownArticle markdown={props.usageMarkdown}/>
-            <Divider/>
-            <br/>
-            <Button style={{marginLeft: 6}}>Explore the docs</Button>
-            <br/>
-            <br/>
+            </Paper>
+            <Paper elevation={0} style={{borderTopLeftRadius: 0, borderTopRightRadius: 0}} className={paperClasses.contentPaper}>
+              <br/>
+              <Typography variant={"body1"}>
+                The framework doesn't limit you in the way you define your data providers, strategies and algorithms.
+              </Typography>
+            </Paper>
+            <Paper style={{borderBottomLeftRadius: 0, borderBottomRightRadius: 0}}>
+              <MarkdownArticle markdown={props.usageMarkdown}/>
+              <Divider/>
+            </Paper>
+            <Paper style={{borderTopLeftRadius: 0, borderTopRightRadius: 0}} className={paperClasses.contentPaper}>
+              <Button>Explore the docs</Button>
+            </Paper>
           </Paper>
         </Grid>
         <Grid item xs={12}>
@@ -372,198 +377,14 @@ const AboutView = props => {
     <br/>
     <br/>
     <br/>
-    </>
-    // <div className={classes.root}/>
-    //   <Grid
-    //       container
-    //       direction="row"
-    //       justify="center"
-    //       alignItems="center"
-    //   >
-    //     <Grid item xs={12}>
-    //       <br/>
-    //       <br/>
-    //       <br/>
-    //       <br/>
-    //       <br/>
-    //       <br/>
-    //       <Paper className={classes.infoBlockHeader}>
-    //          <Typography className={classes.infoBlockTypography}>
-    //            Core principles
-    //          </Typography>
-    //       </Paper>
-    //       <Paper>
-    //         <Grid
-    //             container
-    //             direction="row"
-    //             justify="center"
-    //             alignItems="flex-start"
-    //         >
-    //           <Grid item xs={12} md={4} className={classes.contentTextArea}>
-    //             <Typography className={classes.headerText}>Faster development</Typography>
-    //             <br/>
-    //             <Typography className={classes.text}>
-    //               The Framework gives you a stable foundation to build your algorithms on.
-    //               This allows you to focus on implementing your investment strategies and
-    //               build your algorithms with confidence.
-    //             </Typography>
-    //           </Grid>
-    //           <Grid item xs={12} md={4} className={classes.contentTextArea}>
-    //             <Typography className={classes.headerText}>Versatile</Typography>
-    //             <br/>
-    //             <Typography className={classes.text}>
-    //               The framework can be used to build almost any type of investing algorithm.
-    //               From traditional algorithms, through to machine learning algorithms
-    //               and everything in between.
-    //             </Typography>
-    //           </Grid>
-    //           <Grid item xs={12} md={4} className={classes.contentTextArea}>
-    //             <Typography className={classes.headerText}>Complete</Typography>
-    //             <br/>
-    //             <Typography className={classes.text}>
-    //               The framework follows the "Batteries included" philosophy and provides almost
-    //               everything you need for a good foundation for the implementation of your
-    //               investing algorithms "out of the box".
-    //             </Typography>
-    //           </Grid>
-    //         </Grid>
-    //         <Paper elevation={0} className={classes.bottomPaper}>
-    //           <Grid
-    //               container
-    //               direction="row"
-    //               justify="flex-start"
-    //               alignItems="flex-end"
-    //           >
-    //             <Grid item>
-    //               <Typography className={classes.secondaryText}>
-    //                 Made for:
-    //               </Typography>
-    //             </Grid>
-    //             <Grid item>
-    //               <PythonIcon width={20} height={20} style={{marginLeft: 8}}/>
-    //             </Grid>
-    //           </Grid>
-    //         </Paper>
-    //       </Paper>
-    //     </Grid>
-    //   </Grid>
-    //   <Grid item xs={12}>
-    //     <br/>
-    //     <br/>
-    //     <br/>
-    //     <br/>
-    //     <br/>
-    //     <br/>
-    //     <div style={{maxWidth: 800}}>
-    //       <Typography color={"primary"}>Implementation of strategies</Typography>
-    //       <Typography variant={"h4"}>You can implement any type of strategy, where the framework aims to restrict you as  .</Typography>
-    //       <br/>
-    //       <Typography variant={"body1"}>
-    //         The framework allows you to implement any type of strategy, full control over the data providing for your algorithms with
-    //         abstractions, pre-made mixins and easy to use hooks, where your strategies can take full advatage of.
-    //       </Typography>
-    //       <br/>
-    //       <br/>
-    //       <Button className={classes.infoBlockContainedButton} variant={"contained"}>Learn about strategies</Button>
-    //     </div>
-    //   </Grid>
-    //   <Grid item xs={12}>
-    //     <br/>
-    //     <br/>
-    //     <br/>
-    //     <br/>
-    //     <br/>
-    //     <br/>
-    //     {/*<Paper>*/}
-    //     {/*  <Grid*/}
-    //     {/*      container*/}
-    //     {/*      direction="row"*/}
-    //     {/*      justify="flex-start"*/}
-    //     {/*      alignItems="center"*/}
-    //     {/*  >*/}
-    //     {/*    <Grid item xs={12}>*/}
-    //     {/*      <br/>*/}
-    //     {/*      <br/>*/}
-    //     {/*      <Typography align={"center"} variant={"h4"}>*/}
-    //     {/*        Features overview*/}
-    //     {/*      </Typography>*/}
-    //     {/*      <br/>*/}
-    //     {/*      <br/>*/}
-    //     {/*    </Grid>*/}
-    //     {/*    <Grid item xs={12} md={6}>*/}
-    //     {/*      <Row gap={3}>*/}
-    //     {/*        <Item>*/}
-    //     {/*          <FontAwesomeIcon icon={faLayerGroup} size={"4x"} className={classes.featureIcon}/>*/}
-    //     {/*        </Item>*/}
-    //     {/*        <Info>*/}
-    //     {/*          <Typography className={classes.headerText}>State based behaviour</Typography>*/}
-    //     {/*          <Typography className={classes.text}>*/}
-    //     {/*            Implement multiple states and let you algorithm change behaviour under*/}
-    //     {/*            runtime*/}
-    //     {/*          </Typography>*/}
-    //     {/*        </Info>*/}
-    //     {/*      </Row>*/}
-    //     {/*    </Grid>*/}
-    //     {/*    <Grid item xs={12} md={6}>*/}
-    //     {/*      <Row gap={3}>*/}
-    //     {/*        <Item>*/}
-    //     {/*          <FontAwesomeIcon icon={faDatabase} size={"4x"} className={classes.featureIcon}/>*/}
-    //     {/*        </Item>*/}
-    //     {/*        <Info>*/}
-    //     {/*          <Typography className={classes.headerText}>Database management</Typography>*/}
-    //     {/*          <Typography className={classes.text}>*/}
-    //     {/*            Database connection and session management*/}
-    //     {/*          </Typography>*/}
-    //     {/*        </Info>*/}
-    //     {/*      </Row>*/}
-    //     {/*    </Grid>*/}
-    //     {/*    <Grid  item xs={12} md={6}>*/}
-    //     {/*      <Row gap={3}>*/}
-    //     {/*        <Item>*/}
-    //     {/*          <FontAwesomeIcon icon={faTerminal} size={"4x"} className={classes.featureIcon}/>*/}
-    //     {/*        </Item>*/}
-    //     {/*        <Info>*/}
-    //     {/*          <Typography className={classes.headerText}>Command line management</Typography>*/}
-    //     {/*          <Typography className={classes.text}>*/}
-    //     {/*            Manage your algorithms with the command line interface*/}
-    //     {/*          </Typography>*/}
-    //     {/*        </Info>*/}
-    //     {/*      </Row>*/}
-    //     {/*    </Grid>*/}
-    //     {/*    <Grid item xs={12} md={6}>*/}
-    //     {/*      <Row gap={3}>*/}
-    //     {/*        <Item>*/}
-    //     {/*          <FontAwesomeIcon icon={faSquare} size={"4x"} className={classes.featureIcon}/>*/}
-    //     {/*        </Item>*/}
-    //     {/*        <Info>*/}
-    //     {/*          <Typography className={classes.headerText}>Templates support</Typography>*/}
-    //     {/*          <Typography className={classes.text}>*/}
-    //     {/*            Initialize your algorithm with one of the many templates to boost*/}
-    //     {/*            your development*/}
-    //     {/*          </Typography>*/}
-    //     {/*        </Info>*/}
-    //     {/*      </Row>*/}
-    //     {/*    </Grid>*/}
-    //     {/*    <Grid item xs={12} md={6}>*/}
-    //     {/*      <Row gap={3}>*/}
-    //     {/*        <Item>*/}
-    //     {/*          <FontAwesomeIcon icon={faThList} size={"4x"} className={classes.featureIcon}/>*/}
-    //     {/*        </Item>*/}
-    //     {/*        <Info>*/}
-    //     {/*          <Typography className={classes.headerText}>Model persistence</Typography>*/}
-    //     {/*          <Typography className={classes.text}>*/}
-    //     {/*            ORM support to provide the full power and flexibility of SQL*/}
-    //     {/*            for your algorithms*/}
-    //     {/*          </Typography>*/}
-    //     {/*        </Info>*/}
-    //     {/*      </Row>*/}
-    //     {/*    </Grid>*/}
-    //     {/*  </Grid>*/}
-    //     {/*</Paper>*/}Paper
-    //   </Grid>
-    //   <br/>
-    //   <br/>
-    // </div>
+    <Adsense
+        client="ca-pub-6898179895018365"
+        slot="7259870550"
+        style={{ display: 'block' }}
+        layout="in-article"
+        format="fluid"
+    />
+  </>
   )
 }
 
