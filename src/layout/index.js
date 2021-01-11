@@ -5,6 +5,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Drawer from "@material-ui/core/Drawer";
 import {makeStyles} from "@material-ui/core/styles";
 import Toolbar from '@material-ui/core/Toolbar';
+import Container from "@material-ui/core/Container";
 import Collapse from '@material-ui/core/Collapse';
 import HeaderContent from "./HeaderContent";
 import SideNavContent from "./SideNavContent";
@@ -144,9 +145,9 @@ const Layout = props => {
                     </div>
                 </Drawer>
             }
-            <main className={clsx(showDrawer() && classes.contentShift)}>
+            <div className={clsx(showDrawer() && classes.contentShift)}>
                 {children}
-            </main>
+            </div>
             <Footer drawerOpen={showDrawer()}/>
         </>
     );

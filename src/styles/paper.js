@@ -8,5 +8,8 @@ export const usePaperStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.primary.main,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
+    },
+    transparentPaper: {
+        backgroundColor: 'transparent',
     }
 }));
