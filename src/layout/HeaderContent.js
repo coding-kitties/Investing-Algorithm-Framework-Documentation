@@ -189,6 +189,12 @@ const HeaderContent = props => {
                     >
                         <Grid item>
                             <img
+                                src={'https://pepy.tech/badge/investing-algorithm-framework'}
+                                alt={'downloads'}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <img
                                 src={'https://travis-ci.org/coding-kitties/investing-algorithm-framework.svg?branch=master'}
                                 alt={'travis-ci-status'}
                             />

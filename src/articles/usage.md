@@ -1,6 +1,5 @@
 ```python
 class MyStrategy(Strategy):
-    id = 'my_strategy'
 
     def on_quote(self, data, algorithm_context: AlgorithmContext):
         if data['ask_price'] < 5000:
@@ -10,7 +9,6 @@ class MyStrategy(Strategy):
 
 
 class MyDataProvider(DataProvider, BinanceDataProviderMixin):
-    id = 'my_data_provider'
     registered_strategies = [MyStrategy()]
 
     def extract_quote(self, data, algorithm_context: AlgorithmContext):
@@ -24,7 +22,7 @@ class MyDataProvider(DataProvider, BinanceDataProviderMixin):
 
 
 if __name__ == '__main__':
-    algorithm = AlgorithmContext('my_algorithm', MyDataProvider())
+    algorithm = AlgorithmContext([MyDataProvider()])
     orchestrator = Orchestrator()
     orchestrator.register_algorithm(algorithm)
     orchestrator.start()
