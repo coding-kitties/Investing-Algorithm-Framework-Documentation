@@ -4,13 +4,10 @@ import {useRouter} from "next/router";
 import AppBar from "@material-ui/core/AppBar";
 import Drawer from "@material-ui/core/Drawer";
 import {makeStyles} from "@material-ui/core/styles";
-import Toolbar from '@material-ui/core/Toolbar';
-import Container from "@material-ui/core/Container";
-import Collapse from '@material-ui/core/Collapse';
 import HeaderContent from "./HeaderContent";
 import SideNavContent from "./SideNavContent";
 import Footer from "./Footer";
-import SubHeaderContent from "./SubHeaderContent";
+import {useSideNavStyles} from "../styles";
 
 const drawerWidth = 256;
 
@@ -61,13 +58,13 @@ const Layout = props => {
     const {pathname} = router;
     const {children} = props;
     const classes = useStyles();
+    const sideNavClasses = useSideNavStyles();
     const [headerColor, setHeaderColor] = React.useState('transparent');
     const [drawerWidth, setDrawerWidth] = React.useState(0);
-    const [scrolled, setScrolled] = React.useState(false);
 
     useEffect(() => {
         if (pathname.includes('/documentation/') || pathname.includes('/development')) {
-            setHeaderColor('default');
+            setHeaderColor('#ffffff');
         } else {
             setHeaderColor('transparent');
         }
@@ -85,15 +82,7 @@ const Layout = props => {
         window.scrollTo(0, 0);
         window.onscroll = function() {
 
-            if (pathname.includes('/documentation/') || pathname.includes('/development')) {
-                setHeaderColor('default');
-
-                if (window.pageYOffset === 0) {
-                    setScrolled(false);
-                } else {
-                    setScrolled(true);
-                }
-            } else {
+            if (!pathname.includes('/documentation/') && !pathname.includes('/development')) {
                 if (window.pageYOffset === 0) {
                     setHeaderColor('transparent');
                 } else {
@@ -111,43 +100,33 @@ const Layout = props => {
     }
 
     const showDrawer = () => {
-            if(pathname === undefined) {
-                return false
-            }
-            return pathname.includes('/documentation/') || pathname.includes('/development');
+        if(pathname === undefined) {
+            return false
+        }
+        return pathname.includes('/documentation/') || pathname.includes('/development');
     }
 
     return (
         <>
-            <AppBar className={classes.appBar} color={headerColor} elevation={headerColor === "transparent" || showSubHeader() ? 0 : 3} position={"sticky"}>
+            <AppBar className={classes.appBar} color={headerColor} elevation={headerColor === "transparent"? 0 : 1} position={"sticky"}>
                 <HeaderContent/>
             </AppBar>
-            {showSubHeader() &&
-                <Toolbar className={classes.appBarSecond}>
-                    <SubHeaderContent/>
-                </Toolbar>
-            }
             {showDrawer() &&
                 <Drawer
-                    className={classes.drawer}
                     variant="permanent"
-                    classes={{
-                        paper: classes.drawerPaper,
+                    ModalProps={{
+                        keepMounted: true,
                     }}
+                    className={sideNavClasses.drawer}
                 >
-                    <Collapse in={!scrolled}>
-                        <Toolbar />
-                        <Toolbar />
-                    </Collapse>
-                    <Toolbar />
-                    <div className={classes.drawerContainer}>
-                        <SideNavContent/>
-                    </div>
+                    <SideNavContent/>
                 </Drawer>
             }
             <div className={clsx(showDrawer() && classes.contentShift)}>
                 {children}
             </div>
+            <br/>
+            <br/>
             <Footer drawerOpen={showDrawer()}/>
         </>
     );

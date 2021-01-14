@@ -118,8 +118,6 @@ const HeaderContent = props => {
     const matchesSmUp = useMediaQuery(theme.breakpoints.up('sm'));
     const matchesMdDown = useMediaQuery(theme.breakpoints.down('md'));
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [value, setValue] = React.useState(0);
-    const {pathname} = router;
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -133,15 +131,29 @@ const HeaderContent = props => {
         setAnchorEl(null);
     };
 
+    const tabValue = () => {
+        if(router.pathname === '/') {
+            return 0;
+        } else if(router.pathname.includes('/documentation/')) {
+            return 1;
+        } else if(router.pathname.includes('/development/')) {
+            return 2;
+        } else if(router.pathname.includes('/license/')) {
+            return 3;
+        } else if(router.pathname.includes('/support/')) {
+            return 4;
+        }
+    }
+
+
     const handleChange = (event, newValue) => {
-        setValue(newValue);
 
         if(newValue === 0) {
             router.push('/');
         } else if(newValue === 1) {
-            router.push('/documentation/general/overview');
+            router.push('/documentation/overview');
         } else if(newValue === 2) {
-            router.push('/development/general/overview');
+            router.push('/development/overview');
         } else if(newValue === 3) {
             router.push('/license');
         } else if(newValue === 4) {
@@ -219,7 +231,7 @@ const HeaderContent = props => {
                     </Typography>
                 </Grid>
                 <Grid item>
-                    <CustomTabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                    <CustomTabs value={tabValue()} onChange={handleChange} aria-label="simple tabs example">
                         <CustomTab label="About" {...a11yProps(0)} />
                         <CustomTab label="Documentation" {...a11yProps(1)} />
                         <CustomTab label="Development" {...a11yProps(2)} />
@@ -286,7 +298,7 @@ const HeaderContent = props => {
                         alignItems="center"
                     >
                         <Grid item>
-                            <CustomTabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                            <CustomTabs value={tabValue()} onChange={handleChange} aria-label="simple tabs example">
                                 <CustomTab label="About" {...a11yProps(0)} />
                                 <CustomTab label="Docs" {...a11yProps(1)} />
                             </CustomTabs>

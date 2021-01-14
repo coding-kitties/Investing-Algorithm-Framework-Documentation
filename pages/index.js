@@ -14,13 +14,11 @@ import {faGithub} from "@fortawesome/free-brands-svg-icons";
 import {Adsense} from '@ctrl/react-adsense';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Divider} from "@material-ui/core";
-import {usePaperStyles} from "../src/styles";
+import {usePaperStyles, useTypographyStyles, useButtonStyles} from "../src/styles";
 import Link from "../src/Link";
 import MarkdownArticle from "../src/markdown/MarkdownArticle";
 import python_icon from '../src/images/python.svg'
-import {useButtonStyles} from "../src/styles/button";
 import Container from "@material-ui/core/Container";
-import {useTypographyStyles} from "../src/styles/typography";
 
 
 function PythonIcon(props) {
@@ -58,26 +56,38 @@ const AboutView = props => {
                 </div>
                 <br/>
                 <br/>
-                <Button
-                    className={buttonClasses.standardButton}
-                    color={"primary"}
-                    variant={"contained"}
-                    component={Link}
-                    naked
-                    href={'/documentation/installation'}
+                <Grid
+                    container
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="flex-start"
+                    spacing={1}
                 >
-                    Get Started
-                </Button>
-                <Button
-                    className={buttonClasses.standardButton}
-                    color={"primary"}
-                    startIcon={<SubjectIcon/>}
-                    component={Link}
-                    naked
-                    href={'/documentation/installation'}
-                >
-                    View Docs
-                </Button>
+                    <Grid item>
+                        <Button
+                            className={buttonClasses.standardButton}
+                            color={"primary"}
+                            variant={"contained"}
+                            component={Link}
+                            naked
+                            href={'/documentation/introduction/installation'}
+                        >
+                            Get Started
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button
+                            className={buttonClasses.standardButton}
+                            color={"primary"}
+                            startIcon={<SubjectIcon/>}
+                            component={Link}
+                            naked
+                            href={'/documentation/overview'}
+                        >
+                            View Docs
+                        </Button>
+                    </Grid>
+                </Grid>
                 <br/>
                 <br/>
                 <br/>
@@ -212,8 +222,7 @@ const AboutView = props => {
 // This also gets called at build time
 export async function getStaticProps() {
   const usageMarkdown = await require(`../src/articles/usage.md`);
-  const installationMarkdown = await require(`../src/articles/installation.md`);
-  return { props: { usageMarkdown: usageMarkdown.default, installationMarkdown: installationMarkdown.default} }
+  return { props: { usageMarkdown: usageMarkdown.default} }
 }
 
 export default AboutView;
