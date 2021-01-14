@@ -117,7 +117,7 @@ const AboutView = props => {
                             startIcon={<SubjectIcon/>}
                             component={Link}
                             naked
-                            href={'/documentation'}
+                            href={'/documentation/overview'}
                         >
                             Explore the docs
                         </Button>
@@ -145,7 +145,7 @@ const AboutView = props => {
                         variant={"contained"}
                         component={Link}
                         naked
-                        href={'/documentation/data-providers'}
+                        href={'/documentation/tutorials/fundamentals/data-providers'}
                     >
                         Learn about data providers
                     </Button>
@@ -190,8 +190,8 @@ const AboutView = props => {
                         <br/>
                         <br/>
                         <Typography variant={"h6"}>
-                            <FontAwesomeIcon icon={faBook}/> &nbsp; &nbsp; Read more detailed installations instructions in the&nbsp;
-                            <Link href={'/documentation/general/installation'}>documentation</Link>.
+                            <FontAwesomeIcon icon={faBook}/> &nbsp; &nbsp; Read more detailed installation instructions in the&nbsp;
+                            <Link href={'/documentation/introduction/installation'}>documentation</Link>.
                         </Typography>
                         <br/>
                         <Typography variant={"h6"}>
