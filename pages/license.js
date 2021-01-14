@@ -15,7 +15,7 @@ const License = props => {
 
 // This also gets called at build time
 export async function getStaticProps() {
-    const markdown = await require('../src/articles/license.md');
+    const markdown = await require('../static/articles/license/license.md');
     return { props: { markdown: markdown.default} }
 }
 
