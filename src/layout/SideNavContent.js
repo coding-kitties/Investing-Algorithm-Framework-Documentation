@@ -1,119 +1,344 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useRouter } from 'next/router'
 import Typography from "@material-ui/core/Typography";
-import {makeStyles} from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
-import {Divider} from "@material-ui/core";
-
-import NestedSideNavItem from "../navigation/NestedSideNavItem";
-import SideNavItem from "../navigation/SideNavItem";
-
-const useStyles = makeStyles(theme => ({
-    header: {
-        marginTop: theme.spacing(2),
-        marginLeft: theme.spacing(2)
-    },
-    primaryHeader: {
-        borderTopRightRadius: 5,
-        borderBottomRightRadius: 5,
-        maxWidth: 250,
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2),
-        backgroundColor: theme.palette.primary.light
-    },
-    primaryHeaderText: {
-        color: '#ffffff'
-    },
-    activeItem: {
-        backgroundColor: theme.palette.primary.main
-    },
-    headerItem: {
-        backgroundColor: '#eeeeee'
-    }
-}));
+import {ListItemText} from "@material-ui/core";
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import Collapse from '@material-ui/core/Collapse';
+import List from '@material-ui/core/List';
+import Grid from "@material-ui/core/Grid";
+import {useSideNavStyles, useTypographyStyles} from "../styles";
+import Toolbar from "@material-ui/core/Toolbar";
+import clsx from "clsx";
+import Link from "../Link";
 
 const SideNavContent = () => {
-    const classes = useStyles();
+    const typographyClasses = useTypographyStyles();
+    const sideNavClasses = useSideNavStyles();
     const router = useRouter()
+    const [introductionOpen, setIntroductionOpen] = useState(false);
+    const [tutorialsOpen, setTutorialsOpen] = useState(false);
+    const [fundamentalsOpen, setFundamentalsOpen] = useState(false);
+    const [recipesOpen, setRecipesOpen] = useState(false);
 
-    const listItems = () => {
-        const {pathname} = router;
-
-        if (pathname.includes('documentation/general')) {
-            return <>
-                <ListItem className={classes.primaryHeader}>
-                    <Typography className={classes.primaryHeaderText}>General</Typography>
-                </ListItem>
-                <Divider/>
-                <SideNavItem label={'Overview'} link={'/documentation/general/overview'}/>
-                <SideNavItem label={'Installation'} link={'/documentation/general/installation'}/>
-            </>
-        } else if(pathname.includes('documentation/guides')) {
-            return <>
-                <ListItem className={classes.primaryHeader}>
-                    <Typography className={classes.primaryHeaderText}>Guides</Typography>
-                </ListItem>
-                <Divider/>
-                <SideNavItem label={'Overview'} link={'/documentation/guides/overview'}/>
-                <SideNavItem label={'Basic Algorithm'} link={'/documentation/guides/basic-algorithm'}/>
-            </>
-        } else if(pathname.includes('documentation/framework-features')) {
-            return <>
-                <ListItem className={classes.primaryHeader}>
-                    <Typography className={classes.primaryHeaderText}>Framework Features</Typography>
-                </ListItem>
-                <Divider/>
-                <SideNavItem label={'Overview'} link={'/documentation/framework-features/overview'}/>
-                <NestedSideNavItem header={'Database management'} subItems={
-                    [
-                        {label: 'Database Resolver', link: '/documentation/framework-features/database-management/sql-alchemy-database-resolver'},
-                        {label: 'Models', link: '/documentation/framework-features/database-management/models'},
-                        {label: 'Querying', link: '/documentation/framework-features/database-management/querying'},
-                    ]
-                }/>            </>
-        } else if(pathname.includes('/development/general/')) {
-            return <>
-                <ListItem className={classes.primaryHeader}>
-                    <Typography className={classes.primaryHeaderText}>General</Typography>
-                </ListItem>
-                <Divider/>
-                <SideNavItem label={'Overview'} link={'/development/general/overview'}/>
-                <SideNavItem label={'Contributing'} link={'/development/general/contributing'}/>
-                <SideNavItem label={'Code of Conduct'} link={'/development/general/code-of-conduct'}/>
-                <SideNavItem label={'Code Review'} link={'/development/general/code-review'}/>
-            </>
-        } else if(pathname.includes('/development/framework/')) {
-            return <>
-                <ListItem className={classes.primaryHeader}>
-                    <Typography className={classes.primaryHeaderText}>Framework</Typography>
-                </ListItem>
-                <Divider/>
-                <SideNavItem label={'Overview'} link={'/development/framework/overview'}/>
-                <SideNavItem label={'Roadmap'} link={'/development/framework/roadmap'}/>
-                <SideNavItem label={'Changelog'} link={'/development/framework/changelog'}/>
-                <SideNavItem
-                    label={'Development Environment'}
-                    link={'/development/framework/development-environment'}
-                />
-            </>
-        } else if(pathname.includes('/development/documentation/')) {
-            return <>
-                <ListItem className={classes.primaryHeader}>
-                    <Typography className={classes.primaryHeaderText}>Documentation</Typography>
-                </ListItem>
-                <Divider/>
-                <SideNavItem label={'Overview'} link={'/development/documentation/overview'}/>
-                <SideNavItem label={'Roadmap'} link={'/development/documentation/roadmap'}/>
-                <SideNavItem label={'Changelog'} link={'/development/documentation/changelog'}/>
-                <SideNavItem label={'Documentation Style Guide'} link={'/development/documentation/style-guide'}/>
-            </>
-        }
+    const isActive = (link) => {
+        const pathName = router.pathname;
+        const { id } = router.query
+        return pathName.includes(link) || id === link;
     }
 
+    const renderDocumentationSideNav = () => {
+
+        return (
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                className={sideNavClasses.sideNavContainer}
+            >
+                <Grid item xs={12}>
+                    <List className={sideNavClasses.sideNavList}>
+                        <ListItem
+                            button
+                            onClick={() => setIntroductionOpen(!introductionOpen)}
+                            className={
+                                clsx(
+                                    sideNavClasses.sideNavItem,
+                                    !introductionOpen && isActive('/documentation/introduction') && sideNavClasses.sideNavListItemActive
+                                )
+                            }
+                        >
+                            <ListItemText disableTypography>
+                                <Typography
+                                    className={typographyClasses.listItemHeaderText}
+                                >
+                                    Introduction
+                                </Typography>
+                            </ListItemText>
+                            {introductionOpen ? <ExpandLess/> : <ExpandMore/>}
+                        </ListItem>
+                        <Collapse in={introductionOpen} timeout="auto" unmountOnExit>
+                            <List component="div" disablePadding>
+                                <ListItem
+                                    component={Link}
+                                    href={'/documentation/introduction/getting-started'}
+                                    button
+                                    className={
+                                        clsx(
+                                            sideNavClasses.nestedSideNavItem,
+                                            isActive('getting-started') && sideNavClasses.sideNavListItemActive
+                                        )
+                                    }
+                                >
+                                    <ListItemText disableTypography>
+                                        <Typography className={typographyClasses.listItemText}>
+                                            Getting Started
+                                        </Typography>
+                                    </ListItemText>
+                                </ListItem>
+                                <ListItem
+                                    component={Link}
+                                    href={'/documentation/introduction/installation'}
+                                    button
+                                    className={
+                                        clsx(
+                                            sideNavClasses.nestedSideNavItem,
+                                            isActive('installation') && sideNavClasses.sideNavListItemActive
+                                        )
+                                    }
+                                >
+                                    <ListItemText disableTypography>
+                                        <Typography className={typographyClasses.listItemText}>
+                                            Installation
+                                        </Typography>
+                                    </ListItemText>
+                                </ListItem>
+                                <ListItem
+                                    component={Link}
+                                    href={'/documentation/introduction/core-concepts'}
+                                    button
+                                    className={
+                                        clsx(
+                                            sideNavClasses.nestedSideNavItem,
+                                            isActive('core-concepts') && sideNavClasses.sideNavListItemActive
+                                        )
+                                    }
+                                >
+                                    <ListItemText disableTypography>
+                                        <Typography className={typographyClasses.listItemText}>
+                                            Core Concepts
+                                        </Typography>
+                                    </ListItemText>
+                                </ListItem>
+                                <ListItem
+                                    component={Link}
+                                    href={'/documentation/introduction/examples'}
+                                    button
+                                    className={
+                                        clsx(
+                                            sideNavClasses.nestedSideNavItem,
+                                            isActive('examples') && sideNavClasses.sideNavListItemActive
+                                        )
+                                    }
+                                >
+                                    <ListItemText disableTypography>
+                                        <Typography className={typographyClasses.listItemText}>
+                                            Examples
+                                        </Typography>
+                                    </ListItemText>
+                                </ListItem>
+                            </List>
+                        </Collapse>
+                        <ListItem
+                            button
+                            onClick={() => setTutorialsOpen(!tutorialsOpen)}
+                            className={
+                                clsx(
+                                    sideNavClasses.sideNavItem,
+                                    !tutorialsOpen && isActive('/documentation/tutorials') && sideNavClasses.sideNavListItemActive
+                                )
+                            }
+                        >
+                            <ListItemText disableTypography>
+                                <Typography
+                                    className={typographyClasses.listItemHeaderText}
+                                >
+                                    Tutorials
+                                </Typography>
+                            </ListItemText>
+                            {tutorialsOpen ? <ExpandLess/> : <ExpandMore/>}
+                        </ListItem>
+                        <Collapse in={tutorialsOpen} timeout="auto" unmountOnExit>
+                            <List component="div" disablePadding>
+                                <ListItem
+                                    button
+                                    className={
+                                        clsx(
+                                            sideNavClasses.nestedSideNavItem,
+                                            !fundamentalsOpen && isActive('/documentation/tutorials/fundamentals') && sideNavClasses.sideNavListItemActive
+                                        )
+                                    }
+                                    onClick={() => setFundamentalsOpen(!fundamentalsOpen)}
+                                >
+                                    <ListItemText disableTypography>
+                                        <Typography className={typographyClasses.listItemText}>
+                                            Fundamentals
+                                        </Typography>
+                                    </ListItemText>
+                                    {fundamentalsOpen ? <ExpandLess/> : <ExpandMore/>}
+                                </ListItem>
+                                <Collapse in={fundamentalsOpen} timeout="auto" unmountOnExit>
+                                    <List component="div" disablePadding>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('orchestrator') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/fundamentals/orchestrator'}
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Orchestrator
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('algorithm-context') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/fundamentals/algorithm-context'}
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Algorithm Context
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('data-providers') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/fundamentals/data-providers'}
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Data Providers
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('strategies') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/fundamentals/strategies'}
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Strategies
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('order-executors') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/fundamentals/order-executors'}
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Order Executors
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
+                                    </List>
+                                </Collapse>
+                                <ListItem
+                                    button
+                                    className={sideNavClasses.nestedSideNavItem}
+                                    onClick={() => setRecipesOpen(!recipesOpen)}
+                                >
+                                    <ListItemText disableTypography>
+                                        <Typography className={typographyClasses.listItemText}>
+                                            Recipes
+                                        </Typography>
+                                    </ListItemText>
+                                    {recipesOpen ? <ExpandLess/> : <ExpandMore/>}
+                                </ListItem>
+                                <Collapse in={recipesOpen} timeout="auto" unmountOnExit>
+                                    <List component="div" disablePadding>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('moving-average') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/recipes/moving-average'}
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Moving Average
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('telegram-integration') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/recipes/telegram-integration'}
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Telegram Integration
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('digitalocean-deployment') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/recipes/digitalocean-deployment'}
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Digitalocean Deployment
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
+                                    </List>
+                                </Collapse>
+                            </List>
+                        </Collapse>
+                    </List>
+                </Grid>
+            </Grid>
+        )
+    }
+    const {pathname} = router;
+
     return (
-        <div>
+        <div className={sideNavClasses.sideNavContainer}>
+            <Toolbar/>
             <br/>
-            {listItems()}
+            {pathname.includes('/documentation/') && renderDocumentationSideNav()}
         </div>
     );
 };

@@ -57,8 +57,7 @@ export const useTypographyStyles = makeStyles((theme) => ({
         fontSize: 14,
     },
     listItemText: {
-        fontSize: 14,
-        color: '#757575'
+        fontSize: 12,
     },
     listItemActiveText: {
         fontSize: 14,
