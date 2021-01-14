@@ -71,6 +71,7 @@ const SideNavContent = () => {
                                             isActive('getting-started') && sideNavClasses.sideNavListItemActive
                                         )
                                     }
+                                    naked
                                 >
                                     <ListItemText disableTypography>
                                         <Typography className={typographyClasses.listItemText}>
@@ -88,6 +89,7 @@ const SideNavContent = () => {
                                             isActive('installation') && sideNavClasses.sideNavListItemActive
                                         )
                                     }
+                                    naked
                                 >
                                     <ListItemText disableTypography>
                                         <Typography className={typographyClasses.listItemText}>
@@ -105,6 +107,7 @@ const SideNavContent = () => {
                                             isActive('core-concepts') && sideNavClasses.sideNavListItemActive
                                         )
                                     }
+                                    naked
                                 >
                                     <ListItemText disableTypography>
                                         <Typography className={typographyClasses.listItemText}>
@@ -122,6 +125,7 @@ const SideNavContent = () => {
                                             isActive('examples') && sideNavClasses.sideNavListItemActive
                                         )
                                     }
+                                    naked
                                 >
                                     <ListItemText disableTypography>
                                         <Typography className={typographyClasses.listItemText}>
@@ -181,6 +185,7 @@ const SideNavContent = () => {
                                             }
                                             component={Link}
                                             href={'/documentation/tutorials/fundamentals/orchestrator'}
+                                            naked
                                         >
                                             <ListItemText disableTypography>
                                                 <Typography className={typographyClasses.listItemText}>
@@ -198,6 +203,7 @@ const SideNavContent = () => {
                                             }
                                             component={Link}
                                             href={'/documentation/tutorials/fundamentals/algorithm-context'}
+                                            naked
                                         >
                                             <ListItemText disableTypography>
                                                 <Typography className={typographyClasses.listItemText}>
@@ -215,6 +221,7 @@ const SideNavContent = () => {
                                             }
                                             component={Link}
                                             href={'/documentation/tutorials/fundamentals/data-providers'}
+                                            naked
                                         >
                                             <ListItemText disableTypography>
                                                 <Typography className={typographyClasses.listItemText}>
@@ -232,6 +239,7 @@ const SideNavContent = () => {
                                             }
                                             component={Link}
                                             href={'/documentation/tutorials/fundamentals/strategies'}
+                                            naked
                                         >
                                             <ListItemText disableTypography>
                                                 <Typography className={typographyClasses.listItemText}>
@@ -249,6 +257,7 @@ const SideNavContent = () => {
                                             }
                                             component={Link}
                                             href={'/documentation/tutorials/fundamentals/order-executors'}
+                                            naked
                                         >
                                             <ListItemText disableTypography>
                                                 <Typography className={typographyClasses.listItemText}>
@@ -282,6 +291,7 @@ const SideNavContent = () => {
                                             }
                                             component={Link}
                                             href={'/documentation/tutorials/recipes/moving-average'}
+                                            naked
                                         >
                                             <ListItemText disableTypography>
                                                 <Typography className={typographyClasses.listItemText}>
@@ -299,6 +309,7 @@ const SideNavContent = () => {
                                             }
                                             component={Link}
                                             href={'/documentation/tutorials/recipes/telegram-integration'}
+                                            naked
                                         >
                                             <ListItemText disableTypography>
                                                 <Typography className={typographyClasses.listItemText}>
@@ -316,6 +327,7 @@ const SideNavContent = () => {
                                             }
                                             component={Link}
                                             href={'/documentation/tutorials/recipes/digitalocean-deployment'}
+                                            naked
                                         >
                                             <ListItemText disableTypography>
                                                 <Typography className={typographyClasses.listItemText}>
