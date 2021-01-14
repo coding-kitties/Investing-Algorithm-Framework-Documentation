@@ -136,7 +136,7 @@ const AboutView = props => {
                     <Typography variant={"body1"}>
                         Your investing algorithms need to have the best data source.
                         The framework allows you to take full control over the data providing for your algorithms with
-                        abstractions, pre-made mixins and easy to use hooks, where your strategies can take full advatage of.
+                        abstractions, pre-made mixins and easy to use hooks, where your strategies can take full advantage of.
                     </Typography>
                     <br/>
                     <br/>
