@@ -21,7 +21,7 @@ from investing_algorithm_framework import AlgorithmContext, DataProvider, Strate
 from investing_algorithm_framework.extensions import BinanceClientMixin
 
 config = {
-    binance_api_key = "<your api key>"
+    binance_api_key: "<your api key>"
 }
 
 class BinancePortfolioManager(PortfolioManager, BinanceClientMixin):
