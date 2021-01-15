@@ -5,6 +5,7 @@ import ScrollTrigger from 'react-scroll-trigger';
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import SubjectIcon from '@material-ui/icons/Subject';
@@ -40,6 +41,16 @@ const AboutView = props => {
   return (
         <>
             <Container maxWidth="lg">
+                <br/>
+                <br/>
+                <Alert variant={"standard"} severity={"warning"}>
+                    <Typography>The website is currently in active development. Therefore it is missing a
+                        lot of articles. Please be aware that the website will have regular updates parallel to new releases of the framework.
+                        <br/>
+                        <br/>
+                        A stable version of the website and the framework will be version 1.0.0.
+                    </Typography>
+                </Alert>
                 <br/>
                 <br/>
                 <br/>
