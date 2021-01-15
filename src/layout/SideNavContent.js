@@ -265,6 +265,24 @@ const SideNavContent = () => {
                                                 </Typography>
                                             </ListItemText>
                                         </ListItem>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('portfolio-managers') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/fundamentals/portfolio-managers'}
+                                            naked
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Portfolio Managers
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
                                     </List>
                                 </Collapse>
                                 <ListItem

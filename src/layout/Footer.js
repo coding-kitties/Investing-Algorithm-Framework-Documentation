@@ -73,7 +73,6 @@ function PoweredByVercel(props) {
 const CodingKitties = props => {
     return (
         <img src={coding_kitties} alt="" {...props}/>
-
     )
 }
 
@@ -117,7 +116,9 @@ const Footer = props =>  {
                             <Grid item xs={12}>
                                 <Button
                                     className={classes.linkButton}
-                                    onClick={() => history.push('/documentation/general/installation')}
+                                    component={Link}
+                                    naked
+                                    href={'/documentation/introduction/installation'}
                                     variant={"text"}
                                     color={'primary'}
                                 >
@@ -127,21 +128,25 @@ const Footer = props =>  {
                             <Grid item xs={12}>
                                 <Button
                                     className={classes.linkButton}
-                                    onClick={() => history.push('/documentation/guides/overview')}
+                                    component={Link}
+                                    naked
+                                    href={'/documentation/tutorials/fundamentals/orchestrator'}
                                     variant={"text"}
                                     color={'primary'}
                                 >
-                                    Framework Guides
+                                    Framework Fundamentals
                                 </Button>
                             </Grid>
                             <Grid item xs={12}>
                                 <Button
                                     className={classes.linkButton}
-                                    onClick={() => history.push('/documentation/framework-features/overview')}
+                                    component={Link}
+                                    naked
+                                    href={'/documentation/tutorials/recipes/moving-average'}
                                     variant={"text"}
                                     color={'primary'}
                                 >
-                                    Framework Features
+                                    Framework Recipes
                                 </Button>
                             </Grid>
                         </Grid>

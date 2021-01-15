@@ -5,10 +5,6 @@ guides for the creation of algorithms and common patterns that will explain to y
 There is also a documentation page that describes each component of
 the framework in detail. This can be used as a reference when you are looking
 through the code.
-
----
-**NOTE**
-
-The documentation is a work in progress, therefore it is recommended to 
-check the documentation regularly for new updates
----
+<br/>
+<br/>
+>  The documentation is a work in progress, therefore it is recommended to check the documentation regularly for new updates

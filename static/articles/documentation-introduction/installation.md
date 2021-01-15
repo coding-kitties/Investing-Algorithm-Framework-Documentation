@@ -21,7 +21,7 @@ $ git clone https://github.com/coding-kitties/investing-algorithm-framework.git
 
 Then install the framework by running:
 ```sh
-$ pip install <path to cloned investing-algorithm-framework>
+$ pip install -e <path to cloned investing-algorithm-framework>
 ```
 
 ### Verifying the installation

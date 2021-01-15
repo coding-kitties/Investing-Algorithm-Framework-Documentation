@@ -208,6 +208,31 @@ const AboutView = props => {
         <br/>
         <br/>
         <br/>
+        <br/>
+        <br/>
+        <br/>
+        <Container>
+            <div style={{maxWidth: 800}}>
+                <Typography color={"primary"}>Abstraction of strategies</Typography>
+                <Typography variant={"h4"}>Define your own strategies without any limitation</Typography>
+                <br/>
+                <Typography variant={"body1"}>
+                    Your strategies should not be limited by the framework you use to create the investing algorithms.
+                    With the investing algorithm framework your are allowed to implement any strategy you would like.
+                </Typography>
+                <br/>
+                <br/>
+                <Button
+                    className={clsx(buttonClasses.standardButton, buttonClasses.invertedPrimaryButton)}
+                    variant={"contained"}
+                    component={Link}
+                    naked
+                    href={'/documentation/tutorials/fundamentals/strategies'}
+                >
+                    Learn about strategies
+                </Button>
+            </div>
+        </Container>
         <Adsense
             client="ca-pub-6898179895018365"
             slot="7259870550"
