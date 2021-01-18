@@ -5,4 +5,4 @@ out of 3 operations that form a single cycle. The operations are: data providing
 order execution. 
 
 
-<img src="static/images/algorithm-cycles.png" alt="Algorithm Cycle" style="float: left; margin-right: 10px;" />
+<img src="algorithm-cycles.png" alt="Algorithm Cycle"/>
