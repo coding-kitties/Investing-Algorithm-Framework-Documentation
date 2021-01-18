@@ -8,12 +8,14 @@ other applications.
 The algorithms created with the framework consist out of different components.
 These components are in-line with the cycles that make up the framework. 
 
-To read more about the cycles of an investing algorithm read the following [article](https://investing-algorithm-framework.com/documentation/introduction/core-concepts) 
+To read more about the operational cycles of an investing algorithm made with the framework we recommend reading the following [article](https://investing-algorithm-framework.com/documentation/tutorials/fundamentals/core-concepts) 
 
 For a basic algorithm the following components are needed: DataProvider, Strategy, PortfolioManager, OrderExecutor and a 
 AlgorithmContext.
 
-The framework makes sure that each of the components are called in the right order.
+The framework makes sure that each of the components are called in the right order. The following basic example 
+shows a complete algorithm working on the binance broker.
+
 ## Basic Example
 
 ```python
@@ -81,8 +83,20 @@ if __name__ == '__main__':
 In the basic example you can see that you can override all the hooks
 that are called by the algorithm context. Also, you can provide your own 
 implementations of the different components to make the algorithm completely 
-configurable.
+configurable. 
 
-For example, you can create your own [data providers](https://investing-algorithm-framework.com/documentation/tutorials/fundamentals/data-providers), 
-[strategies](https://investing-algorithm-framework.com/documentation/tutorials/fundamentals/strategies), [order executors](https://investing-algorithm-framework.com/documentation/tutorials/fundamentals/order-executors) and
-[portfolio managers](https://investing-algorithm-framework.com/documentation/tutorials/fundamentals/portfolio-managers).
+As can be seen, we provided our own portfolio manager, order executor and data provided that all work with [Binance](https://www.binance.com/en).
+
+
+## Learn More
+We have a variety of resources available to help you learn to use the Investing Algorithm Framework.
+
+### Fundamentals 
+The [Fundamentals section](https://investing-algorithm-framework.com/documentation/tutorials/fundamentals/core-concepts) is a "top-down" list of articles that teaches you "how to use the Investing Algorithm Framework the right way", 
+using our latest recommended APIs and best practices. We recommend starting there.
+
+### Additional Tutorials
+* The [Recipes section](https://investing-algorithm-framework.com/documentation/tutorials/recipes/overview) section provides you with several example algorithms that you can use. Almost all recipes can be used as a starting base for your
+own investing algorithms.
+* The following sub reddits [Investing Bots](https://www.reddit.com/r/InvestingBots/) and [Investing Algorithms](https://www.reddit.com/r/InvestingAlgorithms/) are great place to hang out, ask questions, and learn about investing algorithms. Also, our own developers will 
+be answering questions related to the framework.

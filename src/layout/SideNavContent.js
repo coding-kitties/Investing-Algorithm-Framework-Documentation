@@ -97,42 +97,6 @@ const SideNavContent = () => {
                                         </Typography>
                                     </ListItemText>
                                 </ListItem>
-                                <ListItem
-                                    component={Link}
-                                    href={'/documentation/introduction/core-concepts'}
-                                    button
-                                    className={
-                                        clsx(
-                                            sideNavClasses.nestedSideNavItem,
-                                            isActive('core-concepts') && sideNavClasses.sideNavListItemActive
-                                        )
-                                    }
-                                    naked
-                                >
-                                    <ListItemText disableTypography>
-                                        <Typography className={typographyClasses.listItemText}>
-                                            Core Concepts
-                                        </Typography>
-                                    </ListItemText>
-                                </ListItem>
-                                <ListItem
-                                    component={Link}
-                                    href={'/documentation/introduction/examples'}
-                                    button
-                                    className={
-                                        clsx(
-                                            sideNavClasses.nestedSideNavItem,
-                                            isActive('examples') && sideNavClasses.sideNavListItemActive
-                                        )
-                                    }
-                                    naked
-                                >
-                                    <ListItemText disableTypography>
-                                        <Typography className={typographyClasses.listItemText}>
-                                            Examples
-                                        </Typography>
-                                    </ListItemText>
-                                </ListItem>
                             </List>
                         </Collapse>
                         <ListItem
@@ -175,6 +139,24 @@ const SideNavContent = () => {
                                 </ListItem>
                                 <Collapse in={fundamentalsOpen} timeout="auto" unmountOnExit>
                                     <List component="div" disablePadding>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('core-concepts') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/fundamentals/core-concepts'}
+                                            naked
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Core Concepts
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
                                         <ListItem
                                             button
                                             className={
@@ -299,6 +281,24 @@ const SideNavContent = () => {
                                 </ListItem>
                                 <Collapse in={recipesOpen} timeout="auto" unmountOnExit>
                                     <List component="div" disablePadding>
+                                        <ListItem
+                                            button
+                                            className={
+                                                clsx(
+                                                    sideNavClasses.doubleNestedSideNavItem,
+                                                    isActive('overview') && sideNavClasses.sideNavListItemActive
+                                                )
+                                            }
+                                            component={Link}
+                                            href={'/documentation/tutorials/recipes/overview'}
+                                            naked
+                                        >
+                                            <ListItemText disableTypography>
+                                                <Typography className={typographyClasses.listItemText}>
+                                                    Overview
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
                                         <ListItem
                                             button
                                             className={
