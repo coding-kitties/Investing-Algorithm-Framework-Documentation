@@ -83,39 +83,43 @@ const ArticleView = props => {
 
     return (
         <div className={classes.root}>
-            <Paper className={classes.contentPaper}>
-                {props.headerInfo && <HeaderInfoComponent/>}
-                {props.children}
-                <br/>
-                <Divider/>
-                <br/>
-                <Typography variant={"h5"} color={"primary"}>Help make this document better</Typography>
-                <br/>
-                <Typography>
+            {props.headerInfo && <HeaderInfoComponent/>}
+            {props.children}
+            {props.showSource &&
+                <>
+                    <br/>
+                    <Divider/>
+                    <br/>
+                    <Typography variant={"h5"} color={"primary"}>Help make this document better</Typography>
+                    <br/>
+                    <Typography>
                     This guide, as well as the rest of our docs, are open-source and
                     available on <Link href="https://github.com/coding-kitties/investing-algorithm-framework-documentation">Github
-                </Link>. We welcome your contributions.
-                </Typography>
-                <ul>
+                    </Link>. We welcome your contributions.
+                    </Typography>
+                    <ul>
                     <li>
-                        <Link href={props.sourceLink}>Suggest an edit to this page</Link> (please read the <Link href={"https://github.com/coding-kitties/investing-algorithm-framework-documentation/blob/master/docs/CONTRIBUTING.md"}>contributing</Link> guide first).
+                    <Link href={props.sourceLink}>Suggest an edit to this page</Link> (please read the <Link href={"https://github.com/coding-kitties/investing-algorithm-framework-documentation/blob/master/docs/CONTRIBUTING.md"}>contributing</Link> guide first).
                     </li>
                     <li>To report a problem in the documentation, or to submit feedback and comments, please open an <Link href={'https://github.com/coding-kitties/investing-algorithm-framework-documentation/issues/new/choose'}>issue</Link> on GitHub</li>
-                </ul>
-                <br/>
-                <Divider/>
-            </Paper>
+                    </ul>
+                    <br/>
+                    <Divider/>
+                </>
+            }
         </div>
     )
 }
 
 ArticleView.propTypes = {
     sourceLink: PropTypes.string.isRequired,
-    headerInfo: PropTypes.bool
+    headerInfo: PropTypes.bool,
+    showSource: PropTypes.bool
 }
 
 ArticleView.defaultProps = {
-    headerInfo: false
+    headerInfo: false,
+    showSource: true
 }
 
 export default ArticleView;

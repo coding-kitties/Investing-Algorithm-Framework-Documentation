@@ -236,7 +236,7 @@ const HeaderContent = props => {
                         <CustomTab label="Documentation" {...a11yProps(1)} />
                         <CustomTab label="Development" {...a11yProps(2)} />
                         <CustomTab label="License" {...a11yProps(3)} />
-                        <CustomTab label="Support" {...a11yProps(4)} />
+                        <CustomTab label="Support the project" {...a11yProps(4)} />
                     </CustomTabs>
                 </Grid>
                 <Grid item>

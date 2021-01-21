@@ -6,8 +6,12 @@ export const useTypographyStyles = makeStyles((theme) => ({
         color: '#757575'
     },
     sectionHeader: {
-        fontSize: 20,
-        color: '#757575'
+        fontSize: 24,
+        color: '#222222'
+    },
+    sectionHeaderSecond: {
+        fontSize: 18,
+        color: '#222222'
     },
     sectionHeaderWhite: {
         fontSize: 18,
@@ -32,11 +36,11 @@ export const useTypographyStyles = makeStyles((theme) => ({
     },
     headerBody: {
         fontSize: 14,
-        color: '#757575'
+        color: '#222222'
     },
     body: {
         fontSize: 14,
-        color: '#a4a4a4'
+        color: '#494949'
     },
     boldBody: {
         fontSize: 14,

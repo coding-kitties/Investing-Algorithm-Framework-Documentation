@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import CodeBlock from "./CodeBlock";
 import MarkdownLink from "./MarkdownLink";
 import MarkdownBlockQuote from "./MarkdownBlockQuote";
+import HeaderMarkdown from "./HeaderMarkdown";
+import TextMarkdown from "./TextMarkdown";
 
 const MarkdownArticle = props => {
 
@@ -14,7 +16,14 @@ const MarkdownArticle = props => {
     return (
         <ReactMarkdown
             source={markdown}
-            renderers={{code: CodeBlock, link: MarkdownLink, linkReference: MarkdownLink, blockquote: MarkdownBlockQuote}}
+            renderers={{
+                code: CodeBlock,
+                link: MarkdownLink,
+                linkReference: MarkdownLink,
+                blockquote: MarkdownBlockQuote,
+                heading: HeaderMarkdown,
+                text: TextMarkdown
+            }}
             escapeHtml={false}
         />
     )
