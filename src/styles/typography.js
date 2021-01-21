@@ -69,5 +69,8 @@ export const useTypographyStyles = makeStyles((theme) => ({
         "&:hover": {
             color: theme.palette.primary.main,
         },
+    },
+    codingKittiesHeader: {
+        fontSize: 40,
     }
 }));

@@ -7,6 +7,14 @@ import Link from "../src/Link";
 import {useTypographyStyles} from "../src/styles";
 import ArticleView from "../src/views/ArticleView";
 import MarkdownArticle from "../src/markdown/MarkdownArticle";
+import coding_kitties from "../src/images/coding-kitties.svg";
+import {Alert} from "@material-ui/lab";
+
+const CodingKitties = props => {
+    return (
+        <img src={coding_kitties} alt="" {...props}/>
+    )
+}
 
 const Support = props => {
     const typographyClasses = useTypographyStyles();
@@ -18,6 +26,10 @@ const Support = props => {
             >
                 <MarkdownArticle markdown={props.markdown}/>
             </ArticleView>
+            <br/>
+            <Alert severity={"info"}>
+                All donations and recurring pledges go directly into a fund for supporting the development of this framework.
+            </Alert>
             <br/>
             <br/>
             <Typography className={typographyClasses.sectionHeader}>
@@ -52,9 +64,11 @@ const Support = props => {
             </Typography>
             <ul>
                 <li>
-                    <Typography className={typographyClasses.body}>
-                        Become a backer or sponsor via Patreon (Goes directly to support of developers working on the project)
-                    </Typography>
+                    <Link href={'https://www.patreon.com/mduyn'}>
+                        Become a backer or sponsor via Patreon
+                    </Link>
+
+
                 </li>
                 <li>
                     <Typography className={typographyClasses.body}>
