@@ -138,9 +138,9 @@ const HeaderContent = props => {
             return 1;
         } else if(router.pathname.includes('/development/')) {
             return 2;
-        } else if(router.pathname.includes('/license/')) {
+        } else if(router.pathname.includes('/license')) {
             return 3;
-        } else if(router.pathname.includes('/support/')) {
+        } else if(router.pathname.includes('/support')) {
             return 4;
         }
     }
