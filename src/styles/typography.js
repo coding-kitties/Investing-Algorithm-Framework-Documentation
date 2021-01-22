@@ -3,13 +3,25 @@ import {makeStyles} from "@material-ui/core/styles";
 export const useTypographyStyles = makeStyles((theme) => ({
     pageHeader: {
         fontSize: 28,
-        color: '#757575'
+        color: '#222222'
     },
     sectionHeader: {
-        fontSize: 24,
+        fontSize: 26,
         color: '#222222'
     },
     sectionHeaderSecond: {
+        fontSize: 24,
+        color: '#222222'
+    },
+    sectionHeaderThird: {
+        fontSize: 22,
+        color: '#222222'
+    },
+    sectionHeaderFourth: {
+        fontSize: 20,
+        color: '#222222'
+    },
+    sectionHeaderFifth: {
         fontSize: 18,
         color: '#222222'
     },

@@ -67,13 +67,6 @@ const Support = props => {
                     <Link href={'https://www.patreon.com/mduyn'}>
                         Become a backer or sponsor via Patreon
                     </Link>
-
-
-                </li>
-                <li>
-                    <Typography className={typographyClasses.body}>
-                        Become a backer or sponsor via OpenCollective (Goes directly to support of developers working on the project)
-                    </Typography>
                 </li>
             </ul>
             <br/>
@@ -84,25 +77,13 @@ const Support = props => {
             <Divider/>
             <br/>
             <Typography className={typographyClasses.sectionHeaderSecond}>
-                Special Sponsors
+                Patreon Gold Sponsors
             </Typography>
             <br/>
             <br/>
             <br/>
             <Typography className={typographyClasses.sectionHeaderSecond}>
-                Platinum Sponsors
-            </Typography>
-            <br/>
-            <br/>
-            <br/>
-            <Typography className={typographyClasses.sectionHeaderSecond}>
-                Patreon Gold
-            </Typography>
-            <br/>
-            <br/>
-            <br/>
-            <Typography className={typographyClasses.sectionHeaderSecond}>
-                Patreon Silver
+                Patreon Sponsors
             </Typography>
             <br/>
             <br/>
