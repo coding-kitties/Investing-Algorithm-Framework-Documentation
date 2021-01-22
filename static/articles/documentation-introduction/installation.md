@@ -1,8 +1,5 @@
 # Installation
-
-### Python
-The framework requires python. As of now, the framework only works with python 3.x. Make sure
-you have a version of python 3 installed.
+The framework requires python 3.0 or higher.
 
 ### Python pip install (recommended)
 
