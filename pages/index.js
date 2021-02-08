@@ -12,7 +12,6 @@ import SubjectIcon from '@material-ui/icons/Subject';
 import Typist from 'react-typist';
 import {faBook} from "@fortawesome/free-solid-svg-icons";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
-import {Adsense} from '@ctrl/react-adsense';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Divider} from "@material-ui/core";
 import {usePaperStyles, useTypographyStyles, useButtonStyles} from "../src/styles";
@@ -244,13 +243,6 @@ const AboutView = props => {
                 </Button>
             </div>
         </Container>
-        <Adsense
-            client="ca-pub-6898179895018365"
-            slot="7259870550"
-            style={{ display: 'block' }}
-            layout="in-article"
-            format="fluid"
-        />
     </>
   )
 }
