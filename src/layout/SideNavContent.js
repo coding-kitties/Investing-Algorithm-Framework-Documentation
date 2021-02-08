@@ -162,24 +162,6 @@ const SideNavContent = () => {
                                             className={
                                                 clsx(
                                                     sideNavClasses.doubleNestedSideNavItem,
-                                                    isActive('orchestrator') && sideNavClasses.sideNavListItemActive
-                                                )
-                                            }
-                                            component={Link}
-                                            href={'/documentation/tutorials/fundamentals/orchestrator'}
-                                            naked
-                                        >
-                                            <ListItemText disableTypography>
-                                                <Typography className={typographyClasses.listItemText}>
-                                                    Orchestrator
-                                                </Typography>
-                                            </ListItemText>
-                                        </ListItem>
-                                        <ListItem
-                                            button
-                                            className={
-                                                clsx(
-                                                    sideNavClasses.doubleNestedSideNavItem,
                                                     isActive('algorithm-context') && sideNavClasses.sideNavListItemActive
                                                 )
                                             }

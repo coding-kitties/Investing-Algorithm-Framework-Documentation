@@ -4,7 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 export default class MarkdownBlockQuote extends PureComponent {
     render() {
         return (
-            <Alert variant={"outlined"} severity={"info"}>
+            <Alert variant={"standard"} severity={"info"}>
                 {this.props.children}
             </Alert>
         );
