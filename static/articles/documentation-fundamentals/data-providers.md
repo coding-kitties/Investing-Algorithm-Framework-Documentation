@@ -80,7 +80,7 @@ data for specific securities and pass it directly to your strategies.
 from investing_algorithm_framework import ScheduledDataProvider
 from investing_algorithm_framework.core.context import AlgorithmContext
 from investing_algorithm_framework.core.utils import TimeUnit
-
+from investing_algorithm_framework.utils import BinanceClientMixin
 
 class CardanoCoinDataProvider(DataProvider, BinanceClientMixin):
     # Run every hour
