@@ -59,8 +59,8 @@ return (
             <br/>
             <Alert variant={"standard"} severity={"info"}>
                 <Typography>REQUEST! Our goal is to solve the biggest issues for developers. It helps us enormously
-                    if we can interview you for 15 minutes, to learn how we can support you. If interested,
-                    send an email to <a className={classes.link}>codingkitties@gmail.com</a>
+                    if we can interview you by mailing you some questions that requires 15 minutes of your time to answer. This questionnaire helps us
+                    to learn how we can support you. If interested, send an email to <a className={classes.link}>codingkitties@gmail.com</a>
                 </Typography>
             </Alert>
             <br/>
