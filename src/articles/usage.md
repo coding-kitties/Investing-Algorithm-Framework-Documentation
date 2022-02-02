@@ -1,36 +1,31 @@
 ```python
-class MyStrategy(Strategy):
+import os
+from investing_algorithm_framework import App, TimeUnit, AlgorithmContext, Ticker, \
+    TradingDataTypes, BINANCE, BINANCE_API_KEY, BINANCE_SECRET_KEY, TRADING_SYMBOL
 
-    def on_quote(self, data, algorithm_context: AlgorithmContext):
-        
-        if data['ask_price'] < 5000:
-            self.perform_buy_order(BrokerType.BINANCE, {})
-        
-        elif data['bid_price'] > 6000:
-            self.perform_sell_order(BrokerType.BINANCE, {})
+app = App(
+    resources_directory=os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir)),
+    config={
+        BINANCE_API_KEY: "<BINANCE_API_KEY>",
+        BINANCE_SECRET_KEY: "<BINANCE_SECRET_KEY>",
+        TRADING_SYMBOL: "USDT",
+    }
+)
+
+@app.algorithm.strategy(
+    time_unit=TimeUnit.SECONDS,
+    interval=5,
+    data_provider_identifier=BINANCE,
+    target_symbol="BTC",
+    trading_data_type=TradingDataTypes.TICKER,
+)
+def perform_strategy(context: AlgorithmContext, ticker: Ticker):
+    portfolio = context.get_portfolio(BINANCE)
+    
+    if portfolio.get_unallocated() > 50000 and ticker.ask_price < 5000:
+        context.create_limit_buy_order(BINANCE, "BTC", price=ticker.ask_price, amount=1, execute=True)
 
 
-class MyDataProvider(DataProvider, BinanceClientMixin):
-    registered_strategies = [MyStrategy()]
-
-    def extract_quote(self, data, algorithm_context: AlgorithmContext):
-        return {
-            'ask_price': float(data['askPrice']),
-            'bid_price': float(data['bidPrice'])
-        }
-
-    def get_data(self, algorithm_context: AlgorithmContext):
-        return self.get_book_ticker('BTC_EUR')
-
-
-if __name__ == '__main__':
-    algorithm = AlgorithmContext(
-        config=config, 
-        data_providers=[MyDataProvider()]
-        portfolio_managers=[BinancePortfolioManager()]
-        order_executors=[BinanceOrderExecutor()]
-    )
-    orchestrator = Orchestrator()
-    orchestrator.register_algorithm(algorithm)
-    orchestrator.start()
+if __name__ == "__main__":
+    app.start()
 ```

@@ -1,18 +1,15 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
 import glob from 'glob';
 import ArticleView from "../../src/views/ArticleView";
-import MarkdownArticle from "../../src/markdown/MarkdownArticle";
+import {MarkdownArticle} from "../../src/components/markdown";
 
 
 const MarkdownPage = props => {
 
     return (
-        <Container maxWidth={"md"}>
-            <ArticleView sourceLink={props.articleSrc}>
-                <MarkdownArticle markdown={props.markdown}/>
-            </ArticleView>
-        </Container>
+        <ArticleView sourceLink={props.articleSrc}>
+            <MarkdownArticle markdown={props.markdown}/>
+        </ArticleView>
     )
 }
 

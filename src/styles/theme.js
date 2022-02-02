@@ -1,6 +1,6 @@
-import {createMuiTheme} from "@material-ui/core";
+import {createTheme, responsiveFontSizes} from "@mui/material";
 
-const theme = createMuiTheme({
+let theme = createTheme({
     typography: {
         fontFamily: "Lexend Deca"
     },
@@ -20,5 +20,7 @@ const theme = createMuiTheme({
     },
     drawerWidth: 256,
 });
+
+theme = responsiveFontSizes(theme);
 
 export default theme

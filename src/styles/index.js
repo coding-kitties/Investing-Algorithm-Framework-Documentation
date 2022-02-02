@@ -1,4 +1,2 @@
-export * from "./paper";
-export * from "./sideNav";
-export * from "./typography";
-export * from "./button";
+export {default as theme} from "./theme";
+export * from "./layout";

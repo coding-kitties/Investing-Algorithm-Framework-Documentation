@@ -1,12 +1,9 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
-import {makeStyles} from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import PropTypes from "prop-types";
+import {makeStyles} from "@mui/styles";
+import {Box, Divider, Paper, Typography} from "@mui/material";
+import Link from "../components/Link";
 
-import Link from '../../src/Link';
-import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles(theme => ({
     root: {

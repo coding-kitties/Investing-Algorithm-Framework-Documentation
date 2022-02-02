@@ -1,8 +1,8 @@
 import glob from 'glob';
 import ArticleView from "../../../../src/views/ArticleView";
-import MarkdownArticle from "../../../../src/markdown/MarkdownArticle";
+import {MarkdownArticle} from "../../../../src/components/markdown";
 import React from "react";
-import Container from "@material-ui/core/Container";
+import {Container} from "@mui/material";
 
 
 const MarkdownPage = props => {

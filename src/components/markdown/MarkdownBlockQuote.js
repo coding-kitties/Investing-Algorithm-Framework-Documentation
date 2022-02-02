@@ -1,10 +1,10 @@
 import React, {PureComponent} from 'react';
-import Alert from '@material-ui/lab/Alert';
+import {Alert} from "@mui/material";
 
 export default class MarkdownBlockQuote extends PureComponent {
     render() {
         return (
-            <Alert variant={"standard"} severity={"info"}>
+            <Alert severity="info">
                 {this.props.children}
             </Alert>
         );

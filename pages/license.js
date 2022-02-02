@@ -1,7 +1,7 @@
 import React from "react";
 import ArticleView from "../src/views/ArticleView";
-import MarkdownArticle from "../src/markdown/MarkdownArticle";
-import Container from "@material-ui/core/Container";
+import {MarkdownArticle} from "../src/components/markdown";
+import {Container} from "@mui/material";
 
 const License = props => {
 
