@@ -194,14 +194,14 @@ const View = props => {
                 <br/>
                 <br/>
                 <div style={{maxWidth: 800}}>
-                    <Typography color={"primary"} variant={"body1"}>brokers</Typography>
+                    <Typography color={"primary"} variant={"body1"}>Brokers</Typography>
                     <Typography variant={"h4"}>
                        Connect to any broker
                     </Typography>
                     <br/>
                     <Typography variant={"body1"}>
                         The framework allows you to create portfolio managers and order executors for any broker.
-                        Currently the framework comes with out of the box support for the following brokers:
+                        Currently, the framework comes with out of the box support for the following brokers:
                     </Typography>
                     <br/>
                 </div>

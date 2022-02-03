@@ -15,11 +15,11 @@ const MarkdownPage = props => {
 
 // This function gets called at build time
 export async function getStaticPaths() {
-    const articles = glob.sync("./static/articles/documentation-introduction/*.md");
+    const articles = glob.sync("./static/articles/documentation_introduction/*.md");
 
     // Get the paths we want to pre-render based on posts
     const paths = articles.map((article) => {
-        let pathName = article.split("./static/articles/documentation-introduction/")[1]
+        let pathName = article.split("./static/articles/documentation_introduction/")[1]
         pathName = pathName.split(".md")[0]
         return `/documentation/introduction/${pathName}`;
     })

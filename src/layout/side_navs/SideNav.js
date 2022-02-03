@@ -7,6 +7,7 @@ import {makeStyles} from "@mui/styles";
 import clsx from "clsx";
 import {SideNavTextItem} from "./SideNavTextItem";
 import {SideNavNestedItem} from "./SideNavNestedItem";
+import {SideNavSpacer} from "./SideNavSpacer";
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -39,6 +40,8 @@ export const SideNav = (
                         return <SideNavTextItem key={item.id} item={item}/>
                     } else if(item.itemStyle === SIDE_NAV_ITEMS.nested) {
                         return <SideNavNestedItem key={item.id} item={item}/>
+                    } else if(item.itemStyle === SIDE_NAV_ITEMS.spacer) {
+                        return <SideNavSpacer key={item.id} item={item}/>
                     }
                 })}
             </List>
@@ -52,10 +55,10 @@ export const SideNav = (
                 open={sideNavOpen}
                 onOpen={() => handleSideNavOpenClick(true)}
                 onClose={() => handleSideNavOpenClick(false)}
-                classes={{
-                    paper: classes.mobileDrawer,
-                }}
-                className={clsx(sideNavOpen? layoutClasses.contentShiftRight : layoutClasses.contentShiftLeft)}
+                // classes={{
+                //     paper: classes.mobileDrawer,
+                // }}
+                // className={clsx(sideNavOpen? layoutClasses.contentShiftRight : layoutClasses.contentShiftLeft)}
                 style={{zIndex: theme.zIndex.appBar - 1}}
             >
                 <div>
@@ -73,9 +76,6 @@ export const SideNav = (
             variant={"persistent"}
             PaperProps={{ elevation: 0}}
             open={true}
-            classes={{
-                paper: classes.drawerPaper,
-            }}
             style={{zIndex: theme.zIndex.appBar - 1}}
         >
             <div>

@@ -101,13 +101,8 @@ const CodingKitties = props => {
 
 
 export const HeaderContent = props => {
-    const classes = useStyles();
     const router = useRouter();
     const theme = useTheme();
-    // const matchesLGUp = useMediaQuery(theme.breakpoints.up('lg'));
-    // const matchesMD = useMediaQuery(theme.breakpoints.only('md'));
-    // const matchesSmUp = useMediaQuery(theme.breakpoints.up('sm'));
-    // const matchesMdDown = useMediaQuery(theme.breakpoints.down('md'));
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -138,11 +133,10 @@ export const HeaderContent = props => {
 
 
     const handleChange = (event, newValue) => {
-        console.log(newValue);
         if(newValue === 0) {
             router.push('/');
         } else if(newValue === 1) {
-            router.push('/documentation/overview');
+            router.push('/documentation/getting-started');
         } else if(newValue === 2) {
             router.push('/development/overview');
         } else if(newValue === 3) {
@@ -156,7 +150,7 @@ export const HeaderContent = props => {
 
     return (
         <>
-            <Toolbar variant={"dense"}>
+            <Toolbar variant={"dense"} style={{paddingLeft: "16px"}}>
                 <Stack
                     direction="row"
                     justifyContent="flex-start"
@@ -204,7 +198,7 @@ export const HeaderContent = props => {
                     </Box>
                 </Stack>
             </Toolbar>
-            <Toolbar variant={"dense"}>
+            <Toolbar variant={"dense"} style={{paddingLeft: "16px"}}>
                 <Stack
                     direction="row"
                     justifyContent="space-between"

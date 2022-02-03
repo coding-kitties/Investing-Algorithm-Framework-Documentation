@@ -4,10 +4,19 @@ import {useRouter} from "next/router";
 import {Collapse, List, ListItem, ListItemText, Typography} from "@mui/material";
 import {ChevronRight, ExpandLess} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
+import {makeStyles, useTheme} from "@mui/styles";
+
+const useStyles = makeStyles((theme) => ({
+   sideNavActiveItem: {
+       background: theme.palette.background.light
+   }
+}));
 
 export const SideNavNestedItem = ({item}) => {
     const [open, setOpen] = useState(false);
     const router = useRouter();
+    const theme = useTheme();
+    const classes = useStyles();
     const dispatch = useDispatch();
     const sideNavValue = useSelector(state => state.layout.sideNavValue);
 
@@ -28,21 +37,17 @@ export const SideNavNestedItem = ({item}) => {
     return (
         <>
             <ListItem
-                className={
-                    clsx(
-                        sideNavClasses.sideNavListItem,
-                        !open && rootActive() && sideNavClasses.sideNavListItemNestedActive
-                    )
-                }
+                className={clsx(rootActive() && classes.sideNavActiveItem)}
                 button
                 onClick={() => setOpen(!open)}
+                style={{borderLeft: "4px solid", marginLeft: "4px", marginTop: "4px", marginBottom: "4px"}}
             >
                 <ListItemText disableTypography>
-                    <Typography variant={"body1"}>
+                    <Typography variant={"body1"} color={"text.secondary"}>
                         {item.label}
                     </Typography>
                 </ListItemText>
-                {open ? <ExpandLess /> : <ChevronRight />}
+                {open ? <ExpandLess style={{color: theme.palette.text.secondary}}/> : <ChevronRight style={{color: theme.palette.text.secondary}}/>}
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List disablePadding>
@@ -51,10 +56,11 @@ export const SideNavNestedItem = ({item}) => {
                             onClick={() => handleClick(childItem)}
                             key={index}
                             button
-                            className={clsx(sideNavClasses.sideNavListItemNested, isActive(childItem) && sideNavClasses.sideNavListItemNestedActive)}
+                            dense
+                            className={clsx(isActive(item) && classes.sideNavActiveItem)}
                         >
-                            <ListItemText disableTypography>
-                                <Typography>
+                            <ListItemText disableTypography style={{paddingLeft: "16px"}}>
+                                <Typography variant={"caption"} color={"text.secondary"}>
                                     {childItem.label}
                                 </Typography>
                             </ListItemText>
