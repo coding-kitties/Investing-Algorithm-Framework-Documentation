@@ -4,14 +4,15 @@ import glob from 'glob';
 import {Container} from "@mui/material";
 import {MarkdownArticle} from "../../../src/components/markdown";
 import {wrapper} from "../../../src/redux/store";
+import ArticleView from "../../../src/views/ArticleView";
 
 
 const MarkdownPage = props => {
 
     return (
-        <Container maxWidth={"md"}>
+        <ArticleView sourceLink={props.articleSrc}>
             <MarkdownArticle markdown={props.markdown}/>
-        </Container>
+        </ArticleView>
     )
 }
 
