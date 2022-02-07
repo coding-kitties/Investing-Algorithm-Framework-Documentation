@@ -1,1 +1,1 @@
-export * from "./MarkdownArticle";
+export {default as MarkdownArticle} from "./MarkdownArticle";

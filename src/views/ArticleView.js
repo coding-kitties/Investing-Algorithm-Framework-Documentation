@@ -39,7 +39,7 @@ const ArticleView = props => {
                         </>
                     }
                 </div>
-                <Paper elevation={0} style={{minWidth: "250px", marginRight: "16px"}}>
+                <Paper elevation={0} style={{minWidth: "350px", marginRight: "16px"}}>
 
                 </Paper>
             </Stack>

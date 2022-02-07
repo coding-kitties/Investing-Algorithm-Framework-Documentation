@@ -1,7 +1,6 @@
 import React from "react";
 import glob from 'glob';
 
-import {Container} from "@mui/material";
 import {MarkdownArticle} from "../../../src/components/markdown";
 import {wrapper} from "../../../src/redux/store";
 import ArticleView from "../../../src/views/ArticleView";

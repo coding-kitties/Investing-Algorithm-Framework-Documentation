@@ -18,6 +18,12 @@ let theme = createTheme({
             contrastText: "#fff",
         },
     },
+    text: {
+        main: "#ffffff",
+        light: "#f0f0f0",
+        dark: "#c2c2c2",
+        contrastText: "#3c3c3c",
+    },
     drawerWidth: 256,
 });
 
