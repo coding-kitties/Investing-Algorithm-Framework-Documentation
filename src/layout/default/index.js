@@ -12,12 +12,7 @@ export const DefaultLayout = ({children}) => {
     const router = useRouter();
 
     const getSideNavOpen = () => {
-
-        if(router.pathname.includes("documentation")) {
-            return true;
-        }
-
-        return false;
+        return router.pathname.includes("documentation");
     }
 
     const getSideNavItems = () => {
@@ -55,29 +50,19 @@ export const DefaultLayout = ({children}) => {
                             href: '/documentation/tutorials/overview',
                         },
                         {
+                            id: 'quick-start',
+                            label: 'Quick start',
+                            href: '/documentation/tutorials/quickstart',
+                        },
+                        {
                             id: 'important-concepts',
                             label: 'Important concepts',
                             href: '/documentation/tutorials/concepts',
                         },
                         {
-                            id: 'strategy',
-                            label: 'Strategies',
-                            href: '/documentation/tutorials/strategies',
-                        },
-                        {
-                            id: 'data-provider',
-                            label: 'Data providers',
-                            href: '/documentation/tutorials/data-providers',
-                        },
-                        {
-                            id: 'portfolio-manager',
-                            label: 'Portfolio managers',
-                            href: '/documentation/tutorials/portfolio-managers',
-                        },
-                        {
-                            id: 'order-executor',
-                            label: 'Order executors',
-                            href: '/documentation/tutorials/order-executors',
+                            id: 'deployment',
+                            label: 'Deployment',
+                            href: '/documentation/tutorials/deployment',
                         },
                     ]
                 },

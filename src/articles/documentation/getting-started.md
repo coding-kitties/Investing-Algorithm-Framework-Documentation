@@ -2,6 +2,15 @@
 Welcome to the investing algorithm framework documentation. Whether you're just getting started
 or have been using the framework for years, you should be able to find answers to all your questions here.
 
+##### Installation
+You can easily install the investing algorithm framework with pypi.
+
+> Python 3 is only supported by the framework
+
+```shell
+pip install investing-algorithm-framework
+```
+
 ##### Documentation structure
 
 Our documentation is split into four parts:

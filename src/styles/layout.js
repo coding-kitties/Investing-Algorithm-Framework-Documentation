@@ -5,7 +5,6 @@ export const useLayoutStyles = makeStyles(theme => ({
         flexGrow: 1,
         paddingLeft: theme.spacing(4),
         paddingRight: theme.spacing(4),
-        paddingTop: theme.spacing(4)
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,

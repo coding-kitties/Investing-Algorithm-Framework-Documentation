@@ -2,18 +2,8 @@
 In this section we will attempt to guide you in order to get started with the investing algorithm framework easily. 
 There are multiple options to get started.
 
-
-##### Installation
-You can easily install the investing algorithm framework with pypi.
-
-> Python 3 is only supported by the framework
-
-```shell
-pip install investing-algorithm-framework
-```
-
 ##### I just want to get started creating strategies without much setup
-Currently, there is support for Binance broker coming with the framework. 
+Currently, there is support for Binance coming with the framework. 
 You can easily create a working algorithm that is connected to Binance with the following code snippet.
 
 Before running your algorithm make sure that you configure the `BINANCE_API_KEY` and the `BINANCE_SECRET_KEY` in your
@@ -50,5 +40,14 @@ if __name__ == "__main__":
 
 if you want to know more about 
 
-
 ##### I want to connect to a broker that is not yet supported.
+You must implement your own portfolio managers and order executors if you want to connect to a broker that 
+is not yet supported.
+
+Creating a custom portfolio manager requires you to extend the `PortfolioManager` class.
+
+```python3
+from investing_algorithm_framework import PortfolioManager
+
+
+```
