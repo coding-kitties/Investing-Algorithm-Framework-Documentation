@@ -6,9 +6,11 @@ import {Container} from "@mui/material";
 const License = props => {
 
     return (
-        <Container maxWidth={"md"}>
+        <Container maxWidth={"lg"}>
+            <br/>
             <ArticleView
                 sourceLink={'https://github.com/coding-kitties/investing-algorithm-framework-documentation/blob/master/src/articles/license.md'}
+                showSource={false}
             >
                 <MarkdownArticle markdown={props.markdown}/>
             </ArticleView>
@@ -18,7 +20,7 @@ const License = props => {
 
 // This also gets called at build time
 export async function getStaticProps() {
-    const markdown = await require('../static/articles/license/license.md');
+    const markdown = await require('../src/articles/license/license.md');
     return { props: { markdown: markdown.default} }
 }
 

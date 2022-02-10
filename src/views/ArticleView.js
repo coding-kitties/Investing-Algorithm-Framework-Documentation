@@ -4,7 +4,7 @@ import {Divider, Paper, Stack, Typography} from "@mui/material";
 import Link from "../components/Link";
 
 
-const ArticleView = props => {
+const ArticleView = ({sourceLink, showSource = true, children}) => {
 
     return (
         <div>
@@ -15,8 +15,8 @@ const ArticleView = props => {
                 spacing={2}
             >
                 <div>
-                    {props.children}
-                    {props.showSource &&
+                    {children}
+                    {showSource &&
                         <>
                             <br/>
                             <Divider/>
@@ -30,7 +30,7 @@ const ArticleView = props => {
                             </Typography>
                             <ul>
                             <li>
-                            <Link href={props.sourceLink}>Suggest an edit to this page</Link> (please read the <Link href={"https://github.com/coding-kitties/investing-algorithm-framework-documentation/blob/master/docs/CONTRIBUTING.md"}>contributing</Link> guide first).
+                            <Link href={sourceLink}>Suggest an edit to this page</Link> (please read the <Link href={"https://github.com/coding-kitties/investing-algorithm-framework-documentation/blob/master/docs/CONTRIBUTING.md"}>contributing</Link> guide first).
                             </li>
                             <li>To report a problem in the documentation, or to submit feedback and comments, please open an <Link href={'https://github.com/coding-kitties/investing-algorithm-framework-documentation/issues/new/choose'}>issue</Link> on GitHub</li>
                             </ul>
@@ -39,9 +39,6 @@ const ArticleView = props => {
                         </>
                     }
                 </div>
-                <Paper elevation={0} style={{minWidth: "350px", marginRight: "16px"}}>
-
-                </Paper>
             </Stack>
         </div>
     )

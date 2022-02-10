@@ -3,12 +3,12 @@ import clsx from "clsx";
 import {useRouter} from "next/router";
 import {Collapse, List, ListItem, ListItemText, Typography} from "@mui/material";
 import {ChevronRight, ExpandLess} from "@mui/icons-material";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {makeStyles, useTheme} from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
-   sideNavActiveItem: {
-       background: theme.palette.background.light
+   active: {
+       backgroundColor: "#ecebeb",
    }
 }));
 
@@ -17,7 +17,6 @@ export const SideNavNestedItem = ({item}) => {
     const router = useRouter();
     const theme = useTheme();
     const classes = useStyles();
-    const dispatch = useDispatch();
     const sideNavValue = useSelector(state => state.layout.sideNavValue);
 
     const isActive = (refItem) => {
@@ -37,7 +36,7 @@ export const SideNavNestedItem = ({item}) => {
     return (
         <>
             <ListItem
-                className={clsx(rootActive() && classes.sideNavActiveItem)}
+                className={clsx(rootActive() && classes.active)}
                 button
                 onClick={() => setOpen(!open)}
                 style={{borderLeft: "4px solid", marginLeft: "4px", marginTop: "4px", marginBottom: "4px"}}
@@ -57,7 +56,7 @@ export const SideNavNestedItem = ({item}) => {
                             key={index}
                             button
                             dense
-                            className={clsx(isActive(item) && classes.sideNavActiveItem)}
+                            style={{backgroundColor: isActive(childItem) && "#ecebeb"}}
                         >
                             <ListItemText disableTypography style={{paddingLeft: "16px"}}>
                                 <Typography variant={"caption"} color={"text.secondary"}>

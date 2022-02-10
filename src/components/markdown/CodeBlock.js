@@ -30,7 +30,7 @@ export const CodeBlock = ({language, value}) => {
     }
     return (
         <Paper
-            style={{backgroundColor: "#282c34"}}
+            style={{backgroundColor: "#282c34", width: "100%"}}
             onMouseEnter={() => setShowCopy(true)}
             onMouseLeave={() => setShowCopy(false)}
         >
@@ -43,11 +43,9 @@ export const CodeBlock = ({language, value}) => {
                 <SyntaxHighlighter language={language} style={atomOneDark}>
                     {value}
                 </SyntaxHighlighter>
-                {showCopy && !mdDown &&
-                    <LowerCaseButton onClick={handleClickCopy}>
-                        <Typography style={{color: "#ffffff"}}>copy</Typography>
-                    </LowerCaseButton>
-                }
+                <LowerCaseButton onClick={handleClickCopy}>
+                    <Typography style={{color: showCopy? "#ffffff" : "#282c34"}}>copy</Typography>
+                </LowerCaseButton>
             </Stack>
         </Paper>
     );

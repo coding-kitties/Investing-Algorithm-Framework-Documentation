@@ -2,6 +2,7 @@ import {SIDE_NAV_OPEN, SIDE_NAV_VALUE} from "../types";
 
 let initialState = {
     sideNavOpen: false,
+    sideNavValue: null,
 };
 
 export default function layoutReducer(state = initialState, action) {
@@ -10,7 +11,6 @@ export default function layoutReducer(state = initialState, action) {
             return {...state, sideNavOpen: action.value};
         case SIDE_NAV_VALUE:
             return {...state, sideNavValue: action.value};
-
         default:
             return state;
     }

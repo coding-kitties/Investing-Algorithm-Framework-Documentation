@@ -17,6 +17,9 @@ let theme = createTheme({
             dark: "#031322",
             contrastText: "#fff",
         },
+        background: {
+            light: "#c2c2c2",
+        }
     },
     text: {
         main: "#ffffff",
@@ -24,7 +27,7 @@ let theme = createTheme({
         dark: "#c2c2c2",
         contrastText: "#3c3c3c",
     },
-    drawerWidth: 256,
+    drawerWidth: 270,
 });
 
 theme = responsiveFontSizes(theme);

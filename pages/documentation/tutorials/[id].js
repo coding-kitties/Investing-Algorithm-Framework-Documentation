@@ -4,14 +4,17 @@ import glob from 'glob';
 import {MarkdownArticle} from "../../../src/components/markdown";
 import {wrapper} from "../../../src/redux/store";
 import ArticleView from "../../../src/views/ArticleView";
+import {sideNavValueAction} from "../../../src/redux/actions";
 
 
 const MarkdownPage = props => {
 
     return (
-        <ArticleView sourceLink={props.articleSrc}>
-            <MarkdownArticle markdown={props.markdown}/>
-        </ArticleView>
+        <div style={{padding: "8px"}}>
+            <ArticleView sourceLink={props.articleSrc}>
+                <MarkdownArticle markdown={props.markdown}/>
+            </ArticleView>
+        </div>
     )
 }
 
@@ -28,10 +31,11 @@ export async function getStaticPaths() {
     return { paths, fallback: false }
 }
 
-export const getStaticProps = wrapper.getStaticProps((store) =>
+export const getStaticProps = wrapper.getServerSideProps((store) =>
     async ({ req, res, ...etc }) => {
         const markdown = await require(`../../../src/articles/documentation-tutorials/${etc.params.id}.md`);
         let articleSrc = `https://github.com/eltyer/blob/master/src/articles/documentation-tutorials/${etc.params.id}.md`
+        store.dispatch(sideNavValueAction(etc.params.id));
         return { props: { markdown: markdown.default, articleSrc: articleSrc} }
     }
 );

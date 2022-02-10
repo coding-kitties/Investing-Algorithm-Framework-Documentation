@@ -1,7 +1,6 @@
 ```python
 import os
-from investing_algorithm_framework import App, TimeUnit, AlgorithmContext, \
-    TradingDataTypes, constants
+from investing_algorithm_framework import App, AlgorithmContext
 
 app = App(
     resources_directory=os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir)),
@@ -13,11 +12,11 @@ app = App(
 )
 
 @app.algorithm.strategy(
-    time_unit=TimeUnit.SECONDS,
+    time_unit="SECONDS",
     interval=5,
-    data_provider_identifier=constants.BINANCE,
+    data_provider_identifier="BINANCE",
     target_symbol="BTC",
-    trading_data_type=TradingDataTypes.TICKER,
+    trading_data_type="TICKER",
 )
 def perform_strategy(context: AlgorithmContext, ticker, **kwargs):
     portfolio = context.get_portfolio(BINANCE)

@@ -17,5 +17,6 @@ software comes without any type of warranty.
 The core team of Coding Kitties can help you with solving issues you encounter while working with the framework. 
 There are a few options to get help, first of all try to solve with on of our communication channels
 
-[slack](https://inv-algo-framework.slack.com): for direct communication with team members. <br/> 
-[reddit](https://reddit.com/r/InvestingAlgorithms/): for general guidance regarding investing algorithms and framework usage.
+[reddit](https://reddit.com/r/InvestingBots/): for general guidance regarding trading bots and framework usage.
+
+If the issue still is not resolved please email us at codingkitties@gmail.com

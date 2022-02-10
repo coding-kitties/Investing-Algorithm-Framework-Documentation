@@ -122,12 +122,14 @@ export const HeaderContent = props => {
             return 0;
         } else if(router.pathname.includes('/documentation/')) {
             return 1;
-        } else if(router.pathname.includes('/development/')) {
+        } else if(router.pathname.includes('/development')) {
             return 2;
-        } else if(router.pathname.includes('/license')) {
+        } else if(router.pathname.includes('/selling-algorithms')) {
             return 3;
-        } else if(router.pathname.includes('/support')) {
+        } else if(router.pathname.includes('/license')) {
             return 4;
+        } else if(router.pathname.includes('/support')) {
+            return 5;
         }
     }
 
@@ -138,11 +140,11 @@ export const HeaderContent = props => {
         } else if(newValue === 1) {
             router.push('/documentation/getting-started');
         } else if(newValue === 2) {
-            router.push('/development/overview');
+            router.push('/development');
         } else if(newValue === 3) {
-            router.push('/license');
+            router.push('/selling-algorithms');
         } else if(newValue === 4) {
-            router.push('/support');
+            router.push('/license');
         } else if(newValue === 5) {
             router.push('/support');
         }

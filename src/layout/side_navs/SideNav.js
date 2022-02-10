@@ -11,7 +11,8 @@ import {SideNavSpacer} from "./SideNavSpacer";
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
-        width: theme.drawerWidth
+        width: theme.drawerWidth,
+        overflowX: 'hidden',
     },
     mobileDrawer: {
         width: '100%',
@@ -27,10 +28,8 @@ export const SideNav = (
         handleSideNavOpenClick,
     }
 ) => {
-    const classes = useStyles();
     const theme = useTheme();
     const mdDown = useMediaQuery(theme.breakpoints.down("md"));
-    const layoutClasses = useLayoutStyles();
 
     const renderSideNavList = (items) => {
         return (
@@ -74,9 +73,9 @@ export const SideNav = (
     return (
         <Drawer
             variant={"persistent"}
-            PaperProps={{ elevation: 0}}
+            PaperProps={{ elevation: 0, style: {overflow: "hidden", overflowX: "hidden"}}}
             open={true}
-            style={{zIndex: theme.zIndex.appBar - 1}}
+            style={{zIndex: theme.zIndex.appBar - 1, overflowX: "hidden", overflow: "hidden"}}
         >
             <div>
                 {sideNavItems !== undefined && sideNavItems !== null && renderSideNavList(sideNavItems)}

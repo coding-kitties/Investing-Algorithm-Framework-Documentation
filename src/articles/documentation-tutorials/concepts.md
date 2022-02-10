@@ -1,9 +1,11 @@
-#### Import Concepts
+## Import Concepts
 There are some important concepts to understand in order to work effectively with the framework:
 
-##### Strategies
-This is the heart of your algorithm. A strategy will only run on the time interval that you specify. You can 
-make a strategy with the `app.algorithm.strategy` decorator.
+### Strategies
+A strategy is the core of your algorithm. The framework provides you with a `strategy` decorator that you 
+can use to register a strategy for your algorithm.
+
+A minimal strategy only requires you to specify the `time_unit` and the `interval` attribute.
 
 ```python
 @app.algorithm.strategy(time_unit=TimeUnit.MINUTES, interval=1)
@@ -11,7 +13,7 @@ def perform_strategy(context: AlgorithmContext, **kwargs):
     print("I run every minute")
 ```
 
-You can define multiple strategies with each their own time interval.
+You can define multiple strategies with each their own time interval specification.
 
 ```python
 @app.algorithm.strategy(time_unit=TimeUnit.MINUTES, interval=1)
@@ -22,19 +24,9 @@ def perform_strategy_one(context: AlgorithmContext, **kwargs):
 def perform_strategy_two(context: AlgorithmContext, **kwargs):
     print("I run every 5 minutes")
 ```
+if you want to know more about strategies you can read this [article](https://investing-algorithm-framework/documentation/guides/strategies).
 
-In the `app.algorithm.strategy` decorator you can provide the following parameters:
-
-* `time_unit` **required**: the time unit the strategy uses (SECONDS, MINUTES, HOURS)
-* `time_interval` **required**: the interval of the strategy. The combination of time unit and interval specify at which time your strategy runs.
-* `data_provider_identifier` **required**: the data provider the strategy uses.
-* `trading_data_type`: the trading type the strategy expects
-* `trading_data_types`: the trading types the strategy expects
-* `target_symbol`: the target symbol that is used by the data provider to obtain the trading data type.
-* `target_symbols`: the target symbols that is used by the data provider to obtain the trading data type.
-
-
-##### Data Providers
+### Data Providers
 Data providers are run before execution of your strategy. You can specify the data provider that is run 
 with the 'data_provider_identifier' attribute in the strategy. Also, you can specify in your strategy which data 
 you expect to receive from the data provider with either the `trading_data_type` or `trading_data_types` attributes in 
@@ -68,7 +60,7 @@ def perform_strategy_one(context: AlgorithmContext, ticker, **kwargs):
     print(ticker)
 ```
 
-###### Registering a data provider
+#### Registering a data provider
 You can register a data provider at your app with the `add_data_provider` method.
 
 ```python
@@ -76,7 +68,7 @@ You can register a data provider at your app with the `add_data_provider` method
 app.add_data_provider(MyDataProvider)
 ```
 
-##### Portfolio Managers
+### Portfolio Managers
 Portfolio managers allows you to track and manage your portfolio from your broker. 
 Also, the framework uses the portfolio manager to track the performance of you algorithm.
 
@@ -161,7 +153,7 @@ class MyPortfolioManager(PortfolioManager):
             return orders
 ```
 
-###### Registering a Portfolio Manager
+#### Registering a Portfolio Manager
 You can register a portfolio manager at your app with the `add_portfolio_manager` method.
 
 ```python
@@ -169,7 +161,7 @@ You can register a portfolio manager at your app with the `add_portfolio_manager
 app.add_portfolio_manager(MyPortfolioManager)
 ```
 
-##### Order Executors
+### Order Executors
 Order executors are used to create orders and retrieve order statuses from your broker. 
 
 > The example order executor uses the ccxt library to connect to Binance. We do not recommend writing your
@@ -254,7 +246,7 @@ class MyOrderExecutor(OrderExecutor):
         return order
 ```
 
-###### Registering an order executor
+#### Registering an order executor
 You can register an order executor at your app with the `add_order_executor` method.
 
 ```python

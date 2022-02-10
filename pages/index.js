@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Alert, Container, Divider, Grid, Paper, Stack, Typography} from "@mui/material";
+import {Alert, ButtonBase, Container, Paper, Stack, Typography} from "@mui/material";
 import {makeStyles, useTheme} from "@mui/styles";
 import {MarkdownArticle} from "../src/components/markdown";
 import {LowerCaseButton} from "../src/components/buttons";
@@ -16,6 +16,22 @@ import {BrokerCarousel} from "../src/components/carousels";
 function PythonIcon(props) {
     return (
         <img src={"/python.svg"} alt="" {...props}/>
+    );
+}
+
+function EltyerIcon(props) {
+    return (
+        <ButtonBase component={Link} href={"https://eltyer.com"}>
+            <Stack
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+                spacing={2}
+            >
+                <img src={"/images/eltyer_onlyicon.svg"} alt="eltyer" style={{width: "75px"}} {...props}/>
+                <img src={"/images/eltyer_onlytext.svg"} alt="eltyer" style={{width: "150px", paddingBottom: "8px"}} {...props}/>
+            </Stack>
+        </ButtonBase>
     );
 }
 
@@ -36,6 +52,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const View = props => {
+    const theme = useTheme();
     const classes = useStyles();
     const [installEnter, setInstallEnter] = useState(false);
     const onInstallEnterViewport = () => setInstallEnter(true);
@@ -43,17 +60,6 @@ const View = props => {
     return (
         <>
             <Container maxWidth="lg">
-                <br/>
-                <br/>
-                <Alert variant={"standard"} severity={"warning"}>
-                    <Typography>
-                        The website is currently in active development. Therefore it is missing a
-                        lot of articles. Please be aware that the website will have regular updates parallel to new releases of the framework.
-                        <br/>
-                        <br/>
-                        A stable version of the website and the framework will be version 1.0.0.
-                    </Typography>
-                </Alert>
                 <br/>
                 <br/>
                 <div style={{maxWidth:800}}>
@@ -91,7 +97,7 @@ const View = props => {
                         Quick Usage
                     </Typography>
                     <MarkdownArticle markdown={props.usageMarkdown}/>
-                    <LowerCaseButton>
+                    <LowerCaseButton component={Link} href={"/documentation/getting-started"}>
                         Explore the docs
                     </LowerCaseButton>
                 </Paper>
@@ -101,6 +107,26 @@ const View = props => {
                 <br/>
                 <br/>
                 <br/>
+            </Container>
+            <Paper style={{width: "100%", backgroundColor: "#eeeeee", padding: theme.spacing(4)}} elevation={0}>
+                <Typography align={"center"}>Sponsored by</Typography>
+                <br/>
+                <Stack
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                    spacing={2}
+                >
+                    <EltyerIcon/>
+                </Stack>
+            </Paper>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <Container maxWidth={"lg"}>
                 <div style={{maxWidth: 800}}>
                     <Typography color={"primary"} variant={"body1"}>Abstraction of data providers</Typography>
                     <Typography variant={"h4"}>Define your own data providers and integrate them with your strategies</Typography>

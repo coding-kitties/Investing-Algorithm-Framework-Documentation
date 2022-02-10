@@ -7,10 +7,10 @@ import clsx from "clsx";
 import {sideNavValueAction} from "../../redux/actions";
 
 const useStyles = makeStyles((theme) => ({
-    sideNavActiveItem: {
-        background: theme.palette.background.light
+    active: {
+        backgroundColor: "#ecebeb",
     }
-}));
+}), {name: "jeig"});
 
 export const SideNavTextItem = ({item}) => {
     const classes = useStyles();
@@ -28,7 +28,7 @@ export const SideNavTextItem = ({item}) => {
     }
 
     return (
-        <ListItem button onClick={handleClick} className={clsx(isActive(item) && classes.sideNavActiveItem)}>
+        <ListItem button onClick={handleClick} style={{backgroundColor: isActive(item) && "#ecebeb"}}>
             <ListItemText disableTypography>
                 <Typography align={"left"} variant={"body1"} color={"text.secondary"}>
                     {item.label}

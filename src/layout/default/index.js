@@ -33,7 +33,7 @@ export const DefaultLayout = ({children}) => {
                     itemStyle: SIDE_NAV_ITEMS.spacer,
                 },
                 {
-                    id: 'get-started',
+                    id: 'getting-started',
                     label: 'Getting started',
                     itemStyle: SIDE_NAV_ITEMS.text,
                     href: '/documentation/getting-started',
@@ -45,19 +45,24 @@ export const DefaultLayout = ({children}) => {
                     itemStyle: SIDE_NAV_ITEMS.nested,
                     children: [
                         {
-                            id: 'Framework introductory overview',
+                            id: 'overview',
                             label: 'Introductory overview',
                             href: '/documentation/tutorials/overview',
                         },
                         {
-                            id: 'quick-start',
+                            id: 'quickstart',
                             label: 'Quick start',
                             href: '/documentation/tutorials/quickstart',
                         },
                         {
-                            id: 'important-concepts',
+                            id: 'concepts',
                             label: 'Important concepts',
                             href: '/documentation/tutorials/concepts',
+                        },
+                        {
+                            id: 'management-commands',
+                            label: 'Management commands',
+                            href: '/documentation/tutorials/management-commands',
                         },
                         {
                             id: 'deployment',
@@ -71,6 +76,31 @@ export const DefaultLayout = ({children}) => {
                     label: 'Guides',
                     itemStyle: SIDE_NAV_ITEMS.nested,
                     children: [
+                        {
+                            id: 'models',
+                            label: 'Models',
+                            href: '/documentation/guides/models',
+                        },
+                        {
+                            id: 'strategies',
+                            label: 'Strategies',
+                            href: '/documentation/guides/strategies',
+                        },
+                        {
+                            id: 'data-providers',
+                            label: 'Data providers',
+                            href: '/documentation/guides/data-providers',
+                        },
+                        {
+                            id: 'order-executors',
+                            label: 'Order executors',
+                            href: '/documentation/guides/order-executors',
+                        },
+                        {
+                            id: 'portfolio-managers',
+                            label: 'Portfolio managers',
+                            href: '/documentation/guides/portfolio-managers',
+                        },
                         {
                             id: 'binance',
                             label: 'Connecting to Binance',

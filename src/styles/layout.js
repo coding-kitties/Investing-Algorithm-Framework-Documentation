@@ -3,8 +3,6 @@ import {makeStyles} from "@mui/styles";
 export const useLayoutStyles = makeStyles(theme => ({
     content: {
         flexGrow: 1,
-        paddingLeft: theme.spacing(4),
-        paddingRight: theme.spacing(4),
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,

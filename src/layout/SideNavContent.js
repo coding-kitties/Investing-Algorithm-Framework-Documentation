@@ -180,11 +180,11 @@
 //                                             className={
 //                                                 clsx(
 //                                                     sideNavClasses.doubleNestedSideNavItem,
-//                                                     isActive('data-providers') && sideNavClasses.sideNavListItemActive
+//                                                     isActive('data-providers.md') && sideNavClasses.sideNavListItemActive
 //                                                 )
 //                                             }
 //                                             component={Link}
-//                                             href={'/documentation/tutorials/fundamentals/data-providers'}
+//                                             href={'/documentation/tutorials/fundamentals/data-providers.md'}
 //                                             naked
 //                                         >
 //                                             <ListItemText disableTypography>

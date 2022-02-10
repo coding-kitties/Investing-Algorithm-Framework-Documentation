@@ -1,8 +1,8 @@
-#### Quickstart
+## Quickstart
 In this section we will attempt to guide you in order to get started with the investing algorithm framework easily. 
 There are multiple options to get started.
 
-##### I just want to get started creating strategies without much setup
+### I just want to get started creating strategies without much setup
 Currently, there is support for Binance coming with the framework. 
 You can easily create a working algorithm that is connected to Binance with the following code snippet.
 
@@ -10,7 +10,7 @@ Before running your algorithm make sure that you configure the `BINANCE_API_KEY`
 algorithm config. You can find these parameters in your Binance account. Also, make sure that you 
 specify a `TRADING_SYMBOL` that is used by your algorithm for execution of its buy orders.
 
-```python3
+```python
 import os
 from investing_algorithm_framework import App, TimeUnit, AlgorithmContext, \
     TradingDataTypes, constants
@@ -38,16 +38,137 @@ if __name__ == "__main__":
     app.start()
 ```
 
-if you want to know more about 
+if you want to know more about binance configuration you can read this [article](https://investing-algorithm-framework/documentation/guides/binance)
 
-##### I want to connect to a broker that is not yet supported.
-You must implement your own portfolio managers and order executors if you want to connect to a broker that 
-is not yet supported.
+### I want to connect to a broker that is not yet supported.
+You can connect to a broker that is not yet supported with custom components. This can be done by implementing your own 
+portfolio manager and order executor.
 
-Creating a custom portfolio manager requires you to extend the `PortfolioManager` class.
+The portfolio manager allows your algorithm to track and manage the portfolio at your broker and the order executor 
+allows your algorithm to execute and track orders at your broker.
 
-```python3
+#### Custom Portfolio Manager
+For a custom portfolio manager you need to extend the `PortfolioManager` class. This portfolio manager must be 
+able to convert the positions and orders that your selected broker returns to the Order and Position models that the 
+framework uses. 
+
+For a guide about position and order models we recommend you to read this [article](https://investing-algorithm-framework/documentation/guides/models)
+
+A reference implementation of a portfolio manager can be seen below.
+
+```python
 from investing_algorithm_framework import PortfolioManager
 
+class CustomPortfolioManager(PortfolioManager):
+    identifier = "<BROKER_X>"
+    market = "<BROKER_X>"
 
+    def get_unallocated(self, algorithm_context, sync=False) -> Position:
+        # Example get_unallocated implementation
+        # .... retrieve trading symbol position from your broker
+        data = {}
+        return Position.from_dict({"amount": data["amount"], "symbol": data["symbol"]})
+
+    def get_positions(self, symbol: str = None, lazy=False) -> List[Position]:
+        # Example get_positions implementation
+        # .... retrieve all positions from your broker
+        data = []
+        
+        for position in data:
+            positions.append(
+                Position.from_dict({"amount": data["amount"], "symbol": data["symbol"]})
+            )
+
+        return positions
+
+    def get_orders(self, symbol: str = None, lazy=False) -> Union[List[Order], Order]:
+        # Example get_orders implementation
+        
+        if symbol is not None:
+            # .... retrieve orders for specific target symbol from your broker
+            data = {}
+            
+            return Order.from_dict(
+                {
+                    "id": data.order_reference,
+                    "target_symbol": data.symbol.split("/")[0].upper(),
+                    "trading_symbol": data.symbol.split("/")[1].upper(),
+                    "order_reference": data.id,
+                    "initial_price": data.price,
+                    "side": data.side,
+                    "status": data.status,
+                    "closing_price": data.closing_price,
+                    "type": data.type
+                }
+            )
+        else:
+            # .... retrieve all orders from your broker
+            data = []
+
+            for order in data:
+                orders.append(Order.from_dict({
+                    "id": order.order_reference,
+                    "target_symbol": order.asset.split("/")[0].upper(),
+                    "trading_symbol": order.asset.split("/")[1].upper(),
+                    "order_reference": order.id,
+                    "initial_price": order.price,
+                    "side": order.side,
+                    "status": order.status,
+                    "closing_price": order.closing_price,
+                    "type": order.type
+                }))
+            return orders
 ```
+
+#### Custom Order Executor
+For a custom order executor you need to extend the `OrderExecutor` class. The order executor that you define must be
+able to convert the orders that your selected broker returns to the Order model that the framework uses.
+
+For a guide about position and order models we recommend you to read this [article](https://investing-algorithm-framework/documentation/guides/models)
+
+A reference implementation of a order executor can be seen below.
+
+```python
+from investing_algorithm_framework import OrderExecutor
+
+class CustomOrderExecutor(OrderExecutor):
+    identifier = "<BROKER_X>"
+    identifier = "my_portfolio_manager"
+
+    def create_order(self,
+        symbol,
+        price,
+        amount_trading_symbol,
+        amount_target_symbol,
+        order_type=OrderType.LIMIT.value,
+        order_side=OrderSide.BUY.value,
+        context=None,
+    ) -> Order:
+        # .... Create order at broker
+        data = {}
+        return Order.from_dict({
+            "id": data.order_reference,
+            "target_symbol": data.symbol.split("/")[0].upper(),
+            "trading_symbol": data.symbol.split("/")[1].upper(),
+            "order_reference": data.id,
+            "initial_price": data.price,
+            "side": data.side,
+            "status": data.status,
+            "closing_price": data.closing_price,
+            "type": data.type
+        })
+
+    def get_order_status(self, order: Order, algorithm_context, **kwargs) -> Order:
+        # .... Retrieve order from broker
+        data = {}
+        order.set_status(OrderStatus.from_string(data.status))
+        return order
+```
+
+You can then register your portfolio manager and order executor at your app with:
+
+```python
+app.add_order_executor(CustomOrderExecutor)
+app.add_portfolio_manager(CustomPortfolioManager)
+```
+
