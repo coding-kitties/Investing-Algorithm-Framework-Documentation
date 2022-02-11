@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createElement} from 'react';
 import ReactMarkdown from "react-markdown";
 import {CodeBlock} from "./CodeBlock";
 import MarkdownBlockQuote from "./MarkdownBlockQuote";
@@ -6,16 +6,35 @@ import {Box, Paper, Typography, useTheme} from "@mui/material";
 
 const MarkdownArticle = ({markdown}) => {
     const theme = useTheme();
+
+    function flatten(text, child) {
+        return typeof child === 'string'
+            ? text + child
+            : React.Children.toArray(child.props.children).reduce(flatten, text)
+    }
+
+    function HeadingRenderer(props) {
+        let children = React.Children.toArray(props.children)
+        let text = children.reduce(flatten, '')
+        let slug = text.toLowerCase().replace(/\W/g, '-')
+        return createElement(`h${props.level}`, { id: slug }, props.children);
+    }
+
     return (
         <ReactMarkdown
-
             components={{
-                h1: ({node, ...props}) => <Typography fontSize={40} {...props} />,
-                h2: ({node, ...props}) => <Typography fontSize={36} style={{marginTop: theme.spacing(2)}}  {...props} />,
-                h3: ({node, ...props}) => <Typography fontSize={32} style={{marginBottom: theme.spacing(2)}} {...props} />,
-                h4: ({node, ...props}) => <Typography fontSize={28} style={{marginBottom: theme.spacing(2)}} {...props} />,
-                h5: ({node, ...props}) => <Typography fontSize={24} style={{marginBottom: theme.spacing(2)}} {...props} />,
-                h6: ({node, ...props}) => <Typography fontSize={20} style={{marginBottom: theme.spacing(2)}} {...props} />,
+                h1: HeadingRenderer,
+                h2: HeadingRenderer,
+                h3: HeadingRenderer,
+                h4: HeadingRenderer,
+                h5: HeadingRenderer,
+                h6: HeadingRenderer,
+                // h1: ({node, ...props}) => <Typography fontSize={40} {...props} />,
+                // h2: ({node, ...props}) => <Typography fontSize={36} style={{marginTop: theme.spacing(2)}}  {...props} />,
+                // h3: ({node, ...props}) => <Typography fontSize={32} style={{marginBottom: theme.spacing(2)}} {...props} />,
+                // h4: ({node, ...props}) => <Typography fontSize={28} style={{marginBottom: theme.spacing(2)}} {...props} />,
+                // h5: ({node, ...props}) => <Typography fontSize={24} style={{marginBottom: theme.spacing(2)}} {...props} />,
+                // h6: ({node, ...props}) => <Typography fontSize={20} style={{marginBottom: theme.spacing(2)}} {...props} />,
                 code({node, inline, className, children, ...props}) {
                     const match = /language-(\w+)/.exec(className || '')
                     return !inline && match ? (

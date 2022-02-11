@@ -79,10 +79,10 @@ const View = props => {
                     alignItems="center"
                     spacing={2}
                 >
-                    <LowerCaseButton variant={"contained"}>
+                    <LowerCaseButton componet={Link} href={"/documentation/tutorials/quickstart"} variant={"contained"}>
                         Get Started
                     </LowerCaseButton>
-                    <LowerCaseButton>
+                    <LowerCaseButton componet={Link} href={"/documentation/getting-started"} >
                         View Docs
                     </LowerCaseButton>
                 </Stack>
@@ -136,7 +136,7 @@ const View = props => {
                         abstractions, pre-made mixins and easy to use hooks, where your strategies can take full advantage of.
                     </Typography>
                     <br/>
-                    <LowerCaseButton endIcon={<OpenInNew/>}>
+                    <LowerCaseButton endIcon={<OpenInNew/>} style={{paddingLeft: "0px"}} component={Link} href={"/documentation/guides/data-providers"}>
                         Learn about data providers
                     </LowerCaseButton>
                 </div>
@@ -163,7 +163,7 @@ const View = props => {
                             spacing={2}
                         >
                             <Typography variant={"h6"}>
-                                The easiest way to install the Investing Algorithm Framework is from&nbsp;
+                                You can install the Investing Algorithm Framework with&nbsp;
                                 <Link href={'https://pypi.org/project/investing-algorithm-framework/'}>Pypi</Link>, using&nbsp;
                                 <Link href={'https://pypi.org/project/pip/'}>pip</Link>:
                             </Typography>
@@ -178,10 +178,6 @@ const View = props => {
                                 }
                                 </ScrollTrigger>
                             </div>
-                            <Typography variant={"h6"}>
-                                <FontAwesomeIcon icon={faBook}/> &nbsp; &nbsp; Read more detailed installation instructions in the&nbsp;
-                                <Link href={'/documentation/introduction/installation'}>documentation</Link>.
-                            </Typography>
                             <Typography variant={"h6"}>
                                 <FontAwesomeIcon icon={faGithub}/> &nbsp; &nbsp; Get the source code at&nbsp;
                                 <Link href={'https://github.com/coding-kitties/investing-algorithm-framework'}>Github</Link>.
@@ -208,7 +204,7 @@ const View = props => {
                             have control over the data that is used for a specific strategy.
                         </Typography>
                         <br/>
-                        <LowerCaseButton endIcon={<OpenInNew/>}>
+                        <LowerCaseButton endIcon={<OpenInNew/>} style={{paddingLeft: "0px"}} component={Link} href={"/documentation/guides/strategies"}>
                             Learn about strategies
                         </LowerCaseButton>
                     </div>
@@ -221,9 +217,7 @@ const View = props => {
                 <br/>
                 <div style={{maxWidth: 800}}>
                     <Typography color={"primary"} variant={"body1"}>Brokers</Typography>
-                    <Typography variant={"h4"}>
-                       Connect to any broker
-                    </Typography>
+                    <Typography variant={"h4"}>Connect to any broker</Typography>
                     <br/>
                     <Typography variant={"body1"}>
                         The framework allows you to create portfolio managers and order executors for any broker.
@@ -233,6 +227,13 @@ const View = props => {
                 </div>
                 <br/>
                 <BrokerCarousel brokers={[{label: "binance", image: "/brokers/binance.png"}]}/>
+                <br/>
+                <LowerCaseButton style={{paddingLeft: "0px"}} component={Link} href={"/documentation/tutorials/quickstart#i-want-to-connect-to-a-broker-that-is-not-yet-supported"}>Learn to connect to an unsupported broker</LowerCaseButton>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </Container>
         </>
     )

@@ -88,10 +88,9 @@ const View = () => {
             <Typography variant={"h3"}>Roadmap</Typography>
             <br/>
             <Typography variant={"body1"}>
-                Currently the timeline beneath is small overview of the roadmap that we have in mind for the framework.
+                Currently the timeline beneath is a small overview of the roadmap that we have in mind for the framework.
             </Typography>
             <br/>
-
             <Stepper alternativeLabel activeStep={1} connector={<QontoConnector />}>
                 {steps.map((label) => (
                     <Step key={label}>

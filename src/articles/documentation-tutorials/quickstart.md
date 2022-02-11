@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
 if you want to know more about binance configuration you can read this [article](https://investing-algorithm-framework/documentation/guides/binance)
 
-### I want to connect to a broker that is not yet supported.
+### I want to connect to a broker that is not yet supported
 You can connect to a broker that is not yet supported with custom components. This can be done by implementing your own 
 portfolio manager and order executor.
 
