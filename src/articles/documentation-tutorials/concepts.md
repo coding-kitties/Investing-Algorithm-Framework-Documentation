@@ -123,15 +123,15 @@ class MyPortfolioManager(PortfolioManager):
 
             return Order.from_dict(
                 {
-                    "id": order.order_reference,
-                    "target_symbol": symbol.split("/")[0].upper(),
-                    "trading_symbol": symbol.split("/")[1].upper(),
-                    "order_reference": order.id,
-                    "initial_price": order.price,
-                    "side": order.side,
-                    "status": order.status,
-                    "closing_price": order.closing_price,
-                    "type": order.type
+                    "id": order["id"],
+                    "target_symbol": order["symbol"].split("/")[0].upper(),
+                    "trading_symbol": order["symbol"].split("/")[1].upper(),
+                    "order_reference": order["id"],
+                    "initial_price": order["price"],
+                    "side": order["side"],
+                    "status": order["status"],
+                    "closing_price": order["closing_price"],
+                    "type": order["type"]
                 }
             )
         else:
@@ -140,15 +140,15 @@ class MyPortfolioManager(PortfolioManager):
 
             for order in binance_orders:
                 orders.append(Order.from_dict({
-                    "id": order.order_reference,
-                    "target_symbol": order.asset.split("/")[0].upper(),
-                    "trading_symbol": order.asset.split("/")[1].upper(),
-                    "order_reference": order.id,
-                    "initial_price": order.price,
-                    "side": order.side,
-                    "status": order.status,
-                    "closing_price": order.closing_price,
-                    "type": order.type
+                    "id": order["id"],
+                    "target_symbol": order["symbol"].split("/")[0].upper(),
+                    "trading_symbol": order["symbol"].split("/")[1].upper(),
+                    "order_reference": order["id"],
+                    "initial_price": order["price"],
+                    "side": order["side"],
+                    "status": order["status"],
+                    "closing_price": order["closing_price"],
+                    "type": order["type"]
                 }))
             return orders
 ```
@@ -205,15 +205,15 @@ class MyOrderExecutor(OrderExecutor):
                 )
 
         return Order.from_dict({
-            "id": order.order_reference,
-            "target_symbol": order.asset.split("/")[0].upper(),
-            "trading_symbol": order.asset.split("/")[1].upper(),
-            "order_reference": order.id,
-            "initial_price": order.price,
-            "side": order.side,
-            "status": order.status,
-            "closing_price": order.closing_price,
-            "type": order.type
+            "id": order["id"],
+            "target_symbol": order["symbol"].split("/")[0].upper(),
+            "trading_symbol": order["symbol"].split("/")[1].upper(),
+            "order_reference": order["id"],
+            "initial_price": order["price"],
+            "side": order["side"],
+            "status": order["status"],
+            "closing_price": order["closing_price"],
+            "type": order["type"]
         })
 
     def get_order_status(self, order, algorithm_context, **kwargs) -> Order:

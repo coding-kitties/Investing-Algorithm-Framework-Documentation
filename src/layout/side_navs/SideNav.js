@@ -1,24 +1,12 @@
 import React from "react";
-import {useRouter} from "next/router";
-import {useLayoutStyles} from "../../styles";
 import {SIDE_NAV_ITEMS} from "../../configuration";
-import {Drawer, List, SwipeableDrawer, useMediaQuery, useTheme} from "@mui/material";
-import {makeStyles} from "@mui/styles";
-import clsx from "clsx";
+import {Drawer, IconButton, List, Stack, SwipeableDrawer, Typography, useMediaQuery} from "@mui/material";
 import {SideNavTextItem} from "./SideNavTextItem";
 import {SideNavNestedItem} from "./SideNavNestedItem";
 import {SideNavSpacer} from "./SideNavSpacer";
-
-const useStyles = makeStyles((theme) => ({
-    drawerPaper: {
-        width: theme.drawerWidth,
-        overflowX: 'hidden',
-    },
-    mobileDrawer: {
-        width: '100%',
-    },
-}), {  name: "sideNavStyles"});
-
+import {useTheme} from "@mui/styles";
+import CloseIcon from '@mui/icons-material/Close';
+import {SideNavHeaderItem} from "./SideNavHeader";
 
 export const SideNav = (
     {
@@ -41,6 +29,8 @@ export const SideNav = (
                         return <SideNavNestedItem key={item.id} item={item}/>
                     } else if(item.itemStyle === SIDE_NAV_ITEMS.spacer) {
                         return <SideNavSpacer key={item.id} item={item}/>
+                    } else if(item.itemStyle === SIDE_NAV_ITEMS.header) {
+                        return <SideNavHeaderItem key={item.id} item={item}/>
                     }
                 })}
             </List>
@@ -50,16 +40,25 @@ export const SideNav = (
     if(mdDown) {
         return (
             <SwipeableDrawer
-                PaperProps={{ elevation: 0}}
+                PaperProps={{ elevation: 0, style: {width: "100%"}}}
                 open={sideNavOpen}
                 onOpen={() => handleSideNavOpenClick(true)}
                 onClose={() => handleSideNavOpenClick(false)}
-                // classes={{
-                //     paper: classes.mobileDrawer,
-                // }}
-                // className={clsx(sideNavOpen? layoutClasses.contentShiftRight : layoutClasses.contentShiftLeft)}
-                style={{zIndex: theme.zIndex.appBar - 1}}
+                style={{zIndex: theme.zIndex.appBar + 1, width: "100%"}}
             >
+                <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    style={{marginTop: theme.spacing(2), marginBottom: theme.spacing(2)}}
+                >
+                    <Typography variant={"h4"} style={{marginLeft: theme.spacing(2)}}>
+                        Investing Algorithm Framework
+                    </Typography>
+                    <IconButton style={{marginRight: theme.spacing(1)}} onClick={() => handleSideNavOpenClick(false)}>
+                        <CloseIcon/>
+                    </IconButton>
+                </Stack>
                 <div>
                     {sideNavItems !== undefined && sideNavItems !== null && renderSideNavList(sideNavItems)}
                 </div>
@@ -74,7 +73,7 @@ export const SideNav = (
         <Drawer
             variant={"persistent"}
             PaperProps={{ elevation: 0, style: {overflow: "hidden", overflowX: "hidden"}}}
-            open={true}
+            open={sideNavOpen}
             style={{zIndex: theme.zIndex.appBar - 1, overflowX: "hidden", overflow: "hidden"}}
         >
             <div>

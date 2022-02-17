@@ -10,7 +10,7 @@ import {sideNavValueAction} from "../../../src/redux/actions";
 const MarkdownPage = props => {
 
     return (
-        <div style={{padding: "8px"}}>
+        <div style={{paddingTop: "4px", paddingLeft: "32px"}}>
             <ArticleView sourceLink={props.articleSrc}>
                 <MarkdownArticle markdown={props.markdown}/>
             </ArticleView>

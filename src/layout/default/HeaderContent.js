@@ -1,90 +1,14 @@
 import React from 'react';
 import {useRouter} from 'next/router'
-import {Box, Button, Menu, MenuItem, Stack, Toolbar, Typography} from "@mui/material";
-import {makeStyles, useTheme, withStyles} from "@mui/styles";
+import {Box, Button, IconButton, Stack, Toolbar, Typography, useMediaQuery} from "@mui/material";
+import {useTheme} from "@mui/styles";
 import {CustomTab, CustomTabs} from "../../components/tabs";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGithub, faReddit} from "@fortawesome/free-brands-svg-icons";
 import StorefrontIcon from '@mui/icons-material/Storefront';
-
-const useStyles = makeStyles(theme => ({
-    header: {
-        [theme.breakpoints.only('xs')]: {
-            fontSize: 13,
-        },
-        [theme.breakpoints.up('sm')]: {
-            fontSize: 16,
-        },
-        [theme.breakpoints.up('lg')] : {
-            fontSize: 24,
-        }
-    },
-    grow: {
-        flexGrow: 1,
-    },
-    title: {
-        flexGrow: 1,
-        alignSelf: 'flex-end',
-    },
-    active: {
-        color: theme.palette.primary.main,
-    },
-    button: {
-        textTransform: 'none',
-        fontWeight: theme.typography.fontWeightRegular,
-        [theme.breakpoints.only('xs')]: {
-            fontSize: 12,
-        },
-        [theme.breakpoints.up('sm')]: {
-            fontSize: 15,
-        },
-    },
-    dropdown: {
-        position: 'absolute',
-        top: 28,
-        right: 0,
-        left: 0,
-        zIndex: 1,
-        border: '1px solid',
-        padding: theme.spacing(1),
-        backgroundColor: theme.palette.background.paper,
-    },
-    codingKittiesHeader: {
-        fontSize: 14,
-    }
-}));
-
-
-const StyledMenu = withStyles({
-    paper: {
-        border: '1px solid #d3d4d5',
-    },
-})((props) => (
-    <Menu
-        elevation={0}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-        }}
-        transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-        }}
-        {...props}
-    />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-    root: {
-        '&:focus': {
-            backgroundColor: theme.palette.primary.main,
-            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                color: theme.palette.common.white,
-            },
-        },
-    },
-}))(MenuItem);
+import MenuIcon from '@mui/icons-material/Menu';
+import {useDispatch, useSelector} from "react-redux";
+import {sideNavOpenAction} from "../../redux/actions";
 
 function a11yProps(index) {
     return {
@@ -100,39 +24,26 @@ const CodingKitties = props => {
 }
 
 
-export const HeaderContent = props => {
+export const HeaderContent = ({handleSideNavOpenClick}) => {
     const router = useRouter();
     const theme = useTheme();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const handleClickAway = () => {
-        setAnchorEl(null);
-    };
+    const sideNavOpen = useSelector(state => state.layout.sideNavOpen);
+    const lgDown = useMediaQuery(theme => theme.breakpoints.down("lg"));
+    const dispatch = useDispatch();
 
     const tabValue = () => {
         if(router.pathname === '/') {
             return 0;
         } else if(router.pathname.includes('/documentation/')) {
             return 1;
-        } else if(router.pathname.includes('/development')) {
-            return 2;
         } else if(router.pathname.includes('/selling-algorithms')) {
-            return 3;
+            return 2;
         } else if(router.pathname.includes('/license')) {
-            return 4;
+            return 3;
         } else if(router.pathname.includes('/support')) {
-            return 5;
+            return 4;
         }
     }
-
 
     const handleChange = (event, newValue) => {
         if(newValue === 0) {
@@ -140,12 +51,10 @@ export const HeaderContent = props => {
         } else if(newValue === 1) {
             router.push('/documentation/getting-started');
         } else if(newValue === 2) {
-            router.push('/development');
-        } else if(newValue === 3) {
             router.push('/selling-algorithms');
-        } else if(newValue === 4) {
+        } else if(newValue === 3) {
             router.push('/license');
-        } else if(newValue === 5) {
+        } else if(newValue === 4) {
             router.push('/support');
         }
     };
@@ -200,44 +109,55 @@ export const HeaderContent = props => {
                     </Box>
                 </Stack>
             </Toolbar>
-            <Toolbar variant={"dense"} style={{paddingLeft: "16px"}}>
+            <Toolbar variant={"dense"} style={{paddingLeft: "16px", paddingRight: "8px"}}>
                 <Stack
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
-                    spacing={2}
                     style={{width: "100%"}}
                 >
-                    <Typography variant={"h6"}>
-                        Investing Algorithm Framework
-                    </Typography>
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }}}>
-                        <CustomTabs value={tabValue()} onChange={handleChange} aria-label="simple tabs example">
-                            <CustomTab label="About" {...a11yProps(0)} />
-                            <CustomTab label="Documentation" {...a11yProps(1)} />
-                            <CustomTab label="Development" {...a11yProps(2)} />
-                            <CustomTab icon={<StorefrontIcon />} iconPosition="start"  label="Sell your algorithm" {...a11yProps(2)} />
-                            <CustomTab label="License" {...a11yProps(3)} />
-                            <CustomTab label="Support the project" {...a11yProps(4)} />
-                        </CustomTabs>
-                    </Box>
+                    <Stack
+                        direction="row"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        spacing={lgDown? 1 : 20}
+                        style={{width: "100%"}}
+                    >
+                        <Typography variant={"h6"}>
+                            Investing Algorithm Framework
+                        </Typography>
+                        <Box sx={{ display: { xs: 'none', md: 'flex' }}}>
+                            <CustomTabs value={tabValue()} onChange={handleChange} aria-label="simple tabs example">
+                                <CustomTab label="About" {...a11yProps(0)} />
+                                <CustomTab label="Documentation" {...a11yProps(1)} />
+                                <CustomTab icon={<StorefrontIcon />} iconPosition="start"  label="Sell your algorithm" {...a11yProps(2)} />
+                                <CustomTab label="License" {...a11yProps(3)} />
+                                <CustomTab label="Support the project" {...a11yProps(4)} />
+                            </CustomTabs>
+                        </Box>
+                    </Stack>
                     <Stack
                         direction="row"
                         justifyContent="flex-end"
                         alignItems="center"
                         spacing={2}
                     >
-                        <Button
-                            startIcon={<FontAwesomeIcon icon={faGithub}/>}
-                            href={'https://github.com/coding-kitties/investing-algorithm-framework'}
-                            style={{color: "#000000"}}
-                        >
-                            Github
-                        </Button>
-                        <Box sx={{ display: { xs: 'none', md: 'flex' }}}>
+                        <Box sx={{ display: { xs: 'flex', md: 'none' }}}>
+                            <IconButton onClick={() => dispatch(sideNavOpenAction(!sideNavOpen))}>
+                                <MenuIcon color={"text.secondary"}/>
+                            </IconButton>
+                        </Box>
+                        <Box sx={{ display: { xs: 'none', lg: 'flex' }}}>
+                            <Button
+                                startIcon={<FontAwesomeIcon icon={faGithub}/>}
+                                href={'https://github.com/coding-kitties/investing-algorithm-framework'}
+                                style={{color: "#000000"}}
+                            >
+                                Github
+                            </Button>
                             <Button
                                 startIcon={<FontAwesomeIcon icon={faReddit}/>}
-                                href={'https://www.reddit.com/r/InvestingAlgorithms/'}
+                                href={"https://www.reddit.com/r/InvestingBots/"}
                                 style={{color: "#000000"}}
                             >
                                 Reddit

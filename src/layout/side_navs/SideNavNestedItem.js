@@ -3,8 +3,9 @@ import clsx from "clsx";
 import {useRouter} from "next/router";
 import {Collapse, List, ListItem, ListItemText, Typography} from "@mui/material";
 import {ChevronRight, ExpandLess} from "@mui/icons-material";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {makeStyles, useTheme} from "@mui/styles";
+import {sideNavOpenAction} from "../../redux/actions";
 
 const useStyles = makeStyles((theme) => ({
    active: {
@@ -17,6 +18,7 @@ export const SideNavNestedItem = ({item}) => {
     const router = useRouter();
     const theme = useTheme();
     const classes = useStyles();
+    const dispatch = useDispatch();
     const sideNavValue = useSelector(state => state.layout.sideNavValue);
 
     const isActive = (refItem) => {
@@ -24,14 +26,17 @@ export const SideNavNestedItem = ({item}) => {
     }
 
     const rootActive = () => {
-        if(item.id && sideNavValue) {
-            return sideNavValue.includes(item.id)
-        }
+        // if(item.id && sideNavValue) {
+        //     return sideNavValue.includes(item.id)
+        // }
 
         return false;
     }
 
-    const handleClick = (item) => {router.push(item.href)}
+    const handleClick = (item) => {
+        router.push(item.href);
+        dispatch(sideNavOpenAction(false));
+    }
 
     return (
         <>

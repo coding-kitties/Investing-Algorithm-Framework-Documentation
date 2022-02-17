@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Alert, ButtonBase, Container, Paper, Stack, Typography} from "@mui/material";
+import {ButtonBase, Container, Paper, Stack, Typography} from "@mui/material";
 import {makeStyles, useTheme} from "@mui/styles";
 import {MarkdownArticle} from "../src/components/markdown";
 import {LowerCaseButton} from "../src/components/buttons";
@@ -8,9 +8,72 @@ import Link from "../src/components/Link";
 import ScrollTrigger from 'react-scroll-trigger';
 import Typist from 'react-typist';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBook} from "@fortawesome/free-solid-svg-icons";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
 import {BrokerCarousel} from "../src/components/carousels";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import {styled} from "@mui/material/styles";
+import StepConnector, {stepConnectorClasses} from "@mui/material/StepConnector";
+import Check from "@mui/icons-material/Check";
+
+const QontoConnector = styled(StepConnector)(({ theme }) => ({
+    [`&.${stepConnectorClasses.alternativeLabel}`]: {
+        top: 10,
+        left: 'calc(-50% + 16px)',
+        right: 'calc(50% + 16px)',
+    },
+    [`&.${stepConnectorClasses.active}`]: {
+        [`& .${stepConnectorClasses.line}`]: {
+            borderColor: theme.palette.primary.main,
+        },
+    },
+    [`&.${stepConnectorClasses.completed}`]: {
+        [`& .${stepConnectorClasses.line}`]: {
+            borderColor: theme.palette.primary.main,
+        },
+    },
+    [`& .${stepConnectorClasses.line}`]: {
+        borderColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
+        borderTopWidth: 3,
+        borderRadius: 1,
+    },
+}));
+
+const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
+    color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
+    display: 'flex',
+    height: 22,
+    alignItems: 'center',
+    ...(ownerState.active && {
+        color: theme.palette.primary.main,
+    }),
+    '& .QontoStepIcon-completedIcon': {
+        color: theme.palette.primary.main,
+        zIndex: 1,
+        fontSize: 18,
+    },
+    '& .QontoStepIcon-circle': {
+        width: 8,
+        height: 8,
+        borderRadius: '50%',
+        backgroundColor: 'currentColor',
+    },
+}));
+
+function QontoStepIcon(props) {
+    const { active, completed, className } = props;
+
+    return (
+        <QontoStepIconRoot ownerState={{ active }} className={className}>
+            {completed ? (
+                <Check className="QontoStepIcon-completedIcon" />
+            ) : (
+                <div className="QontoStepIcon-circle" />
+            )}
+        </QontoStepIconRoot>
+    );
+}
 
 
 function PythonIcon(props) {
@@ -56,22 +119,21 @@ const View = props => {
     const classes = useStyles();
     const [installEnter, setInstallEnter] = useState(false);
     const onInstallEnterViewport = () => setInstallEnter(true);
+    const steps = ['Baseline', 'Stateless runner', 'Expand broker support', 'Back testing', 'Dashboard', 'Telegram bot'];
 
     return (
         <>
             <Container maxWidth="lg">
                 <br/>
                 <br/>
-                <div style={{maxWidth:800}}>
-                    <Typography variant={"h3"}>
-                        Creating investing algorithms starts with a stable foundation
-                    </Typography>
+                <Typography variant={"h2"}>
+                    Creating investing algorithms starts with a stable foundation
+                </Typography>
                 <br/>
                 <Typography variant={"body1"}>
                     A complete framework for taking control over your investing algorithms
                     with reliable core components, extensions, utilities and expandability.
                 </Typography>
-                </div>
                 <br/>
                 <Stack
                     direction="row"
@@ -108,8 +170,8 @@ const View = props => {
                 <br/>
                 <br/>
             </Container>
-            <Paper style={{width: "100%", backgroundColor: "#eeeeee", padding: theme.spacing(4)}} elevation={0}>
-                <Typography align={"center"}>Sponsored by</Typography>
+            <Paper style={{width: "100%", backgroundColor: "#eeeeee", padding: theme.spacing(4), borderRadius: 0}} elevation={0}>
+                <Typography variant={"body1"} align={"center"}>Sponsored by</Typography>
                 <br/>
                 <Stack
                     direction="row"
@@ -178,10 +240,32 @@ const View = props => {
                                 }
                                 </ScrollTrigger>
                             </div>
-                            <Typography variant={"h6"}>
-                                <FontAwesomeIcon icon={faGithub}/> &nbsp; &nbsp; Get the source code at&nbsp;
-                                <Link href={'https://github.com/coding-kitties/investing-algorithm-framework'}>Github</Link>.
-                            </Typography>
+                            <Stack
+                                direction="row"
+                                justifyContent="flex-start"
+                                alignItems="center"
+                                spacing={2}
+                            >
+                                <FontAwesomeIcon icon={faGithub} size={"2x"}/>
+                                <Stack
+                                    direction="row"
+                                    justifyContent="flex-start"
+                                    alignItems="center"
+                                    spacing={0.5}
+                                >
+                                    <Typography variant={"body1"}>
+                                        Get the source code at
+                                    </Typography>
+                                    <Typography
+                                        component={Link}
+                                        underline={"none"}
+                                        href={'https://github.com/coding-kitties/investing-algorithm-framework'}
+                                        variant={"body1"}
+                                    >
+                                        Github
+                                    </Typography>
+                                </Stack>
+                            </Stack>
                         </Stack>
                         <PythonIcon width={150}/>
                     </Stack>
@@ -228,7 +312,57 @@ const View = props => {
                 <br/>
                 <BrokerCarousel brokers={[{label: "binance", image: "/brokers/binance.png"}]}/>
                 <br/>
-                <LowerCaseButton style={{paddingLeft: "0px"}} component={Link} href={"/documentation/tutorials/quickstart#i-want-to-connect-to-a-broker-that-is-not-yet-supported"}>Learn to connect to an unsupported broker</LowerCaseButton>
+                <Stack
+                    direction="row"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    spacing={0.5}
+                >
+                    <Typography variant={"body1"}>
+                        Your broker not in the list? Learn how to create your own
+                    </Typography>
+                    <Typography
+                        variant={"body1"}
+                        component={Link}
+                        href={"/documentation/tutorials/quickstart#i-want-to-connect-to-a-broker-that-is-not-yet-supported"}
+                        underline={"none"}
+                    >
+                        components.
+                    </Typography>
+                </Stack>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Typography variant={"h4"}>Development</Typography>
+                <br/>
+                <Typography variant={"body1"}>
+                    The framework is continuously updated and maintained. If you have a feature request you
+                    can send a email to <a style={{color: theme.palette.primary.main}}>codingkitties@gmail.com</a> or you
+                    could open an <Link href={"https://github.com/coding-kitties/investing-algorithm-framework/issues/new"}>issue </Link> at our
+                    github repo. You could also join the <Link href={"https://www.reddit.com/r/InvestingBots/"}>reddit </Link>
+                    to discuss topics with other developers.
+                </Typography>
+                <br/>
+                <br/>
+                <Typography variant={"h5"}>Roadmap</Typography>
+                <br/>
+                <Typography variant={"body1"}>
+                    The timeline beneath is a small overview of the roadmap that we have in mind for the framework.
+                </Typography>
+                <br/>
+                <Stepper alternativeLabel activeStep={1} connector={<QontoConnector />}>
+                    {steps.map((label) => (
+                        <Step key={label}>
+                            <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+                <br/>
+                <br/>
                 <br/>
                 <br/>
                 <br/>

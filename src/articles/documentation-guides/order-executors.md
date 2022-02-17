@@ -7,7 +7,7 @@ not yet supported. An order executor is used by the `AlgorithmContext` to execut
 
 Creating a custom OrderExecutor requires you to implement a set of methods.  
 
-##### .execute_limit_order(self, order: Order, algorithm_context, **kwargs) -> bool:
+##### .execute_order(self, order: Order, algorithm_context, **kwargs) -> bool:
 Method that receives an [Order](https://investing-algorithm-framework.com/documentation/guides/models#Order) object 
 and the algorithm context. You should implement the logic that will execute this order at your broker.
 
@@ -26,7 +26,7 @@ class MyOrderExecutor(OrderExecutor):
         exchange = exchange_class({'apiKey': "<MY_API_KEY>", 'secret': "<MY_SECRET>"})
         symbol = f"{order.target_symbol}/{algorithm_context.trading_symbol}"
         
-        if OrderType.LIMIT.equals(order_type):
+        if OrderType.MARKET.equals(order_type):
 
             if OrderSide.BUY.equals(order_side):
                 order = self.exchange.create_market_buy_order(symbol, order.amount_trading_symbol)
@@ -46,8 +46,7 @@ class MyOrderExecutor(OrderExecutor):
 
 
 ##### .get_order_status(self, order: Order, algorithm_context, **kwargs) -> OrderStatus:
-Override this method if you use "TICKER" in the `trading_data_type` or `trading_data_types` attributes.
-
+This method is used to update the status of the [Order model](https://investing-algorithm-framework.com/documentation/guides/models#Order)
 ```python
 BINANCE_CCXT_ID = "BINANCE"
 

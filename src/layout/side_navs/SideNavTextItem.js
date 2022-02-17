@@ -4,7 +4,7 @@ import {ListItem, ListItemText, Typography} from "@mui/material";
 import {makeStyles} from "@mui/styles";
 import {useDispatch, useSelector} from "react-redux";
 import clsx from "clsx";
-import {sideNavValueAction} from "../../redux/actions";
+import {sideNavOpenAction, sideNavValueAction} from "../../redux/actions";
 
 const useStyles = makeStyles((theme) => ({
     active: {
@@ -24,6 +24,7 @@ export const SideNavTextItem = ({item}) => {
 
     const handleClick = () => {
         dispatch(sideNavValueAction(item.id));
+        dispatch(sideNavOpenAction(false));
         router.push(item.href);
     }
 

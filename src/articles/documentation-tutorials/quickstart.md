@@ -12,8 +12,7 @@ specify a `TRADING_SYMBOL` that is used by your algorithm for execution of its b
 
 ```python
 import os
-from investing_algorithm_framework import App, TimeUnit, AlgorithmContext, \
-    TradingDataTypes, constants
+from investing_algorithm_framework import App, AlgorithmContext
 
 app = App(
     resources_directory=os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir)),
@@ -25,11 +24,11 @@ app = App(
 )
 
 @app.algorithm.strategy(
-    time_unit=TimeUnit.SECONDS,
+    time_unit="SECONDS",
     interval=5,
-    data_provider_identifier=constants.BINANCE,
+    data_provider_identifier="BINANCE",
     target_symbol="BTC",
-    trading_data_type=TradingDataTypes.TICKER,
+    trading_data_type="TICKER",
 )
 def perform_strategy(context: AlgorithmContext, ticker, **kwargs):
     print(f"BTC/USDT ticker data from binance {ticker}")
@@ -38,7 +37,7 @@ if __name__ == "__main__":
     app.start()
 ```
 
-if you want to know more about binance configuration you can read this [article](https://investing-algorithm-framework/documentation/guides/binance)
+if you want to know more about binance configuration you can read this [article](https://investing-algorithm-framework.com/documentation/guides/binance)
 
 ### I want to connect to a broker that is not yet supported
 You can connect to a broker that is not yet supported with custom components. This can be done by implementing your own 
@@ -73,10 +72,11 @@ class CustomPortfolioManager(PortfolioManager):
         # Example get_positions implementation
         # .... retrieve all positions from your broker
         data = []
+        positions = []
         
-        for position in data:
+        for position_data in data:
             positions.append(
-                Position.from_dict({"amount": data["amount"], "symbol": data["symbol"]})
+                Position.from_dict({"amount": position_data["amount"], "symbol": position_data["symbol"]})
             )
 
         return positions
@@ -86,36 +86,37 @@ class CustomPortfolioManager(PortfolioManager):
         
         if symbol is not None:
             # .... retrieve orders for specific target symbol from your broker
-            data = {}
+            order_data = {}
             
             return Order.from_dict(
                 {
-                    "id": data.order_reference,
-                    "target_symbol": data.symbol.split("/")[0].upper(),
-                    "trading_symbol": data.symbol.split("/")[1].upper(),
-                    "order_reference": data.id,
-                    "initial_price": data.price,
-                    "side": data.side,
-                    "status": data.status,
-                    "closing_price": data.closing_price,
-                    "type": data.type
+                   "id": order_data["id"],
+                    "target_symbol": order_data["asset"].split("/")[0].upper(),
+                    "trading_symbol": order_data["asset"].split("/")[1].upper(),
+                    "order_reference": order_data["id"],
+                    "initial_price": order_data["price"],
+                    "side": order_data["side"],
+                    "status": order_data["status"],
+                    "closing_price": none,
+                    "type": order_data["type"]
                 }
             )
         else:
             # .... retrieve all orders from your broker
             data = []
+            orders = []
 
-            for order in data:
+            for order_data in data:
                 orders.append(Order.from_dict({
-                    "id": order.order_reference,
-                    "target_symbol": order.asset.split("/")[0].upper(),
-                    "trading_symbol": order.asset.split("/")[1].upper(),
-                    "order_reference": order.id,
-                    "initial_price": order.price,
-                    "side": order.side,
-                    "status": order.status,
-                    "closing_price": order.closing_price,
-                    "type": order.type
+                    "id": order_data["id"],
+                    "target_symbol": order_data["asset"].split("/")[0].upper(),
+                    "trading_symbol": order_data["asset"].split("/")[1].upper(),
+                    "order_reference": order_data["id"],
+                    "initial_price": order_data["price"],
+                    "side": order_data["side"],
+                    "status": order_data["status"],
+                    "closing_price": none,
+                    "type": order_data["type"]
                 }))
             return orders
 ```
@@ -133,7 +134,6 @@ from investing_algorithm_framework import OrderExecutor
 
 class CustomOrderExecutor(OrderExecutor):
     identifier = "<BROKER_X>"
-    identifier = "my_portfolio_manager"
 
     def create_order(self,
         symbol,
@@ -147,21 +147,21 @@ class CustomOrderExecutor(OrderExecutor):
         # .... Create order at broker
         data = {}
         return Order.from_dict({
-            "id": data.order_reference,
-            "target_symbol": data.symbol.split("/")[0].upper(),
-            "trading_symbol": data.symbol.split("/")[1].upper(),
-            "order_reference": data.id,
-            "initial_price": data.price,
-            "side": data.side,
-            "status": data.status,
-            "closing_price": data.closing_price,
-            "type": data.type
+            "id": order_data["id"],
+            "target_symbol": order_data["asset"].split("/")[0].upper(),
+            "trading_symbol": order_data["asset"].split("/")[1].upper(),
+            "order_reference": order_data["id"],
+            "initial_price": order_data["price"],
+            "side": order_data["side"],
+            "status": order_data["status"],
+            "closing_price": none,
+            "type": order_data["type"]
         })
 
     def get_order_status(self, order: Order, algorithm_context, **kwargs) -> Order:
         # .... Retrieve order from broker
         data = {}
-        order.set_status(OrderStatus.from_string(data.status))
+        order.set_status(OrderStatus.from_string(data["status"]))
         return order
 ```
 

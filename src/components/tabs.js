@@ -17,5 +17,5 @@ export const CustomTabs = styled(Tabs)(({theme}) => ({
 export const CustomTab = styled((props) => <Tab disableRipple {...props} />)(({theme}) => ({
     textTransform: 'none',
     minWidth: 40,
-    marginRight: theme.spacing(4)
+    marginRight: theme.spacing(2)
 }));

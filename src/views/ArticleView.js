@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Divider, Paper, Stack, Typography} from "@mui/material";
+import {Box, Divider, Paper, Stack, Typography} from "@mui/material";
 import Link from "../components/Link";
 
 
@@ -14,32 +14,42 @@ const ArticleView = ({sourceLink, showSource = true, children}) => {
                 alignItems="center"
                 spacing={2}
             >
-                <div>
+                <div style={{padding: "8px"}}>
                     {children}
-                    {showSource &&
-                        <>
-                            <br/>
-                            <Divider/>
-                            <br/>
-                            <Typography variant={"h5"} color={"primary"}>Help make this document better</Typography>
-                            <br/>
-                            <Typography>
+                </div>
+                <Box sx={{ display: { xs: 'none', lg: 'flex' }}}>
+                    <div style={{minWidth: "600px"}}>
+
+                    </div>
+                </Box>
+            </Stack>
+            {showSource &&
+                <>
+                    <Divider/>
+                    <br/>
+                    <Stack
+                        direction="column"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        spacing={2}
+                    >
+                        <Typography variant={"h5"} color={"primary"}>Help make this document better</Typography>
+                        <Typography>
                             This guide, as well as the rest of our docs, are open-source and
                             available on <Link href="https://github.com/coding-kitties/investing-algorithm-framework-documentation">Github
-                            </Link>. We welcome your contributions.
-                            </Typography>
-                            <ul>
+                        </Link>. We welcome your contributions.
+                        </Typography>
+                        <ul>
                             <li>
-                            <Link href={sourceLink}>Suggest an edit to this page</Link> (please read the <Link href={"https://github.com/coding-kitties/investing-algorithm-framework-documentation/blob/master/docs/CONTRIBUTING.md"}>contributing</Link> guide first).
+                                <Link href={sourceLink}>Suggest an edit to this page</Link> (please read the <Link href={"https://github.com/coding-kitties/investing-algorithm-framework-documentation/blob/master/docs/CONTRIBUTING.md"}>contributing</Link> guide first).
                             </li>
                             <li>To report a problem in the documentation, or to submit feedback and comments, please open an <Link href={'https://github.com/coding-kitties/investing-algorithm-framework-documentation/issues/new/choose'}>issue</Link> on GitHub</li>
-                            </ul>
-                            <br/>
-                            <Divider/>
-                        </>
-                    }
-                </div>
-            </Stack>
+                        </ul>
+                    </Stack>
+                    <br/>
+                    <Divider/>
+                </>
+            }
         </div>
     )
 }

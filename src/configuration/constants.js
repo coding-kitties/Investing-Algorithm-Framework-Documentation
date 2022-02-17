@@ -1,7 +1,8 @@
 export const SIDE_NAV_ITEMS = {
     nested: "nested",
     text: "text",
-    spacer: "spacer"
+    spacer: "spacer",
+    header: "header"
 }
 
 export const APP_TITLE = "Investing Algorithm Framework | Coding Kitties";
