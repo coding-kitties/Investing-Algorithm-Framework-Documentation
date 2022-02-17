@@ -1,25 +1,38 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import {Button, Divider} from "@material-ui/core";
-import Link from "../src/Link";
-import {useTypographyStyles} from "../src/styles";
 import ArticleView from "../src/views/ArticleView";
-import MarkdownArticle from "../src/markdown/MarkdownArticle";
-import coding_kitties from "../src/images/coding-kitties.svg";
-import {Alert} from "@material-ui/lab";
+import {ButtonBase, Container, Divider, Stack, Typography} from "@mui/material";
+import {MarkdownArticle} from "../src/components/markdown";
+import {Alert} from "@mui/lab";
+import {LowerCaseButton} from "../src/components/buttons";
+import Link from "../src/components/Link";
 
 const CodingKitties = props => {
     return (
-        <img src={coding_kitties} alt="" {...props}/>
+        <img src={"/coding-kitties.svg"} alt="" {...props}/>
     )
 }
 
-const Support = props => {
-    const typographyClasses = useTypographyStyles();
+function EltyerIcon(props) {
     return (
-        <Container maxWidth={"md"}>
+        <ButtonBase component={Link} href={"https://eltyer.com"}>
+            <Stack
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+                spacing={2}
+            >
+                <img src={"/images/eltyer_onlyicon.svg"} alt="eltyer" style={{width: "75px"}} {...props}/>
+                <img src={"/images/eltyer_onlytext.svg"} alt="eltyer" style={{width: "150px", paddingBottom: "8px"}} {...props}/>
+            </Stack>
+        </ButtonBase>
+    );
+}
+
+
+const Support = props => {
+    return (
+        <Container maxWidth={"lg"}>
+            <br/>
             <ArticleView
                 showSource={false}
                 sourceLink={'https://github.com/coding-kitties/investing-algorithm-framework-documentation/blob/master/static/articles/support.md'}
@@ -32,59 +45,24 @@ const Support = props => {
             </Alert>
             <br/>
             <br/>
-            <Typography className={typographyClasses.sectionHeader}>
+            <Typography>
                 One-time Donations
             </Typography>
             <br/>
             <Divider/>
             <br/>
-            <Typography className={typographyClasses.body}>
+            <Typography>
                 We accept donations through these channels:
             </Typography>
-            <Grid
-                container
-                direction="row"
-                justify="flex-start"
-                alignItems="flex-start"
-            >
-                <Grid item>
-                    <Button component={Link} naked href={'https://paypal.me/mvduyn?locale.x=nl_NL'}><img height={100} width={100} src={"./paypal.png"} /></Button>
-                </Grid>
-            </Grid>
+            <LowerCaseButton component={Link} naked href={'https://paypal.me/mvduyn?locale.x=nl_NL'}><img height={100} width={100} src={"./paypal.png"} /></LowerCaseButton>
             <br/>
-            <Typography className={typographyClasses.sectionHeader}>
-                Recurring Pledges
-            </Typography>
             <br/>
             <Divider/>
+            <Typography variant={"h4"}>Sponsors</Typography>
             <br/>
-            <Typography className={typographyClasses.body}>
-                Recurring pledges come with exclusive perks, e.g. having your name listed
-                in the Investing Algorithm Framework GitHub repository, or have your company logo placed on this website.
-            </Typography>
-            <ul>
-                <li>
-                    <Link href={'https://www.patreon.com/mduyn'}>
-                        Become a backer or sponsor via Patreon
-                    </Link>
-                </li>
-            </ul>
+            <Typography variant={"body1"}>The investing-algorithm-framework is sponsored by the following sponsors:</Typography>
             <br/>
-            <Typography className={typographyClasses.sectionHeader}>
-                Current Premium Sponsors
-            </Typography>
-            <br/>
-            <Divider/>
-            <br/>
-            <Typography className={typographyClasses.sectionHeaderSecond}>
-                Patreon Gold Sponsors
-            </Typography>
-            <br/>
-            <br/>
-            <br/>
-            <Typography className={typographyClasses.sectionHeaderSecond}>
-                Patreon Sponsors
-            </Typography>
+            <EltyerIcon/>
             <br/>
             <br/>
             <br/>
@@ -94,7 +72,7 @@ const Support = props => {
 
 // This also gets called at build time
 export async function getStaticProps() {
-    const markdown = await require('../static/articles/support.md');
+    const markdown = await require('../src/articles/support.md');
     return { props: { markdown: markdown.default} }
 }
 

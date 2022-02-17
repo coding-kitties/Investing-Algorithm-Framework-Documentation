@@ -1,0 +1,3 @@
+// SEO types
+export const CLEAR_SEO_VARIABLES = "CLEAR_SEO_VARIABLES";
+export const SET_SEO_VARIABLES = "SET_SEO_VARIABLES";
