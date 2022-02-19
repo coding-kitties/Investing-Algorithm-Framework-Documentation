@@ -5,9 +5,9 @@ from investing_algorithm_framework import App
 app = App(
     resources_directory=os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir))
     config={
-        BINANCE_API_KEY: "<BINANCE_API_KEY>",
-        BINANCE_SECRET_KEY: "<BINANCE_SECRET_KEY>",
-        TRADING_SYMBOL: "USDT",
+        "BINANCE_API_KEY": "<BINANCE_API_KEY>",
+        "BINANCE_SECRET_KEY": "<BINANCE_SECRET_KEY>",
+        "TRADING_SYMBOL": "USDT",
     }
 )
 
