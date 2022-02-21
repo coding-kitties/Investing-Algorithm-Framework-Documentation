@@ -182,6 +182,7 @@ Returns the status of the order (SUCCESS, PENDING, TO_BE_SENT, FAILED, CANCELED,
 Method to create an order instance from a dictionary.
 
 You can create an order with the following attributes:
+* `reference_id` the unique id provider by the market where the order was executed on.
 * `target_symbol` the target symbol that the order has (BTC/USDT -> target symbol is BTC).
 * `trading_symbol` the trading symbol that the order has (BTC/USDT -> trading symbol is USDT).
 * `amount_target_symbol`(optional, either amount_target_symbol or amount_trading_symbol needs to be defined) the amount of target symbol the order has.
@@ -199,6 +200,7 @@ Also, because the order is not yet executed only `price` needs to be defined
 from investing_algorithm_framework import Order
 order = Order.from_dict(
     {
+        "reference_id": 10493,
         "target_symbol": "DOT", 
         "trading_symbol": "USDT", 
         "amount_target_symbol": 40, 
@@ -218,6 +220,7 @@ order was executed.
 from investing_algorithm_framework import Order
 order = Order.from_dict(
     {
+        "reference_id": 10493,
         "target_symbol": "DOT", 
         "trading_symbol": "USDT", 
         "amount_target_symbol": 40, 
@@ -238,6 +241,7 @@ order was executed).
 from investing_algorithm_framework import Order
 order = Order.from_dict(
     {
+        "reference_id": 10493,
         "target_symbol": "DOT", 
         "trading_symbol": "USDT", 
         "amount_target_symbol": 40, 
@@ -258,6 +262,7 @@ Because, the market is not yet executed, closing price does not have to be defin
 from investing_algorithm_framework import Order
 order = Order.from_dict(
     {
+        "reference_id": 10493,
         "target_symbol": "DOT", 
         "trading_symbol": "USDT", 
         "amount_target_symbol": 40, 
@@ -277,6 +282,7 @@ Because, the market is executed, closing price needs to be defined.
 from investing_algorithm_framework import Order
 order = Order.from_dict(
     {
+        "reference_id": 10493,
         "target_symbol": "DOT", 
         "trading_symbol": "USDT", 
         "amount_target_symbol": 40, 
@@ -297,6 +303,7 @@ Because, the market is closed, closing price needs to be defined (Same as a succ
 from investing_algorithm_framework import Order
 order = Order.from_dict(
     {
+        "reference_id": 10493,
         "target_symbol": "DOT", 
         "trading_symbol": "USDT", 
         "amount_target_symbol": 40, 
