@@ -17,9 +17,9 @@ from investing_algorithm_framework import App, AlgorithmContext
 app = App(
     resources_directory=os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir)),
     config={
-        BINANCE_API_KEY: "<BINANCE_API_KEY>",
-        BINANCE_SECRET_KEY: "<BINANCE_SECRET_KEY>",
-        TRADING_SYMBOL: "USDT",
+        "BINANCE_API_KEY": "<BINANCE_API_KEY>",
+        "BINANCE_SECRET_KEY": "<BINANCE_SECRET_KEY>",
+        "TRADING_SYMBOL": "USDT",
     }
 )
 
@@ -81,44 +81,25 @@ class CustomPortfolioManager(PortfolioManager):
 
         return positions
 
-    def get_orders(self, symbol: str = None, lazy=False) -> Union[List[Order], Order]:
+    def get_orders(self) -> List[Order]:
         # Example get_orders implementation
-        
-        if symbol is not None:
-            # .... retrieve orders for specific target symbol from your broker
-            order_data = {}
-            
-            return Order.from_dict(
-                {
-                   "id": order_data["id"],
-                    "target_symbol": order_data["asset"].split("/")[0].upper(),
-                    "trading_symbol": order_data["asset"].split("/")[1].upper(),
-                    "order_reference": order_data["id"],
-                    "initial_price": order_data["price"],
-                    "side": order_data["side"],
-                    "status": order_data["status"],
-                    "closing_price": none,
-                    "type": order_data["type"]
-                }
-            )
-        else:
-            # .... retrieve all orders from your broker
-            data = []
-            orders = []
+        # .... retrieve all orders from your broker
+        data = []
+        orders = []
 
-            for order_data in data:
-                orders.append(Order.from_dict({
-                    "id": order_data["id"],
-                    "target_symbol": order_data["asset"].split("/")[0].upper(),
-                    "trading_symbol": order_data["asset"].split("/")[1].upper(),
-                    "order_reference": order_data["id"],
-                    "initial_price": order_data["price"],
-                    "side": order_data["side"],
-                    "status": order_data["status"],
-                    "closing_price": none,
-                    "type": order_data["type"]
-                }))
-            return orders
+        for order_data in data:
+            orders.append(Order.from_dict({
+                "id": order_data["id"],
+                "target_symbol": order_data["asset"].split("/")[0].upper(),
+                "trading_symbol": order_data["asset"].split("/")[1].upper(),
+                "order_reference": order_data["id"],
+                "initial_price": order_data["price"],
+                "side": order_data["side"],
+                "status": order_data["status"],
+                "closing_price": none,
+                "type": order_data["type"]
+            }))
+        return orders
 ```
 
 #### Custom Order Executor
