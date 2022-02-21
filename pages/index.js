@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {ButtonBase, Container, Paper, Stack, Typography} from "@mui/material";
 import {makeStyles, useTheme} from "@mui/styles";
-import {MarkdownArticle} from "../src/components/markdown";
+import {CodeMarkdown, MarkdownArticle} from "../src/components/markdown";
 import {LowerCaseButton} from "../src/components/buttons";
 import {OpenInNew} from "@mui/icons-material";
 import Link from "../src/components/Link";
@@ -158,7 +158,7 @@ const View = props => {
                     <Typography variant={"subtitle1"}>
                         Quick Usage
                     </Typography>
-                    <MarkdownArticle markdown={props.usageMarkdown}/>
+                    <CodeMarkdown markdown={props.usageMarkdown}/>
                     <LowerCaseButton component={Link} href={"/documentation/getting-started"}>
                         Explore the docs
                     </LowerCaseButton>
