@@ -193,7 +193,7 @@ You can create an order with the following attributes:
 * `initial_price` (optional) price of the order, when it was first executed
 * `closing_price` (optional) price of the order, when it was closed
 
-###### Pending limit order
+###### Pending limit buy order
 For a limit order it is required to have either `amount_target_symbol` or `amount_trading_symbol` defined.
 Also, because the order is not yet executed only `price` needs to be defined
 ```python
@@ -206,12 +206,13 @@ order = Order.from_dict(
         "amount_target_symbol": 40, 
         "status": "PENDING", 
         "price": 10,
-        "type": "LIMIT"
+        "type": "LIMIT",
+        "side": "BUY"
     }
 )
 ```
 
-###### Successful limit order
+###### Successful limit buy order
 For a limit order it is required to have either `amount_target_symbol` or `amount_trading_symbol` defined.
 Also, because the order is executed you need to define the current `price` and the `initial_price` when the 
 order was executed.
@@ -227,12 +228,13 @@ order = Order.from_dict(
         "status": "SUCCESS", 
         "price": 10,
         "initial_price": 8,
-        "type": "LIMIT"
+        "type": "LIMIT",
+        "side": "BUY"
     }
 )
 ```
 
-###### Closed limit order
+###### Closed limit buy order
 For a limit order it is required to have either `amount_target_symbol` or `amount_trading_symbol` defined.
 Also, because the order is closed you need to define the `closing_price` (when the order was closed) and the `initial_price` (when the
 order was executed).
@@ -248,12 +250,13 @@ order = Order.from_dict(
         "status": "CLOSED", 
         "closing_price": 11,
         "initial_price": 8,
-        "type": "LIMIT"
+        "type": "LIMIT",
+        "side": "BUY"
     }
 )
 ```
 
-###### Pending market order (SELL)
+###### Pending market sell order
 > MARKET BUY orders are not supported (We do not recommend the use of MARKET BUY orders).
 
 For a market sell order it is required to have `amount_target_symbol` defined.
@@ -267,12 +270,13 @@ order = Order.from_dict(
         "trading_symbol": "USDT", 
         "amount_target_symbol": 40, 
         "status": "PENDING", 
-        "type": "MARKET"
+        "type": "MARKET",
+        "side": "SELL"
     }
 )
 ```
  
-###### Successful market order (SELL)
+###### Successful market sell order 
 > MARKET BUY orders are not supported (We do not recommend the use of MARKET BUY orders).
 
 For a market sell order it is required to have `amount_target_symbol` defined.
@@ -288,12 +292,13 @@ order = Order.from_dict(
         "amount_target_symbol": 40, 
         "status": "SUCCESS", 
         "type": "MARKET",
-        "closing_price": 20
+        "closing_price": 20,
+        "side": "SELL"
     }
 )
 ```
 
-###### Closed market order (SELL)
+###### Closed market sell order 
 > MARKET BUY orders are not supported (We do not recommend the use of MARKET BUY orders).
 
 For a market sell order it is required to have `amount_target_symbol` defined.
@@ -309,7 +314,8 @@ order = Order.from_dict(
         "amount_target_symbol": 40, 
         "status": "SUCCESS", 
         "type": "MARKET",
-        "closing_price": 20
+        "closing_price": 20,
+        "side": "SELL"
     }
 )
 ```
