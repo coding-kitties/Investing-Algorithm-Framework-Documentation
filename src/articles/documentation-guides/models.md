@@ -256,6 +256,69 @@ order = Order.from_dict(
 )
 ```
 
+###### Pending limit sell order
+For a limit order it is required to have either `amount_target_symbol` or `amount_trading_symbol` defined.
+Also, because the order is not yet executed only `price` needs to be defined
+```python
+from investing_algorithm_framework import Order
+order = Order.from_dict(
+    {
+        "reference_id": 10493,
+        "target_symbol": "DOT", 
+        "trading_symbol": "USDT", 
+        "amount_target_symbol": 40, 
+        "status": "PENDING", 
+        "price": 10,
+        "type": "LIMIT",
+        "side": "SELL"
+    }
+)
+```
+
+###### Successful limit sell order
+For a limit order it is required to have either `amount_target_symbol` or `amount_trading_symbol` defined.
+Also, because the order is executed you need to define the current `price` and the `initial_price` when the 
+order was executed.
+
+```python
+from investing_algorithm_framework import Order
+order = Order.from_dict(
+    {
+        "reference_id": 10493,
+        "target_symbol": "DOT", 
+        "trading_symbol": "USDT", 
+        "amount_target_symbol": 40, 
+        "status": "SUCCESS", 
+        "price": 10,
+        "initial_price": 8,
+        "type": "LIMIT",
+        "side": "SELL"
+    }
+)
+```
+
+###### Closed limit sell order
+For a limit order it is required to have either `amount_target_symbol` or `amount_trading_symbol` defined.
+Also, because the order is closed you need to define the `closing_price` (when the order was closed) and the `initial_price` (when the
+order was executed).
+
+```python
+from investing_algorithm_framework import Order
+order = Order.from_dict(
+    {
+        "reference_id": 10493,
+        "target_symbol": "DOT", 
+        "trading_symbol": "USDT", 
+        "amount_target_symbol": 40, 
+        "status": "CLOSED", 
+        "closing_price": 11,
+        "initial_price": 8,
+        "type": "LIMIT",
+        "side": "SELL"
+    }
+)
+```
+
 ###### Pending market sell order
 > MARKET BUY orders are not supported (We do not recommend the use of MARKET BUY orders).
 
