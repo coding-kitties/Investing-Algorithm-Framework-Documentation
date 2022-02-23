@@ -49,7 +49,7 @@ allows your algorithm to execute and track orders at your broker.
 #### Custom Portfolio Manager
 For a custom portfolio manager you need to extend the `PortfolioManager` class. This portfolio manager must be 
 able to convert the positions and orders that your selected broker returns to the Order and Position models that the 
-framework uses. 
+framework uses. For more information about portfolio manager you can read our [guide](https://investing-algorithm-framework/documentation/guides/portfolio-managers).
 
 For a guide about position and order models we recommend you to read this [article](https://investing-algorithm-framework/documentation/guides/models)
 
@@ -61,12 +61,6 @@ from investing_algorithm_framework import PortfolioManager
 class CustomPortfolioManager(PortfolioManager):
     identifier = "<BROKER_X>"
     market = "<BROKER_X>"
-
-    def get_unallocated(self, algorithm_context, sync=False) -> Position:
-        # Example get_unallocated implementation
-        # .... retrieve trading symbol position from your broker
-        data = {}
-        return Position.from_dict({"amount": data["amount"], "symbol": data["symbol"]})
 
     def get_positions(self, symbol: str = None, lazy=False) -> List[Position]:
         # Example get_positions implementation
