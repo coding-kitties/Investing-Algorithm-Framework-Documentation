@@ -2,6 +2,9 @@
 The framework provides you with a `PortfolioManager` class that you can extend if you want to connect to a broker that is
 not yet supported. A portfolio manager is used by the `AlgorithmContext` to track your portfolio at your broker or exchange.
 
+The framework provides you also with a sqlite based `PortfolioManager` that you can use for your custom 
+portfolio manager. For more information about the sqlite `PortfolioManager` you can read this [article]((/documentation/guides/sqlite#PorftolioManager)).
+
 For a custom portfolio manager you must implement two methods:
 
 * `.get_positions(self, **kwargs)`: method that retrieves all positions from your external portfolio
