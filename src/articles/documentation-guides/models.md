@@ -111,12 +111,14 @@ portfolio = Portfolio.from_dict(
         ],
         "orders": [
             {
-                "target_symbol": "DOT", 
-                "trading_symbol": "USDT", 
-                "amount_target_symbol": 40, 
-                "status": "PENDING", 
-                "price": 10
-            },
+                "target_symbol": "DOT",
+                "trading_symbol": "USDT",
+                "amount_target_symbol": 40,
+                "status": "PENDING",
+                "price": 10,
+                "side": "BUY",
+                "type": "LIMIT"
+            }
         ]
     }    
 )
@@ -447,12 +449,14 @@ position = Position.from_dict(
         "amount": "USDT", 
         "orders": [
             {
-                "target_symbol": "DOT", 
-                "trading_symbol": "USDT", 
-                "amount_target_symbol": 40, 
-                "status": "PENDING", 
-                "price": 10
-            },
+                "target_symbol": "DOT",
+                "trading_symbol": "USDT",
+                "amount_target_symbol": 40,
+                "status": "PENDING",
+                "price": 10,
+                "side": "BUY",
+                "type": "LIMIT"
+            }
         ]
     }
 )
