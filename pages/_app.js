@@ -57,7 +57,7 @@ function MyApp(props) {
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
                 <link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet"/>
                 {/*<script data-ad-client="ca-pub-6898179895018365" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>*/}
-                {/*<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7554139046090360" crossOrigin="anonymous"></script>*/}
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7554139046090360" crossOrigin="anonymous"></script>
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             </Head>
             <ThemeProvider theme={theme}>
