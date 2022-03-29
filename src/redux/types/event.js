@@ -1,5 +1,5 @@
 // Error related types
-export const CLEAR_ERROR_EVENT = 'CLEAR_ERROR_EVENT';
+export const CLEAR_EVENTS = 'CLEAR_EVENTS';
 export const ERROR_EVENT = 'ERROR_EVENT';
 
 // Success related types

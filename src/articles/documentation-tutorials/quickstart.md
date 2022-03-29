@@ -3,11 +3,11 @@ In this section we will attempt to guide you in order to get started with the in
 There are multiple options to get started.
 
 ### I just want to get started creating strategies without much setup
-Currently, there is support for Binance coming with the framework. 
-You can easily create a working algorithm that is connected to Binance with the following code snippet.
+You can easily create a working algorithm that is connected to Binance (or any other ccxt supported broker) with the 
+following code snippet.
 
-Before running your algorithm make sure that you configure the `BINANCE_API_KEY` and the `BINANCE_SECRET_KEY` in your
-algorithm config. You can find these parameters in your Binance account. Also, make sure that you 
+Before running your algorithm make sure that you configure the `API_KEY` and the `SECRET_KEY` in your
+algorithm config. You can find these parameters in your Binance (broker) account. Also, make sure that you 
 specify a `TRADING_SYMBOL` that is used by your algorithm for execution of its buy orders.
 
 ```python
@@ -15,11 +15,16 @@ import os
 from investing_algorithm_framework import App, AlgorithmContext
 
 app = App(
-    resources_directory=os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir)),
+    resource_directory=os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir)),
     config={
-        "BINANCE_API_KEY": "<BINANCE_API_KEY>",
-        "BINANCE_SECRET_KEY": "<BINANCE_SECRET_KEY>",
-        "TRADING_SYMBOL": "USDT",
+        "PORTFOLIOS": {
+            "BINANCE_PORTFOLIO": {
+                "API_KEY": "<BINANCE_API_KEY>",
+                "SECRET_KEY": "<BINANCE_SECRET_KEY>",
+                "TRADING_SYMBOL": "USDT",
+                "MARKET": "binance"
+            }
+        }
     }
 )
 
@@ -37,11 +42,12 @@ if __name__ == "__main__":
     app.start()
 ```
 
-if you want to know more about binance configuration you can read this [article](https://investing-algorithm-framework.com/documentation/guides/binance)
+if you want to know more about ccxt library configuration you can read 
+this [article](https://investing-algorithm-framework.com/documentation/guides/ccxt)
 
 ### I want to connect to a broker that is not yet supported
 You can connect to a broker that is not yet supported with custom components. This can be done by implementing your own 
-portfolio manager and order executor.
+portfolio manager and order executor components.
 
 The portfolio manager allows your algorithm to track and manage the portfolio at your broker and the order executor 
 allows your algorithm to execute and track orders at your broker.
@@ -59,8 +65,8 @@ A reference implementation of a portfolio manager can be seen below.
 from investing_algorithm_framework import PortfolioManager
 
 class CustomPortfolioManager(PortfolioManager):
-    identifier = "<BROKER_X>"
-    market = "<BROKER_X>"
+    # Use the same portfolio identifier as for your order executor
+    identifier = "<PORTFOLIO_IDENTIFIER>"
 
     def get_positions(self, symbol: str = None, lazy=False) -> List[Position]:
         # Example get_positions implementation
@@ -108,7 +114,8 @@ A reference implementation of a order executor can be seen below.
 from investing_algorithm_framework import OrderExecutor
 
 class CustomOrderExecutor(OrderExecutor):
-    identifier = "<BROKER_X>"
+    # Use the same portfolio identifier as for your portfolio manager
+    identifier = "<PORTFOLIO_IDENTIFIER>"
 
     def create_order(self,
         symbol,

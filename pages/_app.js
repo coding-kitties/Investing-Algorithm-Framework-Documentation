@@ -56,7 +56,8 @@ function MyApp(props) {
                 <title>Investing Algorithm Framework: The framework for creation of investing algorithms</title>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
                 <link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet"/>
-                <script data-ad-client="ca-pub-6898179895018365" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                {/*<script data-ad-client="ca-pub-6898179895018365" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>*/}
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7554139046090360" crossOrigin="anonymous"></script>
             </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline />

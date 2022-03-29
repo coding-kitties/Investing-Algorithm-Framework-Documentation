@@ -16,6 +16,10 @@ import StepLabel from "@mui/material/StepLabel";
 import {styled} from "@mui/material/styles";
 import StepConnector, {stepConnectorClasses} from "@mui/material/StepConnector";
 import Check from "@mui/icons-material/Check";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import {ActionsErrorEventNotifier, ActionsSuccessEventNotifier} from "../src/components/notifications";
+import {successEventAction} from "../src/redux/actions";
+import {useDispatch} from "react-redux";
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -89,10 +93,10 @@ function EltyerIcon(props) {
                 direction="row"
                 justifyContent="flex-start"
                 alignItems="center"
-                spacing={2}
+                spacing={0.75}
             >
-                <img src={"/images/eltyer_onlyicon.svg"} alt="eltyer" style={{width: "75px"}} {...props}/>
-                <img src={"/images/eltyer_onlytext.svg"} alt="eltyer" style={{width: "150px", paddingBottom: "8px"}} {...props}/>
+                <img src={"/images/eltyer_onlyicon.svg"} alt="eltyer" style={{width: "35px"}} {...props}/>
+                <img src={"/images/eltyer_onlytext.svg"} alt="eltyer" style={{width: "80px", paddingBottom: "2px"}} {...props}/>
             </Stack>
         </ButtonBase>
     );
@@ -115,18 +119,24 @@ const useStyles = makeStyles(() => ({
 }));
 
 const View = props => {
+    const dispatch = useDispatch();
     const theme = useTheme();
     const classes = useStyles();
     const [installEnter, setInstallEnter] = useState(false);
     const onInstallEnterViewport = () => setInstallEnter(true);
     const steps = ['Baseline', 'Stateless runner', 'Expand broker support', 'Back testing', 'Dashboard', 'Telegram bot'];
 
+    const handleCopyInstallationButtonClick = () => {
+        dispatch(successEventAction("Copied to clipboard!"));
+        navigator.clipboard.writeText("pip install investing-algorithm-framework");
+    }
+
     return (
         <>
             <Container maxWidth="lg">
                 <br/>
                 <br/>
-                <Typography variant={"h2"}>
+                <Typography variant={"h3"}>
                     Creating investing algorithms starts with a stable foundation
                 </Typography>
                 <br/>
@@ -141,10 +151,16 @@ const View = props => {
                     alignItems="center"
                     spacing={2}
                 >
-                    <LowerCaseButton componet={Link} href={"/documentation/tutorials/quickstart"} variant={"contained"}>
-                        Get Started
+                    <LowerCaseButton
+                        variant={"outlined"}
+                        style={{height: "50px"}}
+                        componet={Link}
+                        onClick={handleCopyInstallationButtonClick}
+                        startIcon={<ContentCopyIcon/>}
+                    >
+                        <Typography variant={"subtitle2"}>> pip install investing-algorithm-framework</Typography>
                     </LowerCaseButton>
-                    <LowerCaseButton componet={Link} href={"/documentation/getting-started"} >
+                    <LowerCaseButton variant={"contained"} componet={Link} href={"/documentation/getting-started"} >
                         View Docs
                     </LowerCaseButton>
                 </Stack>
@@ -152,26 +168,44 @@ const View = props => {
                 <br/>
                 <br/>
                 <br/>
-                <br/>
-                <br/>
-                <Paper elevation={4} style={{padding: "8px"}}>
-                    <Typography variant={"subtitle1"}>
-                        Quick Usage
+                <Paper elevation={8} style={{padding: "16px"}}>
+                    <Typography variant={"h4"}>
+                        Get started with a <a style={{color: theme.palette.primary.main}}>quick example</a>
+                    </Typography>
+                    <br/>
+                    <Typography variant={"caption"}>
+                        We've made it as easy as possible to get up and running. Just use the following code snippet
+                        and you have your first trading algorithm.
                     </Typography>
                     <CodeMarkdown markdown={props.usageMarkdown}/>
-                    <LowerCaseButton component={Link} href={"/documentation/getting-started"}>
-                        Explore the docs
-                    </LowerCaseButton>
+                    <Stack
+                        direction="row"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        spacing={0.5}
+                    >
+                        <LowerCaseButton
+                            style={{paddingLeft: "0px"}}
+                            component={Link}
+                            href={"/documentation/getting-started"}
+                            endIcon={<OpenInNew/>}
+                        >
+                            Explore the docs
+                        </LowerCaseButton>
+                        <Typography variant={"caption"}>and join our</Typography>
+                        <Typography variant={"caption"} component={Link} href={"https://www.reddit.com/r/InvestingBots/"}>
+                            reddit
+                        </Typography>
+                    </Stack>
                 </Paper>
                 <br/>
                 <br/>
                 <br/>
                 <br/>
-                <br/>
-                <br/>
-            </Container>
-            <Paper style={{width: "100%", backgroundColor: "#eeeeee", padding: theme.spacing(4), borderRadius: 0}} elevation={0}>
-                <Typography variant={"body1"} align={"center"}>Sponsored by</Typography>
+                <div style={{maxWidth: 800, marginBottom: "8px"}}>
+                    <Typography color={"primary"} variant={"body1"}>Trusted by</Typography>
+                    <Typography variant={"body1"}>Platforms that support the use of the framework</Typography>
+                </div>
                 <br/>
                 <Stack
                     direction="row"
@@ -181,9 +215,37 @@ const View = props => {
                 >
                     <EltyerIcon/>
                 </Stack>
-            </Paper>
-            <br/>
-            <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <div style={{maxWidth: 800, marginBottom: "8px"}}>
+                    <Typography color={"primary"} variant={"body1"}>Supported Brokers</Typography>
+                    <Typography variant={"h6"}>Connect to any broker</Typography>
+                </div>
+                <br/>
+                <BrokerCarousel
+                    brokers={
+                        [
+                            {label: "binance", image: "/brokers/binance.png"},
+                            {label: "coinbase", image: "/brokers/coinbase.png"},
+                            {label: "bitvavo", image: "/brokers/bitvavo.png"},
+                            {label: "ftx", image: "/brokers/ftx.svg"},
+                            {label: "kucoin", image: "/brokers/kucoin.svg"},
+                            {label: "ascendEX", image: "/brokers/acendEX.png"},
+                        ]
+                    }
+                    numberOfCards={5}
+                />
+                <br/>
+                <Typography variant={"body1"}>
+                    Your broker not in the list? Please check if your broker is in the of list the support
+                    brokers by the <Link href={"https://github.com/ccxt/ccxt#supported-cryptocurrency-exchange-markets"}>ccxt package</Link> that we use by default, or <Link href={"/documentation/tutorials/quickstart#i-want-to-connect-to-a-broker-that-is-not-yet-supported"}>learn how to create your
+                    own portfolio manager and order executor components. </Link>
+                </Typography>
+                <br/>
+                <br/>
+            </Container>
             <br/>
             <br/>
             <br/>
@@ -198,12 +260,18 @@ const View = props => {
                         abstractions, pre-made mixins and easy to use hooks, where your strategies can take full advantage of.
                     </Typography>
                     <br/>
+                    <Typography variant={"body1"}>
+                        Currently, the default data providers support the following trading data types:
+                        <ul>
+                            <li><Link href={"/"}>OHCLV</Link></li>
+                            <li><Link href={"/"}>Ticker</Link></li>
+                            <li><Link href={"/"}>Order Book</Link></li>
+                        </ul>
+                    </Typography>
                     <LowerCaseButton endIcon={<OpenInNew/>} style={{paddingLeft: "0px"}} component={Link} href={"/documentation/guides/data-providers"}>
-                        Learn about data providers
+                        Learn more about data providers
                     </LowerCaseButton>
                 </div>
-                <br/>
-                <br/>
                 <br/>
                 <br/>
                 <br/>
@@ -274,8 +342,6 @@ const View = props => {
                 <br/>
                 <br/>
                 <br/>
-                <br/>
-                <br/>
                 <div>
                     <div style={{maxWidth: 800}}>
                         <Typography color={"primary"} variant={"body1"}>Control over your strategies</Typography>
@@ -288,51 +354,16 @@ const View = props => {
                             have control over the data that is used for a specific strategy.
                         </Typography>
                         <br/>
-                        <LowerCaseButton endIcon={<OpenInNew/>} style={{paddingLeft: "0px"}} component={Link} href={"/documentation/guides/strategies"}>
+                        <LowerCaseButton
+                            endIcon={<OpenInNew/>}
+                            style={{paddingLeft: "0px"}}
+                            component={Link}
+                            href={"/documentation/guides/strategies"}
+                        >
                             Learn about strategies
                         </LowerCaseButton>
                     </div>
                 </div>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <div style={{maxWidth: 800}}>
-                    <Typography color={"primary"} variant={"body1"}>Brokers</Typography>
-                    <Typography variant={"h4"}>Connect to any broker</Typography>
-                    <br/>
-                    <Typography variant={"body1"}>
-                        The framework allows you to create portfolio managers and order executors for any broker.
-                        Currently, the framework comes with out of the box support for the following brokers:
-                    </Typography>
-                    <br/>
-                </div>
-                <br/>
-                <BrokerCarousel brokers={[{label: "binance", image: "/brokers/binance.png"}]}/>
-                <br/>
-                <Stack
-                    direction="row"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    spacing={0.5}
-                >
-                    <Typography variant={"body1"}>
-                        Your broker not in the list? Learn how to create your own
-                    </Typography>
-                    <Typography
-                        variant={"body1"}
-                        component={Link}
-                        href={"/documentation/tutorials/quickstart#i-want-to-connect-to-a-broker-that-is-not-yet-supported"}
-                        underline={"none"}
-                    >
-                        components.
-                    </Typography>
-                </Stack>
-                <br/>
-                <br/>
-                <br/>
                 <br/>
                 <br/>
                 <br/>

@@ -1,11 +1,10 @@
 import * as React from 'react';
 import {useTheme} from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import {Card, CardContent, CardMedia, Stack} from "@mui/material";
+import {Stack} from "@mui/material";
 import SwipeableViews from 'react-swipeable-views';
 
 
@@ -42,18 +41,21 @@ export function BrokerCarousel({numberOfCards = 2, brokers }) {
             return null;
         }
 
-        return cardsSelection.map((card) => {
-            return (
-                <Card elevation={0} key={card.label} sx={{width: {xs: 350}}}>
-                    <CardMedia
-                        component="img"
-                        sx={{maxHeight: "150px"}}
-                        image={card.image}
-                        alt={card.label}
-                    />
-                </Card>
+        let cards = cardsSelection.map((card) => (
+                <img style={{height: '30px', width: "140px"}} src={card.image} alt={card.label}/>
             )
-        })
+        );
+
+        return (
+            <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={4}
+            >
+                {cards}
+            </Stack>
+        )
     }
 
     return (
@@ -70,9 +72,7 @@ export function BrokerCarousel({numberOfCards = 2, brokers }) {
                 onChangeIndex={handleStepChange}
                 enableMouseEvents
             >
-                {batches.map((_, index) => {
-                    return renderCards(getCards(index))
-                })}
+                {batches.map((_, index) => (renderCards(getCards(index))))}
             </SwipeableViews>
             <MobileStepper
                 sx={{ maxWidth: 400}}

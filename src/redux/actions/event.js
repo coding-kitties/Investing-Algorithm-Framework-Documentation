@@ -1,5 +1,5 @@
 import {createAction} from './index';
-import {CLEAR_ERROR_EVENT, ERROR_EVENT} from "../types";
+import {CLEAR_EVENTS, ERROR_EVENT, SUCCESS_EVENT} from "../types";
 
 const capitalize = (s) => {
     if (typeof s !== 'string') return ''
@@ -57,9 +57,7 @@ export const errorEventAction = (error, defaultMessage, throwException = true) =
     return createAction(ERROR_EVENT, {message: errorMessages});
 };
 
-export const clearErrorEventAction = () => createAction(CLEAR_ERROR_EVENT);
-
-import {CLEAR_SUCCESS_EVENT, SUCCESS_EVENT} from "../types";
+export const clearErrorEventAction = () => createAction(CLEAR_EVENTS);
 
 export const successEventAction = (successMessage, showSuccess = true) => {
 
@@ -78,4 +76,4 @@ export const successEventAction = (successMessage, showSuccess = true) => {
     return createAction(SUCCESS_EVENT, {message: successMessages});
 }
 
-export const clearSuccessEventAction = () => createAction(CLEAR_SUCCESS_EVENT);
+export const clearSuccessEventAction = () => createAction(CLEAR_EVENTS);

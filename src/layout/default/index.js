@@ -9,6 +9,7 @@ import {SIDE_NAV_ITEMS} from "../../configuration";
 import {useDispatch, useSelector} from "react-redux";
 import {useTheme} from "@mui/styles";
 import {sideNavOpenAction} from "../../redux/actions";
+import {ActionsErrorEventNotifier, ActionsSuccessEventNotifier} from "../../components/notifications";
 
 export const DefaultLayout = ({children}) => {
     const theme = useTheme();
@@ -224,6 +225,8 @@ export const DefaultLayout = ({children}) => {
             </AppBar>
             <SideNav sideNavItems={getSideNavItems()} sideNavOpen={getSideNavOpen()} handleSideNavOpenClick={handleSideNavOpenClick}/>
             <main className={clsx(layoutClasses.content, shiftContent() && layoutClasses.contentShiftLeft)}>
+                <ActionsErrorEventNotifier/>
+                <ActionsSuccessEventNotifier/>
                 {children}
             </main>
             <Box
