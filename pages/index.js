@@ -20,6 +20,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import {ActionsErrorEventNotifier, ActionsSuccessEventNotifier} from "../src/components/notifications";
 import {successEventAction} from "../src/redux/actions";
 import {useDispatch} from "react-redux";
+import {Ad} from "../src/components/ads";
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -198,6 +199,11 @@ const View = props => {
                         </Typography>
                     </Stack>
                 </Paper>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Ad slot={"1234567890"}/>
                 <br/>
                 <br/>
                 <br/>
